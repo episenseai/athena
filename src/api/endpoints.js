@@ -1,0 +1,329 @@
+// backend service
+const BACKEND = 'http://localhost:8000/'
+
+//  TABULAR SERVICE
+const TABULAR = `${BACKEND}tab/v1/`
+
+// COMMON HTTP ERRORS to all endpoints
+// 401 Unauthorized => if the user is not logged in or invalid jwt token
+
+// JSON POST request headers
+// Content - Type: application/json
+// Accept: application/json
+// body: JSON.stringify(content)
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// signup service for creating new user accounts
+// POST https://localhost:8000/auth/signup
+// request:
+//      { username: username, password: password }
+// response: 201 Created
+//      {
+//          success: true or false,
+//          info: "Successfully signup. Congratulations!!!",
+//          version: "v1",
+//          data: { username: username, userid: userid }
+//      }
+// if created is false => something went wrong, check the info
+export const SIGNUP_SERVICE = () => `${BACKEND}auth/signup`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// login for existing users
+// POST https://localhost:8000/auth/login
+// request:
+//      { username: username, password: password }
+// response: 200 OK
+//      {
+//          success: true or false,
+//          info: "some message",
+//          version: "v1",
+//          data: { jwt: jwt token }
+//      }
+// if success is false, login failed
+// When requesting data from the server send the `jwt` token in the Header of the request
+// Authorization: Bearer <token>
+// Authorization: Bearer eyJhbGci...<snip>...yu5CSpyHI
+export const LOGIN_SERVICE = () => `${BACKEND}auth/login`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// logout of the account
+// POST https://localhost:8000/auth/logout
+// request:
+//      {}
+// response: 200 OK
+//      { success: true, version: "v1" }
+// just drop the jwt and call the server if necessary
+export const LOGOUT_SERVICE = () => `${BACKEND}auth/logout`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// file uploads (include file_name)
+// POST https://localhost:8000/uploads?userid=26r276re25r52456
+// request:
+//      Content-Type: multipart/form-data;
+// response: 201 OK
+//      {
+//          success: true,
+//          info: "file created",
+//          version: "v1",
+//          data: {}
+//      }
+// response: 400 Bad Request => if the userid does match the one that is logged in
+//      { succuess: false, info: "error message" }
+// response: 500 Internal Server Error => Something bad happened while uploading
+//      {
+//          success: false,
+//          info: "error during file upload"
+//          version: "v1",
+//      }
+export const FILE_UPLOAD_SERVICE = (userid) => `${BACKEND}uploads?userid=${userid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// get a list of uploaded files for the user
+// GET https://localhost:8000/uploads?userid=26r276re25r52456
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "list of uploaded files"
+//          version: "v1",
+//          data: [ {filepath: "uniquefile path", filename: filename, timestamp: "upload time"}, ... ]
+//      }
+// response: 400 Bad Request => if the userid does not match the one that is logged in
+//      { succuess: false, info: "error message", version: "v1" }
+export const FILE_LIST_SERVICE = (userid) => `${BACKEND}uploads?userid=${userid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// create a new project
+// POST https://localhost:8000/tab/v1/projects?userid=26r276re25r52456
+// request:
+//      { projectname: projectname, projectdesc: projectdesc }
+// response: 201 OK
+//      {
+//          success: true,
+//          info: "project created",
+//          version: "v1",
+//          data: { projectid: projectid, projectname: projectname }
+//      }
+// response: 400 Bad Request => if the userid does match the one that is logged in
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_CREATE_PROJECTS_SERVICE = (userid) => `${TABULAR}projects?userid=${userid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// change to a different project
+// POST https://localhost:8000/tab/v1/projects/current?userid=26r276re25r52456
+// request:
+//      {}
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "project set",
+//          version: "v1",
+//          data: { id: id,
+//                  name: name,
+//                  timestamp: ,
+//                  current_stage: ,
+//                  pipe_status: ,
+//                  error_type: ,
+//                  error_stack: ,
+//          }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_SET_PROJECT_SERVICE = (userid, projectid) =>
+  `${TABULAR}projects/current?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// get all the projects for a particlar user
+// GET https://localhost:8000/tab/v1/projects?userid=26r276re25r52456
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "project created",
+//          version: "v1",
+//          data: [ { projectid: projectid, projectname: projectname, created: date }, ... ]
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_PROJECTS_LIST_SERVICE = (userid) => `${TABULAR}projects?userid=${userid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// get the data for the current pipeline stage
+// POST https://localhost:8000/tab/v1/pipe/current?userid=26r276re25r52456&projectid=d267gd27f726fd
+// request { current_stage:  "consume:GET" }
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "pipeline stage data",
+//          version: "v1",
+//          data:
+//              {
+//                  stage: "prepare:GET",
+//                  data: { stagedata... }
+//              }
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_PIPE_GET_SERVICE = (userid, projectid) =>
+  `${TABULAR}pipe/current?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// post data for the next pipeline stage
+// POST https://localhost:8000/tab/v1/pipe/next?userid=26r276re25r52456&projectid=d267gd27f726fd
+// request:
+//      { current_stage: "prepare:GET", next_stage: "prepare:POST", data: {  stage: "prepare:POST",
+//                                                                           data:  {stagedata...} }
+//      }
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "pipeline processing job added",
+//          version: "v1",
+//          data: { id: id,
+//                  name: name,
+//                  timestamp: ,
+//                  current_stage: ,
+//                  pipe_status: ,
+//                  error_type: ,
+//                  error_stack: ,
+//          }
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_PIPE_POST_SERVICE = (userid, projectid) =>
+  `${TABULAR}pipe/next?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// revert to a previous pipeline stage
+// POST https://localhost:8000/tab/v1/pipe/revert?userid=26r276re25r52456&projectid=d267gd27f726fd
+// request:
+//      { from: 'transform:POST', to: 'prpeare:GET' }
+// response: 201 OK
+//      {
+//          success: true,
+//          info: "reverting pipeline stage",
+//          version: "v1",
+//          data: { id: id,
+//                  name: name,
+//                  timestamp: ,
+//                  current_stage: ,
+//                  pipe_status: ,
+//                  error_type: ,
+//                  error_stack: ,
+//          }
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+//          ex. if not (to < from)
+//              or any other type of malformed request
+//          can only revert to a GET stage
+export const TAB_REVERT_STAGE_SERVICE = (userid, projectid) =>
+  `${TABULAR}pipe/revert?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// unfreeze the pipeline after to retry after pipeline error
+// POST https://localhost:8000/tab/v1/pipe/unfreeze?userid=26r276re25r52456&projectid=d267gd27f726fd
+// request:
+//      {}
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "unfreezed pipeline",
+//          version: "v1",
+//          data: { id: id,
+//                  name: name,
+//                  timestamp: ,
+//                  current_stage: ,
+//                  pipe_status: ,
+//                  error_type: ,
+//                  error_stack: ,
+//          }
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+//          ex. pipe was never frozen to begin with
+//              or any other type of malformed request
+export const TAB_UNFREEZE_PIPE_SERVICE = (userid, projectid) =>
+  `${TABULAR}pipe/unfreeze?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// submit model build jobs for processing when at stage finalconfig:GET
+// POST https://localhost:8000/tab/v1/models/build?userid=26r276re25r52456&projectid=d267gd27f726fd
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "started model building",
+//          version: "v1",
+//          data: { id: id,
+//                  name: name,
+//                  timestamp: ,
+//                  current_stage: ,
+//                  pipe_status: 1,
+//                  error_type: ,
+//                  error_stack: ,
+//          }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_MODEL_BUILD_SERVICE = (userid, projectid) =>
+  `${TABULAR}models/build?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// submit model build jobs for processing when at stage finalconfig:GET
+// POST https://localhost:8000/tab/v1/models/build?userid=26r276re25r52456&projectid=d267gd27f726fd
+// request { modelid: modelid }
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "started model building",
+//          version: "v1",
+//          data: {}
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+// response: 500 Server Error
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_MODEL_CANCEL_SERVICE = (userid, projectid) =>
+  `${TABULAR}models/cancel?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// list all the models for a particlar project
+// GET https://localhost:8000/tab/v1/models/?userid=26r276re25r52456&projectid=d267gd27f726fd
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "list of models",
+//          version: "v1",
+//          data:
+//              {
+//                .. mock data
+//              }
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_ALL_MODELS_SERVICE = (userid, projectid) =>
+  `${TABULAR}models?userid=${userid}&projectid=${projectid}`
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// list all the models for a particlar project
+// POST https://localhost:8000/tab/v1/models/?userid=26r276re25r52456&projectid=d267gd27f726fd
+// request { modelid: modelid }
+// response: 200 OK
+//      {
+//          success: true,
+//          info: "list of models",
+//          version: "v1",
+//          data:
+//              {
+//                .. mock data
+//              }
+//      }
+// response: 400 Bad Request
+//      { succuess: false, info: "error message", version: "v1" }
+export const TAB_MODELS_SERVICE = (userid, projectid) =>
+  `${TABULAR}models?userid=${userid}&projectid=${projectid}`
+
+// GET request
+export const GET_SSE_TOKEN_SERVICE = (userid, projectid) =>
+  `${BACKEND}sse/token?userid=${userid}&projectid=${projectid}`
+
+export const SSE_UPDATE_SERVICE = (userid, projectid, token) =>
+  `${BACKEND}sse/events?userid=${userid}&projectid=${projectid}&token=${token}`
+
+export const SSE_MODELS_UPDATE_SERVICE = (userid, projectid, token) =>
+  `${BACKEND}sse/events/models?userid=${userid}&projectid=${projectid}&token=${token}`
