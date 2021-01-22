@@ -1,10 +1,7 @@
 <script>
   import Container from './models/Container.svelte'
-  import { activeTabs, models, modelType, activeModels, optimizeUsing } from './models/store.js'
-  import { headersInfo } from './models/headerinfo.js'
-  import { onMount } from 'svelte'
+  import { models, modelType, activeModels, optimizeUsing } from './models/store.js'
   import { get } from 'svelte/store'
-  import ProgressL from '../base/ProgressL.svelte'
   import Spinner from '../Spinner.svelte'
   import Jumper from '../Jumper.svelte'
   import { PROJECT } from '../../components/tp/store'
@@ -12,9 +9,9 @@
   // for development purpose only
   //onMount(() => ($activeModel = $models[0].id))
   async function cancel_model(id) {
-    let res = await PROJECT.cancel_model(id)
+    await PROJECT.cancel_model(id)
     let i = get(models).findIndex((el) => el.id === id)
-    if (i != -1) {
+    if (i !== -1) {
       let m = get(models)[i]
       if (m.status === 'WAIT' || m.status === 'RUNNING' || m.status === 'TRYCANCEL') {
         console.log(m.status)
@@ -35,9 +32,9 @@
   <main>
     <header>
       <h4 class="info noselect">
-        {$modelType == 'regressor'
+        {$modelType === 'regressor'
           ? 'Regressor Models'
-          : $modelType == 'classifier'
+          : $modelType === 'classifier'
           ? 'Classifier Models'
           : 'Multi Classifier Models'}
       </h4>

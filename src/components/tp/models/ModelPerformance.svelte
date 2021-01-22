@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
   import { v4 as uuidv4 } from 'uuid'
 
   const uuid = 'pl-' + uuidv4()
@@ -8,7 +7,6 @@
   export let model
   $: metrics = model.metrics
 
-  let plotlyLoaded
   const hoverlabel = {
     bgcolor: 'rgba(62, 89, 107, 1)',
     bordercolor: 'rgba(109, 137, 157, 1)',
@@ -63,6 +61,7 @@
       y: model.pt.p,
       name: 'predicted values',
     })
+    // eslint-disable-next-line
     Plotly.newPlot(uuid, traces, layout, {
       scrollZoom: false,
       displaylogo: false,

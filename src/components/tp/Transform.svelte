@@ -21,8 +21,10 @@
       )
       return
     }
+    // eslint-disable-next-line
     if (true || get(PROJECT).current_stage === 'transform:GET') {
       //let item = items.find(({ value }) => value === selected)
+      // eslint-disable-next-line
       $POST_DATA = {
         stage: 'transform:POST',
         data: {
@@ -65,9 +67,9 @@
 
   //get data
   onMount(async () => {
-    if (get(PROJECT).current_stage == 'transform:GET') {
+    if (get(PROJECT).current_stage === 'transform:GET') {
       await PROJECT.get_pipe({ current_stage: 'transform:GET' })
-      if (get(GET_DATA).stage == 'transform:GET') {
+      if (get(GET_DATA).stage === 'transform:GET') {
         plotlyDraw(get(GET_DATA).data.target)
       }
     }
@@ -80,7 +82,7 @@
   <span class="logo-global">&nbsp;&#x21d2;</span>
 </button>
 
-{#if $PROJECT && $PROJECT.current_stage == 'transform:GET' && $GET_DATA.stage == 'transform:GET'}
+{#if $PROJECT && $PROJECT.current_stage === 'transform:GET' && $GET_DATA.stage === 'transform:GET'}
   <div class="transform-container">
     <div class="plots-container">
       {#if plotlyData}
@@ -94,7 +96,7 @@
       </table>
     </div>
   </div>
-{:else if $PROJECT && $PROJECT.current_stage == 'transform:POST'}
+{:else if $PROJECT && $PROJECT.current_stage === 'transform:POST'}
   <PipeWait />
 {/if}
 

@@ -22,6 +22,7 @@
     // miminal configuration complete
     if (get(GET_DATA).data.optimizeUsing) {
       //let item = items.find(({ value }) => value === selected)
+      // eslint-disable-next-line
       $POST_DATA = {
         stage: 'build:POST',
         data: {
@@ -47,7 +48,7 @@
   $: summary = $GET_DATA.stage === 'build:GET' ? $GET_DATA.data.summary : undefined
 
   onMount(async () => {
-    if (get(PROJECT).current_stage == 'build:GET') {
+    if (get(PROJECT).current_stage === 'build:GET') {
       let success = await PROJECT.get_pipe({ current_stage: 'build:GET' })
       if (success) {
         // unselect default optmization metric
@@ -63,7 +64,7 @@
   <span class="logo-global">&nbsp;&#x21d2;</span>
 </button>
 
-{#if $PROJECT && $PROJECT.current_stage == 'build:GET' && $GET_DATA.stage == 'build:GET'}
+{#if $PROJECT && $PROJECT.current_stage === 'build:GET' && $GET_DATA.stage === 'build:GET'}
   <div class="build-stage">
     <main>
       <h1>Build Configuration</h1>
@@ -164,7 +165,7 @@
       <CVLayout {...$GET_DATA.data.cv} />
     </aside>
   </div>
-{:else if $PROJECT && $PROJECT.current_stage == 'build:POST'}
+{:else if $PROJECT && $PROJECT.current_stage === 'build:POST'}
   <PipeWait />
 {/if}
 

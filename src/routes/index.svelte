@@ -1,14 +1,11 @@
 <script>
-  //
-  import PipeWait from '../components/tp/PipeWait.svelte'
+  // empty
 </script>
 
 <svelte:head>
   <title>Home - episense ai</title>
 </svelte:head>
-<!--
-<PipeWait />
--->
+
 <div class="container">
   <h1 class="welcome">Welcome to episense ai data inteligence app</h1>
   <p>Your Data has a Story. We help you Shape it.</p>

@@ -12,7 +12,7 @@ const mock = [
 ]
 
 // GET request to pull the mock data for stages
-export function get(req, res, next) {
+export function get(req, res, _) {
   // stage for which the data needs to be returned
   const { stage } = req.query
   // check ofr unwanted query params

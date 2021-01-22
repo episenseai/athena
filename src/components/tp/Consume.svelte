@@ -26,6 +26,7 @@
     // miminal configuration complete
     if (selected) {
       let item = items.find(({ value }) => value === selected)
+      // eslint-disable-next-line
       $POST_DATA = {
         stage: 'consume:POST',
         data: { filepath: item.value, filename: item.name, timestamp: item.desc },
@@ -46,7 +47,6 @@
   // max file size limit 1GB = 1073741824 bytes
   let maxFileSze = 1024 * 1024 * 2000 // 100MB
   let maxfileSizeReached = false
-  let fileType
 
   // convert raw bytes to human readable format
   function formatBytes(bytes) {
@@ -55,7 +55,7 @@
     return `${(bytes / Math.pow(1024, i)).toFixed(2)}  ${sizes[i]}`
   }
 
-  let buffersize = 1048576 * 5 // 1 MB * 5 = 5
+  /* let buffersize = 1048576 * 5 // 1 MB * 5 = 5 */
   let start = 0
   let end = 1024 * 50 // 50KB
 
@@ -93,6 +93,7 @@
     if (response.json.success) {
       // account created
       await snack('success', response.json.info)
+      // eslint-disable-next-line
       uploadfiles = null
       file_node.value = null
       await get_uploads()
@@ -115,12 +116,12 @@
   }
   let getting_uploads = true
   onMount(async () => {
-    if (get(PROJECT).current_stage == 'consume:GET') {
+    if (get(PROJECT).current_stage === 'consume:GET') {
       await PROJECT.get_pipe({ current_stage: 'consume:GET' })
       await get_uploads()
       getting_uploads = false
     }
-    if (items.length == 0) {
+    if (items.length === 0) {
       await snack('warning', "You haven't uploaded any file yet.")
     }
   })
@@ -138,7 +139,7 @@
   Next stage
   <span class="logo-global">&nbsp;&#x21d2;</span>
 </button>
-{#if $PROJECT && $PROJECT.current_stage == 'consume:GET' && $GET_DATA.stage == 'consume:GET'}
+{#if $PROJECT && $PROJECT.current_stage === 'consume:GET' && $GET_DATA.stage === 'consume:GET'}
   <div class="import-stage">
     <div>
       <h4>Zip compress your CSV file for upload</h4>
@@ -206,7 +207,7 @@
       <div class="filemenu">
         <Menu bind:open bind:selected {items} width="350" color="maroon" />
       </div>
-      {#if !getting_uploads && items.length == 0}
+      {#if !getting_uploads && items.length === 0}
         <p class="note empty">
           !! You have not uploaded any file yet. Uploaded a file to select from the list.
         </p>
@@ -218,7 +219,7 @@
   {#if file && content}
     <ExcelPreview rawCSV={content} />
   {/if}
-{:else if $PROJECT && $PROJECT.current_stage == 'consume:POST'}
+{:else if $PROJECT && $PROJECT.current_stage === 'consume:POST'}
   <PipeWait />
 {/if}
 

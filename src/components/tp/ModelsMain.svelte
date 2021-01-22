@@ -4,12 +4,11 @@
   import Models from './Models.svelte'
   import { modelType, models, activeModels, optimizeUsing } from './models/store'
   import Details from '../base/Details.svelte'
-  import { TAB_ALL_MODELS_SERVICE, TAB_MODELS_SERVICE } from '../../api/endpoints'
-  import { fetch_json_GET, fetch_json_POST } from '../../api/fetch'
+  import { TAB_ALL_MODELS_SERVICE } from '../../api/endpoints'
+  import { fetch_json_GET } from '../../api/fetch'
   import { PROJECT } from './store'
   import { LOGIN } from '../auth/store'
   import { get } from 'svelte/store'
-  import { snack } from '../base/store/snack'
 
   async function all_models() {
     const response = await fetch_json_GET(
@@ -59,6 +58,6 @@
     </pre>
   </Details>
 {/if}
-{#if $PROJECT.id && $PROJECT.current_stage == 'finalconfig:GET' && $PROJECT.pipe_status == '1'}
+{#if $PROJECT.id && $PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'}
   <Models models={$models} modelType={$modelType} />
 {/if}

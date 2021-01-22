@@ -6,10 +6,10 @@ function get_auth_header() {
   const login_store = get(LOGIN)
   if (login_store.success && login_store.jwt) {
     return { Authorization: `Bearer ${login_store.jwt}` }
-  } else {
-    return {}
   }
+  return {}
 }
+
 export async function fetch_json_POST(url, data, service_name) {
   // POST request to the service
   try {
@@ -25,7 +25,7 @@ export async function fetch_json_POST(url, data, service_name) {
       mode: 'cors',
       // never cache request or response
       cache: 'no-store',
-    }).catch(async (e) => {
+    }).catch(async (_) => {
       await snack('error', 'Either your lost your internet connectivity or episense ai server is down.')
       return false
     })
@@ -95,7 +95,7 @@ export async function fetch_json_GET(url, service_name) {
       mode: 'cors',
       // never cache request or response
       cache: 'no-store',
-    }).catch(async (e) => {
+    }).catch(async (_) => {
       await snack('error', 'Either your lost your internet connectivity or episense ai server is down.')
       return false
     })
@@ -165,7 +165,7 @@ export async function fetch_upload_POST(url, formData) {
       mode: 'cors',
       // never cache request or response
       cache: 'no-store',
-    }).catch(async (e) => {
+    }).catch(async (_) => {
       await snack('error', 'Either your lost your internet connectivity or episense ai server is down.')
       return false
     })

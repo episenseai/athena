@@ -40,7 +40,6 @@
       // concat the sorted and unsortable features
 
       $GET_DATA.data.features = comparable.concat(notComparable)
-      return
     }
   }
 </script>

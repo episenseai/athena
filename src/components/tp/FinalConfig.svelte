@@ -1,14 +1,11 @@
 <script>
-  import { PROJECT, GET_DATA, POST_DATA } from './store'
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { PROJECT, GET_DATA } from './store'
+  import { onMount } from 'svelte'
   import { get } from 'svelte/store'
-  import { fetch_upload_POST, fetch_json_GET } from '../../api/fetch'
-  import { FILE_UPLOAD_SERVICE, FILE_LIST_SERVICE } from '../../api/endpoints'
-  import { snack } from '../base/store/snack'
 
   //get data
   onMount(async () => {
-    if (get(PROJECT).current_stage == 'finalconfig:GET' && get(PROJECT).pipe_status == '0') {
+    if (get(PROJECT).current_stage === 'finalconfig:GET' && get(PROJECT).pipe_status === '0') {
       await PROJECT.get_pipe({ current_stage: 'finalconfig:GET' })
     }
   })
@@ -18,7 +15,7 @@
   }
 </script>
 
-{#if $PROJECT && $PROJECT.current_stage == 'finalconfig:GET' && $GET_DATA.stage == 'finalconfig:GET'}
+{#if $PROJECT && $PROJECT.current_stage === 'finalconfig:GET' && $GET_DATA.stage === 'finalconfig:GET'}
   <div class="container">
     <h3>
       All the pipeline stages for the project
@@ -35,7 +32,7 @@
       columns, of which
       <span>{$GET_DATA.data.includedFeatures}</span>
       will be used for building the models.
-      <span>{$GET_DATA.data.model_type == 'regressor' ? 'Numerical' : 'Categorical'}</span>
+      <span>{$GET_DATA.data.model_type === 'regressor' ? 'Numerical' : 'Categorical'}</span>
       variable
       <span>{$GET_DATA.data.target_name}</span>
       is the target of the learning algorithm.

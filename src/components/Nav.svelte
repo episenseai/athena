@@ -187,7 +187,7 @@
       </li>
     </ul>
   </div>
-  {#if level == 'home'}
+  {#if level === 'home'}
     <div class="">
       <ul>
         <li class="username">
@@ -197,7 +197,7 @@
       </ul>
     </div>
   {/if}
-  {#if level == 'tabular'}
+  {#if level === 'tabular'}
     <div>
       <ul>
         <li class="tabular">
@@ -205,7 +205,7 @@
         </li>
         <li class="pipeline">
           (
-          <span class={!($PROJECT.pipe_status == '1') ? 'selected' : ''} title="TABULAR: Pipeline">
+          <span class={!($PROJECT.pipe_status === '1') ? 'selected' : ''} title="TABULAR: Pipeline">
             Pipeline
           </span>)
         </li>
@@ -213,7 +213,7 @@
         <li class="models">
           (
           <span
-            class={$PROJECT.current_stage == 'finalconfig:GET' && $PROJECT.pipe_status == '1'
+            class={$PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'
               ? 'selected'
               : ''}
             title="TABULAR: Models"> Models </span>)
@@ -224,7 +224,7 @@
 
   <div class="others">
     <ul>
-      {#if level == 'tabular'}
+      {#if level === 'tabular'}
         {#if $PROJECT.name && $PROJECT.current_stage}
           <li class="cproj">Project:&nbsp; <span class="pname">{$PROJECT.name}</span>&nbsp;</li>
         {/if}
@@ -232,14 +232,14 @@
           <button
             on:click|stopPropagation={async () => {
               console.log(get(SWITCH_PROJECT))
-              if (get(SWITCH_PROJECT) == true) {
+              if (get(SWITCH_PROJECT) === true) {
                 await snack(
                   'warning',
                   'Already in the process of switching project. Try selecting a project from the list below.'
                 )
                 return
               }
-              $SWITCH_PROJECT = true
+              $SWITCH_PROJECT = true // eslint-disable-line
             }}>
             <span class="logo-global">&#x23CE;</span>
             Switch Project

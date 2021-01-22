@@ -6,7 +6,7 @@
   export let selected = null
   export let width
   export let color // maroon, violet, green, pink, blue, teal, purple
-  $: selectedName = selected ? items[items.findIndex((el) => el.value == selected)].name : ''
+  $: selectedName = selected ? items[items.findIndex((el) => el.value === selected)].name : ''
 </script>
 
 <svelte:window on:click={() => (open = false)} />

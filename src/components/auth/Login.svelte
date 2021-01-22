@@ -1,5 +1,5 @@
 <script>
-  import { LOGIN, SIGNUP } from './store.js'
+  import { LOGIN } from './store.js'
 
   async function handle_login(event) {
     disabled = true

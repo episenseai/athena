@@ -37,7 +37,7 @@
         {#each model.grid_results.cvresult_list as element, i}
           <tr class={model.grid_results.best_params.length >= i + 1 ? 'param' : ''}>
             {#each element as elem}
-              <td class={elem == model.grid_results.best_score ? 'best-score' : ''}>{elem}</td>
+              <td class={elem === model.grid_results.best_score ? 'best-score' : ''}>{elem}</td>
             {/each}
           </tr>
         {/each}

@@ -22,14 +22,14 @@
   let strokeColor = 'rgba(33, 135, 153, 0.6)'
 
   const resize = () => {
-    rect = div.getBoundingClientRect()
+    let rect = div.getBoundingClientRect()
     width = rect.width
     height = rect.height
   }
 
   const yCalc = (i) => {
     if (offsets.length > 7 && i >= offsets.length - 2) return (8 - offsets.length + i) * yOffset + 60
-    else return i * yOffset + 60
+    return i * yOffset + 60
   }
 </script>
 

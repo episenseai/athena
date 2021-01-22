@@ -14,14 +14,12 @@ import {
   TAB_MODEL_BUILD_SERVICE,
   SSE_MODELS_UPDATE_SERVICE,
   TAB_MODELS_SERVICE,
-  TAB_ALL_MODELS_SERVICE,
   TAB_MODEL_CANCEL_SERVICE,
 } from '../../api/endpoints'
-import { SSE } from '../../api/sse'
 import { fetch_json_POST, fetch_json_GET } from '../../api/fetch'
 import { snack } from '../base/store/snack'
 import modelsInfo from '../../routes/tabular/models/_mock/models.js'
-import { modelType, models, reset_model_stores } from './models/store'
+import { models, reset_model_stores } from './models/store'
 
 export const GET_DATA = writable({})
 // {
@@ -72,7 +70,7 @@ function project_store() {
     return false
   }
 
-  const { subscribe, set, update } = writable(BLANK_TEMPLATE)
+  const { subscribe, set } = writable(BLANK_TEMPLATE)
 
   return {
     subscribe,
@@ -104,17 +102,17 @@ function project_store() {
         set(BLANK_TEMPLATE)
         set(response.json.data)
         await snack('success', response.json.info)
-        if (current_proj_id !== get(PROJECT).id && get(PROJECT).pipe_status == '1') {
+        if (current_proj_id !== get(PROJECT).id && get(PROJECT).pipe_status === '1') {
           reset_model_stores()
         }
-        if (get(PROJECT).pipe_status == '0') {
+        if (get(PROJECT).pipe_status === '0') {
           await snack(
             'info',
             `Your are on the ${get(PROJECT).current_stage} stage of the pipeline for this project`
           )
-        } else if (get(PROJECT).pipe_status == '1') {
+        } else if (get(PROJECT).pipe_status === '1') {
           await snack('info', `You are on MODELS stage for the project`)
-        } else if (get(PROJECT).pipe_status == '-1') {
+        } else if (get(PROJECT).pipe_status === '-1') {
           await snack('warning', `A pipeline error has occured while processing.`)
         }
 
@@ -133,7 +131,7 @@ function project_store() {
     },
     init_proj: async () => {
       const porj_id = await read_proj('error reading project id from local storage while initialization')
-      if (!porj_id || typeof porj_id !== 'string' || porj_id == '') {
+      if (!porj_id || typeof porj_id !== 'string' || porj_id === '') {
         await write_proj('', 'error writing auth state to local storage while initialization')
         return false
       }
@@ -249,7 +247,7 @@ function project_store() {
             //console.log('1', pipe_state)
             //console.log('2', get(PROJECT))
             //console.log(es instanceof EventSource, es.constructor.name)
-            if (get(PROJECT).current_stage.split(':')[1] != 'GET') {
+            if (get(PROJECT).current_stage.split(':')[1] !== 'GET') {
               if (
                 pipe_state.pipe_status !== get(PROJECT).pipe_status ||
                 pipe_state.current_stage !== get(PROJECT).current_stage
@@ -264,7 +262,7 @@ function project_store() {
           },
           false
         )
-        es.onerror = async (e) => {
+        es.onerror = async (_) => {
           await snack(
             'error',
             'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.'
@@ -278,7 +276,7 @@ function project_store() {
 
     sse_close: async () => {
       if (es) {
-        if (es instanceof EventSource || es.constructor.name == 'EventSource') {
+        if (es instanceof EventSource || es.constructor.name === 'EventSource') {
           es.close()
         }
       }
@@ -341,8 +339,8 @@ function project_store() {
         if (
           !rerun &&
           get(models).findIndex(
-            (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status == 'TRYCANCEL'
-          ) == -1
+            (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
+          ) === -1
         ) {
           //console.log('All models already done. no sse required')
           return
@@ -418,7 +416,7 @@ function project_store() {
               if (
                 get(models).findIndex(
                   (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
-                ) == -1
+                ) === -1
               ) {
                 PROJECT.sse_models_close()
                 snack('info', `All the models completed for the ${get(PROJECT).name} project`).then(
@@ -432,7 +430,7 @@ function project_store() {
           },
           false
         )
-        es_models.onerror = async (e) => {
+        es_models.onerror = async (_) => {
           await snack(
             'error',
             'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.'
@@ -445,7 +443,7 @@ function project_store() {
     },
     sse_models_close: async () => {
       if (es_models) {
-        if (es_models instanceof EventSource || es.constructor.name == 'EventSource') {
+        if (es_models instanceof EventSource || es.constructor.name === 'EventSource') {
           es_models.close()
         }
       }
@@ -485,7 +483,7 @@ function project_store() {
             'error',
             `Error occured while building ${new_model.name} model for the ${get(PROJECT).name} project`
           )
-        } else if (new_model.status == 'CANCELLED') {
+        } else if (new_model.status === 'CANCELLED') {
           await snack(
             'warning',
             `Cancelled building ${new_model.name} model for the ${get(PROJECT).name} project`

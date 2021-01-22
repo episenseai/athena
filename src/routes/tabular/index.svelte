@@ -2,7 +2,6 @@
   import Menu from '../../components/base/Menu.svelte'
   import PipeMain from '../../components/tp/PipeMain.svelte'
   import ModelsMain from '../../components/tp/ModelsMain.svelte'
-  import FinalConfig from '../../components/tp/FinalConfig.svelte'
   import { PROJECT, SWITCH_PROJECT, GET_DATA, POST_DATA } from '../../components/tp/store'
   import { onMount } from 'svelte'
   import { snack } from '../../components/base/store/snack'
@@ -22,7 +21,7 @@
         name: `${p.projectname}`,
         desc: `${p.timestamp}`,
       }))
-      if (items.length == 0) {
+      if (items.length === 0) {
         await snack('warning', 'You do not have any projects yet.')
       }
     }
@@ -73,7 +72,9 @@
           if (response) {
             await list_projects()
             await snack('info', 'Continue with the newly created and selected project.')
+            // eslint-disable-next-line
             event.target.projectname.value = ''
+            // eslint-disable-next-line
             event.target.projectdesc.value = ''
             if (items.length > 0) {
               selectedproj = items[0].value
@@ -111,7 +112,7 @@
           <span class="logo-global">→</span>
         </button>
       </div>
-      {#if !getting_list && items.length == 0}
+      {#if !getting_list && items.length === 0}
         <p class="empty">
           !! You have not created any project yet. Create a new project to select from the list.
         </p>
@@ -126,7 +127,7 @@
       </button>
     </div>
   {/if}
-{:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.current_stage == 'finalconfig:GET' && $PROJECT.pipe_status == '1'}
+{:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'}
   <ModelsMain />
 {:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.pipe_status !== '1' && ['consume:GET', 'prepare:GET', 'transform:GET', 'build:GET', 'consume:POST', 'prepare:POST', 'transform:POST', 'build:POST', 'finalconfig:GET'].includes($PROJECT.current_stage)}
   <PipeMain />

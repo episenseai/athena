@@ -3,7 +3,7 @@
   import Nav from '../components/Nav.svelte'
   import Signup from '../components/auth/Signup.svelte'
   import Login from '../components/auth/Login.svelte'
-  import { LOGIN, SIGNUP } from '../components/auth/store.js'
+  import { LOGIN } from '../components/auth/store.js'
   import { PROJECT } from '../components/tp/store'
   import { onMount } from 'svelte'
 

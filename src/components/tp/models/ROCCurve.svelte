@@ -1,10 +1,7 @@
 <script>
-  import { onMount } from 'svelte'
-  import { modelType } from './store.js'
   export let model
   import { v4 as uuidv4 } from 'uuid'
 
-  let plotlyLoaded
   const uuid = 'pl-' + uuidv4()
   let my_node
   const hoverlabel = {
@@ -64,6 +61,7 @@
     model.roc.forEach(({ x, y, name, area }) => {
       traces.push({ ...traceTemplate, x, y, name: `${name} (area = ${area})` })
     })
+    // eslint-disable-next-line
     Plotly.newPlot(uuid, traces, layout, {
       scrollZoom: false,
       displaylogo: false,

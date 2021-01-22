@@ -33,7 +33,7 @@ module.exports = {
   rules: {
     indent: 'off',
     semi: ['error', 'never'],
-    'no-unused-vars': 'error',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'no-unused-labels': 'off',
     'object-shorthand': ['error', 'always'],
     'no-var': 'error',

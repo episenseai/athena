@@ -10,7 +10,7 @@
   const dispatch = createEventDispatcher()
 
   onMount(async () => {
-    if (get(PROJECT).current_stage == 'prepare:GET') {
+    if (get(PROJECT).current_stage === 'prepare:GET') {
       let success = await PROJECT.get_pipe({ current_stage: 'prepare:GET' })
       if (success) {
         $GET_DATA.data.target = undefined
@@ -32,6 +32,7 @@
     // miminal configuration complete
     if (get(GET_DATA).data.target) {
       //let item = items.find(({ value }) => value === selected)
+      // eslint-disable-next-line
       $POST_DATA = {
         stage: 'prepare:POST',
         data: {
@@ -72,7 +73,7 @@
   <span class="logo-global">&nbsp;&#x21d2;</span>
 </button>
 
-{#if $PROJECT && $PROJECT.current_stage == 'prepare:GET' && $GET_DATA.stage == 'prepare:GET'}
+{#if $PROJECT && $PROJECT.current_stage === 'prepare:GET' && $GET_DATA.stage === 'prepare:GET'}
   <div class="input-stage">
     <table>
       <thead>
@@ -147,7 +148,7 @@
       </select>
     </aside>
   </div>
-{:else if $PROJECT && $PROJECT.current_stage == 'prepare:POST'}
+{:else if $PROJECT && $PROJECT.current_stage === 'prepare:POST'}
   <PipeWait />
 {/if}
 

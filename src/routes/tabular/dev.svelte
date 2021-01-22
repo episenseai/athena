@@ -1,17 +1,12 @@
 <script>
-  import { fetch_json_GET, fetch_json_POST } from '../../api/fetch'
-  import {
-    TAB_CREATE_PROJECTS_SERVICE,
-    GET_SSE_TOKEN_SERVICE,
-    SSE_UPDATE_SERVICE,
-    SSE_MODELS_UPDATE_SERVICE,
-  } from '../../api/endpoints'
-  import { snack } from '../../components/base/store/snack'
-  import { LOGIN, SIGNUP } from '../../components/auth/store.js'
+  import { fetch_json_GET } from '../../api/fetch'
+  import { GET_SSE_TOKEN_SERVICE, SSE_MODELS_UPDATE_SERVICE } from '../../api/endpoints'
+  import { LOGIN } from '../../components/auth/store.js'
   import { SSE } from '../../api/sse'
   import { get } from 'svelte/store'
   import { PROJECT } from '../../components/tp/store'
 
+  /* eslint-disable */
   async function test_sse() {
     try {
       const token = await get_token()

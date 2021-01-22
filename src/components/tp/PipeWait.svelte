@@ -1,5 +1,4 @@
 <script>
-  import { snack } from '../base/store/snack'
   import { PROJECT } from './store'
   import ProgressL from '../base/ProgressL.svelte'
   import Unfreeze from './Unfreeze.svelte'
@@ -12,7 +11,7 @@
 </script>
 
 <div class="container">
-  {#if $PROJECT.pipe_status == '0'}
+  {#if $PROJECT.pipe_status === '0'}
     <h3>
       <span class="emoji">🚚</span>
       ... Currently processing data for the
@@ -32,7 +31,7 @@
       <span>☕</span>
       ...
     </h4>
-  {:else if $PROJECT.pipe_status == '-1'}
+  {:else if $PROJECT.pipe_status === '-1'}
     <Unfreeze />
   {/if}
 </div>

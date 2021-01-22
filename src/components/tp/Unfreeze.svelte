@@ -1,5 +1,4 @@
 <script>
-  import { TAB_UNFREEZE_PIPE_SERVICE } from '../../api/endpoints'
   import { PROJECT } from './store'
 </script>
 

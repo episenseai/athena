@@ -1,14 +1,12 @@
 <script>
-  import { GET_DATA, POST_DATA, PROJECT } from './store'
+  import { POST_DATA, PROJECT } from './store'
   // import components corresponding to each stage of processing
   import Consume from './Consume.svelte'
   import Prepare from './Prepare.svelte'
   import Transform from './Transform.svelte'
   import Build from './Build.svelte'
   import { get } from 'svelte/store'
-  import { LOGIN } from '../auth/store'
   import { snack } from '../base/store/snack'
-  import Details from '../base/Details.svelte'
   import FinalConfig from './FinalConfig.svelte'
   // stages of the tabular data processing pipeline
   const stages = [
@@ -44,16 +42,13 @@
     console.log('revert_stage ', to_stage, to_idx)
     if (from_idx < 0 || to_idx < 0) {
       await snack('error', 'invalid stage name provided from reversal')
-      return
     } else if (from_idx === to_idx) {
       await snack(
         'warning',
         'Stage reversal request ignored. Trying to revert to the stage you are already on.'
       )
-      return
     } else if (to_idx > from_idx) {
       await snack('warning', 'Stage reversal request ignored. Can only revert to a previous stage.')
-      return
     } else {
       await PROJECT.revert(from_stage, to_stage)
     }

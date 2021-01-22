@@ -5,13 +5,13 @@
 
   let TP, FP, FN, TN
   let P, N
-  let TOTAL, PREVALENCE
+  let TOTAL // PREVALENCE
   let TPR, FNR, TNR, FPR
   let PPV, NPV, FDR, FOR
   let ACC
   let F1SCORE
-  let MCC
-  let INFORMEDNESS
+  /* let MCC */
+  /* let INFORMEDNESS */
   let LR_PLUS, LR_NEG, DOR
 
   $: if (cm) {

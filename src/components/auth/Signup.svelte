@@ -1,5 +1,5 @@
 <script>
-  import { LOGIN, SIGNUP } from './store.js'
+  import { SIGNUP } from './store.js'
   import { snack } from '../base/store/snack'
   let form
 
@@ -11,7 +11,7 @@
     // console.log(event.target.password.value)
 
     // Call custom store method to handle signup
-    if (event.target.password.value != event.target.password1.value) {
+    if (event.target.password.value !== event.target.password1.value) {
       await snack('error', 'Passwords in both should be the same. Try again.')
       disabled = false
       return
@@ -25,7 +25,6 @@
   }
   // disable the submit button when request in flight
   let disabled = false
-  let logo_html = '<span>episense</span>ai'
 </script>
 
 <div class="auth-block">

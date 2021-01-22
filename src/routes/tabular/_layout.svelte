@@ -7,7 +7,7 @@
 
   onMount(async () => {
     // initalize the auth store from the local storage
-    const get_proj = await PROJECT.init_proj()
+    await PROJECT.init_proj()
   })
 </script>
 

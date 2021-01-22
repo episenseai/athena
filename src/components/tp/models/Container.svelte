@@ -43,7 +43,7 @@
     { component: Predict, name: 'PREDICT' },
   ]
 
-  const unfinishedModelTabs = [{ component: ModelInfo, name: 'MODEL INFO' }]
+  /* const unfinishedModelTabs = [{ component: ModelInfo, name: 'MODEL INFO' }] */
   $: tabs =
     //  modelStatus !== 'DONE'
     //    ? unfinishedModelTabs
@@ -75,31 +75,27 @@
               'warning',
               `Model building has not started yet to view the data in "${tab.name.toLowerCase()}" tab.`
             )
-            return
           } else if (modelStatus === 'RUNNING') {
             await snack(
               'warning',
               `Model building is not yet complete to view the data in "${tab.name.toLowerCase()}" tab.`
             )
-            return
           } else if (modelStatus === 'ERROR') {
             await snack(
               'warning',
               `Error happened during model building. You can not view the data in "${tab.name.toLowerCase()}" tab.`
             )
-            return
           } else if (modelStatus === 'CANCELLED') {
             await snack('warning', `Model build was cancelled. No data.`)
-            return
           } else if (modelStatus === 'TRYCANCEL') {
             await snack('warning', `Model is scheduled to be cancelled. No data`)
-            return
+          } else {
+            activeTabs.update((val) => {
+              val[uid] = tab.name
+              return val
+            })
           }
         }
-        activeTabs.update((val) => {
-          val[uid] = tab.name
-          return val
-        })
       }}>
       {tab.name}
     </span>

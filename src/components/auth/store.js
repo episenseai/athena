@@ -8,7 +8,7 @@ import { SIGNUP_SERVICE, LOGIN_SERVICE, LOGOUT_SERVICE } from '../../api/endpoin
 const AUTH_KEY = 'authkey123'
 
 function signup_store() {
-  const { subscribe, set, update } = writable(false)
+  const { subscribe, set } = writable(false)
 
   return {
     subscribe,
@@ -79,7 +79,7 @@ function login_store() {
     return false
   }
 
-  const { subscribe, set, update } = writable(clean_state)
+  const { subscribe, set } = writable(clean_state)
 
   return {
     // a store must have a subscribe method
