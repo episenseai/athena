@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser',
+  // parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -20,14 +20,14 @@ module.exports = {
       files: ['*.svelte'],
       processor: 'svelte3/svelte3',
     },
-    {
-      extends: ['plugin:cypress/recommended'],
-      files: ['cypress/**/*'],
-      env: {
-        'cypress/globals': true,
-      },
-      plugins: ['cypress'],
-    },
+    //     {
+    // extends: ['plugin:cypress/recommended'],
+    // files: ['cypress/**/*'],
+    // env: {
+    //   'cypress/globals': true,
+    // },
+    // plugins: ['cypress'],
+    // },
   ],
   extends: ['eslint:recommended', 'prettier'],
   rules: {
