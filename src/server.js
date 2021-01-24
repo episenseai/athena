@@ -48,6 +48,6 @@ server.on('error', (err) => {
 
 server.listen(PORT, () => {
   console.log(`┌─────────────────────────────────────────────────────────────────────┐`)
-  console.log(`│ Running frontend for [[ carbon ]] on http://localhost:${PORT}           │`)
+  console.log(`│ Running frontend for [[ carbon ]] on http://localhost:${PORT}          │`)
   console.log(`└─────────────────────────────────────────────────────────────────────┘`)
 })

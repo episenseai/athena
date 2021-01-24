@@ -7,7 +7,6 @@ import svelte from 'rollup-plugin-svelte'
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
-import alias from '@rollup/plugin-alias'
 import pkg from './package.json'
 
 const mode = process.env.NODE_ENV
@@ -19,29 +18,11 @@ const onwarn = (warning, onwarn) =>
   (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning)
 
-const customResolver = resolve({
-  extensions: ['.svelte', '.js', '.json', '.sass', '.scss', '.css'],
-})
-const projectRootDir = path.resolve(__dirname)
-const entries = [
-  {
-    find: '@comp',
-    replacement: path.resolve(projectRootDir, 'src/components/'),
-    // OR place `customResolver` here. See explanation below.
-  },
-  {
-    find: '@routes',
-    replacement: path.resolve(projectRootDir, 'src/routes/'),
-    // OR place `customResolver` here. See explanation below.
-  },
-]
-
 export default {
   client: {
     input: config.client.input(),
     output: config.client.output(),
     plugins: [
-      alias({ entries, customResolver }),
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
@@ -100,7 +81,6 @@ export default {
     input: config.server.input(),
     output: config.server.output(),
     plugins: [
-      alias({ entries, customResolver }),
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
