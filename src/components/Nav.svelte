@@ -216,7 +216,9 @@
             class={$PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'
               ? 'selected'
               : ''}
-            title="TABULAR: Models"> Models </span>)
+            title="TABULAR: Models">
+            Models
+          </span>)
         </li>
       </ul>
     </div>
@@ -276,7 +278,9 @@
         <a
           class={segment === 'legal' ? 'selected' : ''}
           href="legal"
-          title="Terms and Privacy policy of episense ai"> legal </a>
+          title="Terms and Privacy policy of episense ai">
+          legal
+        </a>
       </li>
       <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->

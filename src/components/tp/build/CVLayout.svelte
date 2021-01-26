@@ -54,7 +54,9 @@
             y={yCalc(i) + barHeight / 2}
             text-anchor="middle"
             dominant-baseline="middle"
-            fill={strokeColor}> ------ </text>
+            fill={strokeColor}>
+            ------
+          </text>
         {/if}
       {:else}
         <g stroke-width="1" stroke={strokeColor}>
