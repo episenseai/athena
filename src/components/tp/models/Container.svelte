@@ -53,6 +53,44 @@
       ? nClassificationTabs
       : regressionTabs
 
+  const tabupdate = async (tab) => {
+    if (tab.name !== 'MODEL INFO') {
+      if (modelStatus === 'WAIT') {
+        await snack(
+          'warning',
+          `Model building has not started yet to view the data in "${tab.name.toLowerCase()}" tab.`
+        )
+        return false
+      }
+      if (modelStatus === 'RUNNING') {
+        await snack(
+          'warning',
+          `Model building is not yet complete to view the data in "${tab.name.toLowerCase()}" tab.`
+        )
+        return false
+      }
+      if (modelStatus === 'ERROR') {
+        await snack(
+          'warning',
+          `Error happened during model building. You can not view the data in "${tab.name.toLowerCase()}" tab.`
+        )
+        return false
+      }
+      if (modelStatus === 'CANCELLED') {
+        await snack('warning', `Model build was cancelled. No data.`)
+        return false
+      }
+      if (modelStatus === 'TRYCANCEL') {
+        await snack('warning', `Model is scheduled to be cancelled. No data`)
+        return false
+      }
+    }
+    activeTabs.update((val) => {
+      val[uid] = tab.name
+      return val
+    })
+  }
+
   onMount(() => {
     if (!get(activeTabs)[uid])
       activeTabs.update((val) => {
@@ -68,35 +106,7 @@
       class:active-tab={tab.name === $activeTabs[uid]}
       class:notdone={modelStatus !== 'DONE'}
       class="noselect"
-      on:click|stopPropagation={async () => {
-        if (tab.name !== 'MODEL INFO') {
-          if (modelStatus === 'WAIT') {
-            await snack(
-              'warning',
-              `Model building has not started yet to view the data in "${tab.name.toLowerCase()}" tab.`
-            )
-          } else if (modelStatus === 'RUNNING') {
-            await snack(
-              'warning',
-              `Model building is not yet complete to view the data in "${tab.name.toLowerCase()}" tab.`
-            )
-          } else if (modelStatus === 'ERROR') {
-            await snack(
-              'warning',
-              `Error happened during model building. You can not view the data in "${tab.name.toLowerCase()}" tab.`
-            )
-          } else if (modelStatus === 'CANCELLED') {
-            await snack('warning', `Model build was cancelled. No data.`)
-          } else if (modelStatus === 'TRYCANCEL') {
-            await snack('warning', `Model is scheduled to be cancelled. No data`)
-          } else {
-            activeTabs.update((val) => {
-              val[uid] = tab.name
-              return val
-            })
-          }
-        }
-      }}>
+      on:click|stopPropagation={async () => await tabupdate(tab)}>
       {tab.name}
     </span>
   {/each}
