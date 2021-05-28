@@ -295,11 +295,11 @@ function project_store() {
       return false
     },
 
-    model_build: async (modelids = []) => {
+    model_build: async (modelids = [], changed_hparams = {}) => {
       console.log(modelids)
       const response = await fetch_json_POST(
         TAB_MODEL_BUILD_SERVICE(get(LOGIN).userid, get(PROJECT).id),
-        { modelids },
+        { modelids, changed_hparams },
         'MODEL BUILD SERVICE'
       )
       if (!response) return false
