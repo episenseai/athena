@@ -35,7 +35,7 @@
     // The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain.
     splitter: ['best'],
     // The strategy used to choose the split at each node. Supported strategies are “best” to choose the best split and “random” to choose the best random split.
-    max_depth: [],
+    // max_depth: [10],
     // The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
     min_samples_split: [2],
     // The minimum number of samples required to split an internal node:
