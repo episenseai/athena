@@ -2,6 +2,7 @@
   import Container from './models/Container.svelte'
   import { models, modelType, activeModels, optimizeUsing } from './models/store.js'
   import { get } from 'svelte/store'
+  import { GET_DATA } from './store.js'
   import Spinner from '../Spinner.svelte'
   import Jumper from '../Jumper.svelte'
   import { PROJECT } from '../../components/tp/store'
@@ -22,7 +23,7 @@
   async function rerun_model(id) {
     let modelids = [id]
     let changed_hparams = {}
-    changed_hparams[id] = changed_hyperparameters()
+    changed_hparams[id] = changed_hyperparameters(id)
     let res = await PROJECT.model_build(modelids, changed_hparams)
     if (res) {
       models.update((ms) => {
@@ -45,27 +46,39 @@
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1) + min) //The maximum is inclusive and the minimum is inclusive
   }
-  function changed_hyperparameters() {
+  function getRandomFloatInclusive(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.random() * (max - min) + min //The maximum is inclusive and the minimum is inclusive
+  }
+  function changed_hyperparameters(id) {
+    if (id === '6bb167c7-fd88-4fc1-8cc9-5005b463a6b4') {
+      return decisiontreeclf_hyperparams()
+    } else if (id === '24ee24ed-6174-4a79-bf53-215d6fbcf680') {
+      return adaboostclf_hyperparams()
+    }
+  }
+
+  function decisiontreeclf_hyperparams() {
+    // console.log(JSON.stringify(get(GET_DATA)))
     return {
       criterion: ['gini', 'entropy'],
-      // criterion:{“gini”, “entropy”}, default=”gini”
-      // The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain.
-      splitter: ['best'],
-      // The strategy used to choose the split at each node. Supported strategies are “best” to choose the best split and “random” to choose the best random split.
-      // max_depth: [10],
-      // The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
-      // min_samples_split: [2],
-      // The minimum number of samples required to split an internal node:
-      // min_samples_leaf: [1],
-      // The minimum number of samples required to be at a leaf node.
-      // A split point at any depth will only be considered if it leaves at
-      // least min_samples_leaf training samples in each of the left and right branches.
-      // min_weight_fraction_leaf: [0.0],
-      // The minimum weighted fraction of the sum total of weights (of all the input samples) required to be at a leaf node. Samples have equal weight when sample_weight is not provided.
-      max_features: [getRandomIntInclusive(5, 15), getRandomIntInclusive(5, 15)],
-      // The number of features to consider when looking for the best split:
-      max_leaf_nodes: [getRandomIntInclusive(5, 15), getRandomIntInclusive(5, 15)],
-      // Grow a tree with max_leaf_nodes in best-first fashion. Best nodes are defined as relative reduction in impurity. If None then unlimited number of leaf nodes.
+      splitter: ['best', 'random'],
+      max_features: [
+        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
+        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
+      ],
+      max_leaf_nodes: [
+        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
+        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
+      ],
+    }
+  }
+  function adaboostclf_hyperparams() {
+    // console.log(JSON.stringify(get(GET_DATA)))
+    return {
+      n_estimators: [50, getRandomIntInclusive(0, 50), getRandomIntInclusive(50, 100)],
+      learning_rate: [1, getRandomFloatInclusive(0, 1), getRandomFloatInclusive(1, 3)],
     }
   }
 
