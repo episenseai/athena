@@ -17,3 +17,5 @@ export function reset_model_stores() {
   modelType.set(undefined)
   activeModels.set({})
 }
+
+export const model_store = writable({})

@@ -27,7 +27,8 @@
       modelType.set(response.json.data.modelType)
       optimizeUsing.set(response.json.data.optimizeUsing)
     }
-    console.log(response.json.data)
+    // console.log('All models data.....')
+    // console.log(response.json.data)
   }
 
   onMount(async () => {
@@ -35,6 +36,7 @@
     await PROJECT.sse_models_update()
     return async () => await PROJECT.sse_models_close()
   })
+
 </script>
 
 {#if false}

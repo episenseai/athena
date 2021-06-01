@@ -297,14 +297,14 @@ function project_store() {
 
 
     model_build: async (modelids = [], changed_hparams = {}) => {
-      console.log(modelids)
+      // console.log(modelids)
       const response = await fetch_json_POST(
         TAB_MODEL_BUILD_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         { modelids, changed_hparams },
         'MODEL BUILD SERVICE'
       )
       if (!response) return false
-      console.log(response.json)
+      // console.log(response.json)
       if (response.json.success) {
         set(response.json.data)
         await snack('success', response.json.info)
@@ -343,7 +343,7 @@ function project_store() {
             (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
           ) === -1
         ) {
-          //console.log('All models already done. no sse required')
+          // console.log('All models already done. no sse required')
           return
         }
         await PROJECT.sse_models_close()
@@ -408,9 +408,10 @@ function project_store() {
                 return new_models
               })
               if (done_models.length > 0) {
+                // console.log("Data to be downloaded for these models")
+                // console.log(done_models)
                 const promises = done_models.map(PROJECT.get_model_by_id)
                 Promise.all(promises).then((vals) => {
-                  // console.log(vals)
                   return vals
                 })
               }
@@ -469,6 +470,8 @@ function project_store() {
             }
             //console.log(new_model)
             ms[idx] = new_model
+            // console.log("Downloaded and set new model data....")
+            // console.log(ms[idx])
             return ms
           }
         })

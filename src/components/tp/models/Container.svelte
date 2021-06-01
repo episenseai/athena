@@ -6,7 +6,7 @@
   import ModelPerformance from './ModelPerformance.svelte'
   import ConfusionMatrix from './ConfusionMatrix.svelte'
   import MultiConfusionMatrix from './MultiConfusionMatrix.svelte'
-  import { activeTabs, modelType, models } from './store.js'
+  import { activeTabs, modelType, models, model_store } from './store.js'
   import { get } from 'svelte/store'
   import { snack } from '../../base/store/snack'
   import GridResults from './GridResults.svelte'
@@ -18,7 +18,9 @@
   $: modelStatus = model.status
   $: uid = String(id)
   $: if (model) {
-    console.log(model)
+    model_store.set(model)
+    // console.log('===============')
+    // console.log(get(model_store))
   }
 
   // tabs for the models container pane
@@ -98,6 +100,7 @@
         return val
       })
   })
+
 </script>
 
 <div class="tabs">
@@ -161,4 +164,5 @@
   span:hover.active-tab {
     background-color: rgba(var(--lobster-rgb), 0.2);
   }
+
 </style>
