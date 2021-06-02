@@ -33,6 +33,7 @@
     await PROJECT.sse_models_update()
     return async () => await PROJECT.sse_models_close()
   })
+
 </script>
 
 {#if false}
@@ -57,5 +58,5 @@
   </Details>
 {/if}
 {#if $PROJECT.id && $PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'}
-  <Models models={$models} modelType={$modelType} />
+  <Models />
 {/if}
