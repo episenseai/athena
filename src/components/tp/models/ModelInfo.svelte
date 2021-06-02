@@ -1,7 +1,8 @@
 <script>
   import model_info from './model_info'
-  import { models } from './store'
-  export let model
+  import { models, model_store } from './store'
+  $: model = $model_store
+
 </script>
 
 <div class="container modelinfo">
@@ -25,4 +26,5 @@
   :global(.container.modelinfo) :global(h2) {
     margin-top: 20px;
   }
+
 </style>
