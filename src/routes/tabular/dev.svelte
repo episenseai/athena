@@ -52,10 +52,7 @@
   }
 
   async function get_token() {
-    const response = await fetch_json_GET(
-      GET_SSE_TOKEN_SERVICE(get(LOGIN).userid, get(PROJECT).id),
-      'GET SSE TOKEN'
-    )
+    const response = await fetch_json_GET(GET_SSE_TOKEN_SERVICE(get(LOGIN).userid, get(PROJECT).id), 'GET SSE TOKEN')
     if (!response) return false
     if (response.json.success) {
       return response.json.data.token

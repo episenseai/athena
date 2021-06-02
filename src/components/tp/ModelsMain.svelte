@@ -11,10 +11,7 @@
   import { get } from 'svelte/store'
 
   async function all_models() {
-    const response = await fetch_json_GET(
-      TAB_ALL_MODELS_SERVICE(get(LOGIN).userid, get(PROJECT).id),
-      'ALL MODELS'
-    )
+    const response = await fetch_json_GET(TAB_ALL_MODELS_SERVICE(get(LOGIN).userid, get(PROJECT).id), 'ALL MODELS')
     if (!response) return false
     if (response.json.success) {
       const get_models = response.json.data.models
@@ -36,7 +33,6 @@
     await PROJECT.sse_models_update()
     return async () => await PROJECT.sse_models_close()
   })
-
 </script>
 
 {#if false}

@@ -13,9 +13,7 @@
     if (get(PROJECT).current_stage !== 'build:GET') {
       await snack(
         'warning',
-        `Currently processing data for the ${
-          get(PROJECT).current_stage
-        } stage. Can not move to the next stage.`
+        `Currently processing data for the ${get(PROJECT).current_stage} stage. Can not move to the next stage.`
       )
       return
     }
@@ -108,8 +106,8 @@
         <div>
           <h3>Number of CV Folds (k-fold)</h3>
           <p>
-            Cross-Validation (CV) folds determine how the data is split between training, validation and
-            holdout sets. Number of folds should be between 2-20.
+            Cross-Validation (CV) folds determine how the data is split between training, validation and holdout sets.
+            Number of folds should be between 2-20.
           </p>
           <label class="cv">
             <input type="number" bind:value={$GET_DATA.data.cv.folds} min="2" max="20" step="1" />

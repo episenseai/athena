@@ -113,9 +113,7 @@
         </button>
       </div>
       {#if !getting_list && items.length === 0}
-        <p class="empty">
-          !! You have not created any project yet. Create a new project to select from the list.
-        </p>
+        <p class="empty">!! You have not created any project yet. Create a new project to select from the list.</p>
       {/if}
     </div>
   </div>

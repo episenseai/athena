@@ -12,10 +12,7 @@
   <div>
     <ul>
       <li class="brand">
-        <a
-          class={segment === undefined && level === 'home' ? 'selected' : ''}
-          href="."
-          title="HOME: episense ai">
+        <a class={segment === undefined && level === 'home' ? 'selected' : ''} href="." title="HOME: episense ai">
           <!-- width="158.4" -->
           <!-- height="51.36" -->
           <svg
@@ -205,17 +202,13 @@
         </li>
         <li class="pipeline">
           (
-          <span class={!($PROJECT.pipe_status === '1') ? 'selected' : ''} title="TABULAR: Pipeline">
-            Pipeline
-          </span>)
+          <span class={!($PROJECT.pipe_status === '1') ? 'selected' : ''} title="TABULAR: Pipeline"> Pipeline </span>)
         </li>
         <li>&nbsp;&nbsp;⮕ &nbsp;&nbsp;</li>
         <li class="models">
           (
           <span
-            class={$PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'
-              ? 'selected'
-              : ''}
+            class={$PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1' ? 'selected' : ''}
             title="TABULAR: Models">
             Models
           </span>)
@@ -275,10 +268,7 @@
 
       <li><a class={segment === 'about' ? 'selected' : ''} href="faq" title="About episense ai">FAQ</a></li>
       <li>
-        <a
-          class={segment === 'legal' ? 'selected' : ''}
-          href="legal"
-          title="Terms and Privacy policy of episense ai">
+        <a class={segment === 'legal' ? 'selected' : ''} href="legal" title="Terms and Privacy policy of episense ai">
           legal
         </a>
       </li>

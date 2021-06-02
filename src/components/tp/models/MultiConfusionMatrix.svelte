@@ -1,6 +1,8 @@
 <script>
-  export let model
+  import { model_store } from './store'
+
   const sumFunc = (acc, cur) => acc + cur
+  $: model = $model_store
   $: cm = model.cm
   $: sumRows = cm.map((row) => row.reduce(sumFunc))
   $: cm_transpose = cm[0].map((col, i) => cm.map((row) => row[i]))

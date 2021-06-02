@@ -3,7 +3,7 @@ module.exports = {
   tabWidth: 2,
   semi: false,
   singleQuote: true,
-  printWidth: 110,
+  printWidth: 120,
   plugins: ['prettier-plugin-svelte'],
   svelteSortOrder: 'options-scripts-markup-styles',
   svelteStrictMode: false,

@@ -15,9 +15,7 @@
     if (get(PROJECT).current_stage !== 'transform:GET') {
       await snack(
         'warning',
-        `Currently processing data for the ${
-          get(PROJECT).current_stage
-        } stage. Can not move to the next stage.`
+        `Currently processing data for the ${get(PROJECT).current_stage} stage. Can not move to the next stage.`
       )
       return
     }

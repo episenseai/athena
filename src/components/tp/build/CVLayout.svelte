@@ -68,12 +68,7 @@
             width={trainValWidth - offset - valWidth <= 0 ? 0 : trainValWidth - offset - valWidth}
             height={barHeight}
             fill={trainColor} />
-          <rect
-            x={xOffset + trainValWidth}
-            y={yCalc(i)}
-            width={holdoutWidth}
-            height={barHeight}
-            fill={holdoutColor} />
+          <rect x={xOffset + trainValWidth} y={yCalc(i)} width={holdoutWidth} height={barHeight} fill={holdoutColor} />
           <text
             x={xOffset + barWidth + 6}
             y={yCalc(i) + barHeight / 2}

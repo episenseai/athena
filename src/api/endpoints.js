@@ -296,8 +296,7 @@ export const TAB_MODEL_CANCEL_SERVICE = (userid, projectid) =>
 //      }
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
-export const TAB_ALL_MODELS_SERVICE = (userid, projectid) =>
-  `${TABULAR}models?userid=${userid}&projectid=${projectid}`
+export const TAB_ALL_MODELS_SERVICE = (userid, projectid) => `${TABULAR}models?userid=${userid}&projectid=${projectid}`
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // list all the models for a particlar project
@@ -315,8 +314,7 @@ export const TAB_ALL_MODELS_SERVICE = (userid, projectid) =>
 //      }
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
-export const TAB_MODELS_SERVICE = (userid, projectid) =>
-  `${TABULAR}models?userid=${userid}&projectid=${projectid}`
+export const TAB_MODELS_SERVICE = (userid, projectid) => `${TABULAR}models?userid=${userid}&projectid=${projectid}`
 
 // GET request
 export const GET_SSE_TOKEN_SERVICE = (userid, projectid) =>

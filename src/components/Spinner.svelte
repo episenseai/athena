@@ -9,12 +9,7 @@
   $: dash = (2 * Math.PI * radius * (100 - gap)) / 100
 </script>
 
-<svg
-  height={size}
-  width={size}
-  style="animation-duration:{speed}ms;"
-  class="svelte-spinner"
-  viewbox="0 0 32 32">
+<svg height={size} width={size} style="animation-duration:{speed}ms;" class="svelte-spinner" viewbox="0 0 32 32">
   <circle
     role="presentation"
     cx="16"

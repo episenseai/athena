@@ -208,9 +208,7 @@
         <Menu bind:open bind:selected {items} width="350" color="maroon" />
       </div>
       {#if !getting_uploads && items.length === 0}
-        <p class="note empty">
-          !! You have not uploaded any file yet. Uploaded a file to select from the list.
-        </p>
+        <p class="note empty">!! You have not uploaded any file yet. Uploaded a file to select from the list.</p>
       {/if}
 
       <p class="note">Note: try refreshing the page if the uploaded file does not appear in the list.</p>

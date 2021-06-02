@@ -8,8 +8,7 @@ export default {
     {
       id: '83e55067-aa8e-4d4b-961e-bef5218096c9',
       name: 'K-Neighbors Regressor',
-      desc:
-        'Neighbors-based regression implements learning based on the "k" nearest neighbors of each query point.',
+      desc: 'Neighbors-based regression implements learning based on the "k" nearest neighbors of each query point.',
     },
     {
       id: '60c1f21c-7bbb-4119-981a-04a42b1e54cf',
@@ -19,8 +18,7 @@ export default {
     {
       id: '259c7cf1-33fb-4768-ba88-2d2fac348c95',
       name: 'Multi-Layer Perceptron Regressor',
-      desc:
-        'Uses multiple layers between input and output; can contain non-linear componenets as opposed to Linear regressor.',
+      desc: 'Uses multiple layers between input and output; can contain non-linear componenets as opposed to Linear regressor.',
     },
     {
       id: '7cc05ccd-580e-4233-8604-e0d5ea523da5',
@@ -40,8 +38,7 @@ export default {
     {
       id: 'a10dd9dc-cda3-4aa5-b9f3-ac6d26140bd1',
       name: 'Theil-Sen Estimator',
-      desc:
-        'The Theil–Sen estimator is an unbiased estimator of the true slope in simple linear regression and makes no assumption about the underlying distribution of the data.',
+      desc: 'The Theil–Sen estimator is an unbiased estimator of the true slope in simple linear regression and makes no assumption about the underlying distribution of the data.',
     },
     {
       id: '24ee24ed-6174-4a79-bf53-215d6fbcf680',

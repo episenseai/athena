@@ -1,11 +1,12 @@
 <script>
   import { v4 as uuidv4 } from 'uuid'
+  import { model_store } from './store'
+
+  $: model = $model_store
+  $: metrics = model.metrics
 
   const uuid = 'pl-' + uuidv4()
   let my_node
-
-  export let model
-  $: metrics = model.metrics
 
   const hoverlabel = {
     bgcolor: 'rgba(62, 89, 107, 1)',
@@ -18,14 +19,10 @@
     line: { shape: 'linear', dash: 'dot', width: 1 },
     hoverinfo: 'y+x',
     hoverlabel,
-    //marker: { color: 'rgba(0, 125, 184, 0.85)' },
     name: `x = y`,
   }
   $: traceTemplate = {
-    //x: model.roc.x,
-    //y: model.roc.y,
     mode: 'markers',
-    //name: `ROC (area = ${model.roc.area})`,
     type: 'scatter',
     hoverinfo: 'y+x',
     hoverlabel,
@@ -68,17 +65,6 @@
       responsive: true,
     })
   }
-  // onMount(() => {
-  //   const script = document.createElement('script')
-  //   script.src = 'https://cdn.plot.ly/plotly-cartesian-latest.min.js'
-  //   script.async = true
-  //   script.onload = () => (plotlyLoaded = true)
-  //   document.head.appendChild(script)
-  //
-  //   return () => {
-  //     script.parentNode.removeChild(script)
-  //   }
-  // })
 </script>
 
 <table>

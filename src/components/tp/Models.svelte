@@ -81,7 +81,6 @@
       learning_rate: [1, getRandomFloatInclusive(0, 1), getRandomFloatInclusive(1, 3)],
     }
   }
-
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -141,8 +140,7 @@
         {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
           <button class="request request-rerun-btn" on:click|stopPropagation={rerun_model(id)}>Rerun</button>
         {:else}
-          <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
-            >Cancel</button>
+          <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}>Cancel</button>
         {/if}
         <p class="status noselect">
           {#if status === 'DONE'}
@@ -341,5 +339,4 @@
     position: relative;
     color: rgba(var(--blue-rgb), 0.95);
   }
-
 </style>

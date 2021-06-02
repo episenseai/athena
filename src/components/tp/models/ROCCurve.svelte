@@ -1,6 +1,8 @@
 <script>
-  export let model
+  import { model_store } from './store'
   import { v4 as uuidv4 } from 'uuid'
+
+  $: model = $model_store
 
   const uuid = 'pl-' + uuidv4()
   let my_node
@@ -17,14 +19,10 @@
     line: { shape: 'linear', dash: 'dot', width: 1 },
     hoverinfo: 'y+x',
     hoverlabel,
-    //marker: { color: 'rgba(0, 125, 184, 0.85)' },
     name: `x = y`,
   }
   $: traceTemplate = {
-    //x: model.roc.x,
-    //y: model.roc.y,
     mode: 'lines+markers',
-    //name: `ROC (area = ${model.roc.area})`,
     type: 'scatter',
     hoverinfo: 'y+x',
     hoverlabel,
@@ -46,21 +44,11 @@
   }
   $: if (my_node) {
     let traces = [trace0]
-    // if ($modelType === 'classifier') {
-    //   traces.push({
-    //     ...traceTemplate,
-    //     x: model.roc.x,
-    //     y: model.roc.y,
-    //     name: `ROC (area = ${model.roc.area})`,
-    //   })
-    // } else {
-    //   model.roc.forEach(({ x, y, name, area }) => {
-    //     traces.push({ ...traceTemplate, x, y, name: `${name} (area = ${area})` })
-    //   })
-    // }
+
     model.roc.forEach(({ x, y, name, area }) => {
       traces.push({ ...traceTemplate, x, y, name: `${name} (area = ${area})` })
     })
+
     // eslint-disable-next-line
     Plotly.newPlot(uuid, traces, layout, {
       scrollZoom: false,
@@ -68,17 +56,6 @@
       responsive: true,
     })
   }
-  // onMount(() => {
-  //   const script = document.createElement('script')
-  //   script.src = 'https://cdn.plot.ly/plotly-cartesian-latest.min.js'
-  //   script.async = true
-  //   script.onload = () => (plotlyLoaded = true)
-  //   document.head.appendChild(script)
-  //
-  //   return () => {
-  //     script.parentNode.removeChild(script)
-  //   }
-  // })
 </script>
 
 <div class="plots">

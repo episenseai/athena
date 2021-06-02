@@ -32,8 +32,8 @@
   import { tooltip } from '../../SampleTooltip.svelte'
   export let about
   let translateX = '5px'
-  $: sample = [info[about].desc]
-  $: heading = info[about].head
+  let sample = [info[about].desc]
+  let heading = info[about].head
 </script>
 
 <div use:tooltip={{ sample, heading, translateX }}>INFO</div>

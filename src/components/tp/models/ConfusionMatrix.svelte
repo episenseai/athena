@@ -1,7 +1,7 @@
 <script>
-  export let model
+  import { model_store } from './store'
 
-  $: cm = model.cm
+  $: cm = $model_store.cm
 
   let TP, FP, FN, TN
   let P, N

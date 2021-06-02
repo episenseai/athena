@@ -1,11 +1,9 @@
 <script>
   import { models, modelType, model_store } from './store'
-  export let model
-
 </script>
 
 {#if $models && $model_store && $model_store.grid_results}
-  <!-- 
+  <!--
  <pre>{JSON.stringify($model_store)}</pre>
 -->
 
@@ -94,5 +92,4 @@
   .best-score {
     color: var(--green);
   }
-
 </style>

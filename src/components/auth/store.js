@@ -140,10 +140,7 @@ function login_store() {
       if (response.json.success) {
         // successfully logged out
         // reset the local storage auth state
-        const auth_state = await write_auth(
-          clean_state,
-          'error resetting auth state to local storage while logout'
-        )
+        const auth_state = await write_auth(clean_state, 'error resetting auth state to local storage while logout')
         if (auth_state) {
           // if reset is successfull, reset the value in svelte store
           set(auth_state)
@@ -159,10 +156,7 @@ function login_store() {
     init_auth: async () => {
       let load_state = await read_auth('error reading auth state from local storage while initialization')
       if (!load_state || !load_state.success) {
-        load_state = await write_auth(
-          clean_state,
-          'error writing auth state to local storage while initialization'
-        )
+        load_state = await write_auth(clean_state, 'error writing auth state to local storage while initialization')
         set(load_state)
         return false
       }

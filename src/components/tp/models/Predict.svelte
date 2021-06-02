@@ -1,5 +1,4 @@
 <script>
-  // export let model
   let files
   let file
   let div

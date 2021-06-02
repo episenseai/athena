@@ -14,9 +14,7 @@
   function handleTransformSort(column, ascend) {
     // sort numbers and booleans
     if (['id', 'weight', 'include'].includes(column)) {
-      $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) =>
-        sortOrder(f1[column] - f2[column], ascend)
-      )
+      $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) => sortOrder(f1[column] - f2[column], ascend))
       return
     }
 

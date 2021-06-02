@@ -43,10 +43,7 @@
     if (from_idx < 0 || to_idx < 0) {
       await snack('error', 'invalid stage name provided from reversal')
     } else if (from_idx === to_idx) {
-      await snack(
-        'warning',
-        'Stage reversal request ignored. Trying to revert to the stage you are already on.'
-      )
+      await snack('warning', 'Stage reversal request ignored. Trying to revert to the stage you are already on.')
     } else if (to_idx > from_idx) {
       await snack('warning', 'Stage reversal request ignored. Can only revert to a previous stage.')
     } else {
