@@ -81,6 +81,7 @@
       learning_rate: [1, getRandomFloatInclusive(0, 1), getRandomFloatInclusive(1, 3)],
     }
   }
+
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -196,11 +197,14 @@
     color: var(--lobster);
   }
   section.active {
-    background-color: #fbfbfd;
+    background-color: #fffff0;
   }
   section.active .container,
   section:hover.active .container {
-    background-color: #fbfbfd;
+    background-color: #fffff0;
+  }
+  section.active h3.name {
+    color: rgba(var(--reddish-rgb), 0.96);
   }
   .info {
     grid-column: 1 / 8;
@@ -339,4 +343,5 @@
     position: relative;
     color: rgba(var(--blue-rgb), 0.95);
   }
+
 </style>

@@ -1,7 +1,10 @@
 <script>
-  import { model_store } from './store'
+  import { models } from './store'
+  export let id
 
-  $: cm = $model_store.cm
+  $: model = $models.find((el) => el.id === id)
+
+  $: cm = model.cm
 
   let TP, FP, FN, TN
   let P, N
@@ -60,6 +63,7 @@
     // Dagnostic odds ratio
     DOR = LR_PLUS / LR_NEG
   }
+
 </script>
 
 {#if cm}
@@ -351,4 +355,5 @@
     color: #c05726;
     font-size: 13px;
   }
+
 </style>

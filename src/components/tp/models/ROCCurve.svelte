@@ -1,8 +1,9 @@
 <script>
-  import { model_store } from './store'
+  import { models } from './store'
   import { v4 as uuidv4 } from 'uuid'
+  export let id
 
-  $: model = $model_store
+  $: model = $models.find((el) => el.id === id)
 
   const uuid = 'pl-' + uuidv4()
   let my_node
@@ -56,6 +57,7 @@
       responsive: true,
     })
   }
+
 </script>
 
 <div class="plots">
@@ -67,4 +69,5 @@
     width: 850px;
     margin: 30px auto 0;
   }
+
 </style>

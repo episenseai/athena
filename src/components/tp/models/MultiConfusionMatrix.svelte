@@ -1,8 +1,10 @@
 <script>
-  import { model_store } from './store'
+  import { models } from './store'
+  export let id
+
+  $: model = $models.find((el) => el.id === id)
 
   const sumFunc = (acc, cur) => acc + cur
-  $: model = $model_store
   $: cm = model.cm
   $: sumRows = cm.map((row) => row.reduce(sumFunc))
   $: cm_transpose = cm[0].map((col, i) => cm.map((row) => row[i]))
@@ -14,6 +16,7 @@
   $: avgPrecision = (precision.reduce(sumFunc) / precision.length).toFixed(2)
   $: avgRecall = (recall.reduce(sumFunc) / recall.length).toFixed(2)
   $: avgF1score = (f1score.reduce(sumFunc) / f1score.length).toFixed(2)
+
 </script>
 
 <div>
@@ -202,4 +205,5 @@
   td {
     padding: 4px;
   }
+
 </style>

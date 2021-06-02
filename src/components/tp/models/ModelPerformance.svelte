@@ -1,8 +1,10 @@
 <script>
   import { v4 as uuidv4 } from 'uuid'
-  import { model_store } from './store'
+  import { models } from './store'
+  export let id
 
-  $: model = $model_store
+  $: model = $models.find((el) => el.id === id)
+
   $: metrics = model.metrics
 
   const uuid = 'pl-' + uuidv4()
@@ -65,6 +67,7 @@
       responsive: true,
     })
   }
+
 </script>
 
 <table>
@@ -106,4 +109,5 @@
     width: 750px;
     margin: auto;
   }
+
 </style>

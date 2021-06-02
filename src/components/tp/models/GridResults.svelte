@@ -1,8 +1,12 @@
 <script>
-  import { models, modelType, model_store } from './store'
+  import { models } from './store'
+  export let id
+
+  $: model = $models.find((el) => el.id === id)
+
 </script>
 
-{#if $models && $model_store && $model_store.grid_results}
+{#if $models && model && model.grid_results}
   <!--
  <pre>{JSON.stringify($model_store)}</pre>
 -->
@@ -10,7 +14,7 @@
   <div class="container modelinfo">
     <h2>
       The best score for this model is
-      <span class="best-score"><b>{$model_store.grid_results.best_score}.</b></span>
+      <span class="best-score"><b>{model.grid_results.best_score}.</b></span>
     </h2>
     <table>
       <thead>
@@ -20,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each $model_store.grid_results.best_params as param}
+        {#each model.grid_results.best_params as param}
           <tr class="param">
             <td>{JSON.stringify(param[0], undefined, 2)}</td>
             <td>{JSON.stringify(param[1], undefined, 2)}</td>
@@ -37,10 +41,10 @@
         </tr>
       </thead>
       <tbody>
-        {#each $model_store.grid_results.cvresult_list as element, i}
-          <tr class={$model_store.grid_results.best_params.length >= i + 1 ? 'param' : ''}>
+        {#each model.grid_results.cvresult_list as element, i}
+          <tr class={model.grid_results.best_params.length >= i + 1 ? 'param' : ''}>
             {#each element as elem}
-              <td class={elem === $model_store.grid_results.best_score ? 'best-score' : ''}>{elem}</td>
+              <td class={elem === model.grid_results.best_score ? 'best-score' : ''}>{elem}</td>
             {/each}
           </tr>
         {/each}
@@ -92,4 +96,5 @@
   .best-score {
     color: var(--green);
   }
+
 </style>

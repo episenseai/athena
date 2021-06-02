@@ -6,7 +6,7 @@
   import ModelPerformance from './ModelPerformance.svelte'
   import ConfusionMatrix from './ConfusionMatrix.svelte'
   import MultiConfusionMatrix from './MultiConfusionMatrix.svelte'
-  import { activeTabs, modelType, models, model_store } from './store.js'
+  import { activeTabs, modelType, models } from './store.js'
   import { get } from 'svelte/store'
   import { snack } from '../../base/store/snack'
   import GridResults from './GridResults.svelte'
@@ -17,11 +17,6 @@
   $: name = model.name
   $: modelStatus = model.status
   $: uid = String(id)
-  $: if (model) {
-    model_store.set(model)
-    // console.log('===============')
-    // console.log(get(model_store))
-  }
 
   // tabs for the models container pane
   const classificationTabs = [
@@ -100,6 +95,7 @@
         return val
       })
   })
+
 </script>
 
 <div class="tabs">
@@ -114,7 +110,8 @@
   {/each}
 </div>
 <svelte:component
-  this={$activeTabs[uid] ? tabs.find((el) => el.name === $activeTabs[uid]).component : tabs[0].component} />
+  this={$activeTabs[uid] ? tabs.find((el) => el.name === $activeTabs[uid]).component : tabs[0].component}
+  {id} />
 
 <style>
   .tabs {
@@ -162,4 +159,5 @@
   span:hover.active-tab {
     background-color: rgba(var(--lobster-rgb), 0.2);
   }
+
 </style>

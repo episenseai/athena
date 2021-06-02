@@ -1,7 +1,9 @@
 <script>
   import model_info from './model_info'
-  import { models, model_store } from './store'
-  $: model = $model_store
+  import { models } from './store'
+  export let id
+
+  $: model = $models.find((el) => el.id === id)
 
 </script>
 
