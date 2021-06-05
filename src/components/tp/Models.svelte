@@ -7,6 +7,9 @@
   import Jumper from '../Jumper.svelte'
   import { PROJECT } from '../../components/tp/store'
 
+  $: if ($models) {
+    console.log(get(models))
+  }
   // for development purpose only
   //onMount(() => ($activeModel = $models[0].id))
   async function cancel_model(id) {
@@ -60,7 +63,7 @@
   }
 
   function decisiontreeclf_hyperparams() {
-    // console.log(JSON.stringify(get(GET_DATA)))
+    console.log(JSON.stringify(get(GET_DATA)))
     return {
       criterion: ['gini', 'entropy'],
       splitter: ['best', 'random'],
