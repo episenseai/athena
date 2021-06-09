@@ -1,4 +1,5 @@
 <script>
+  import { keys } from 'localforage'
   import { models } from './store'
   export let id
 
@@ -7,9 +8,7 @@
 </script>
 
 {#if $models && model && model.grid_results}
-  <!--
- <pre>{JSON.stringify($model_store)}</pre>
--->
+  <pre>{JSON.stringify(model.possible_model_params)}</pre>
 
   <div class="container modelinfo">
     <h2>
@@ -49,6 +48,40 @@
           </tr>
         {/each}
       </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Parameters</th>
+          <th>Default Value</th>
+          <th>Possible Values</th>
+        </tr>
+      </thead>
+      {#if model.possible_model_params}
+        <tbody>
+          {#each Object.keys(model.possible_model_params) as param}
+            <tr class="param">
+              <td>{JSON.stringify(param)}</td>
+              <td>{JSON.stringify(model.possible_model_params[param].default)}</td>
+              {#each Object.keys(model.possible_model_params[param]) as paramvalues}
+                {#if paramvalues != 'default'}
+                  <td>{JSON.stringify(model.possible_model_params[param][paramvalues])}</td>
+                {/if}
+              {/each}
+              {#if 'possible_str' in Object.keys(param)}
+                <td>{JSON.stringify(param.possible_str)}</td>
+              {/if}
+              {#if 'possible_int' in Object.keys(param)}
+                <td>{JSON.stringify(param.possible_int)}</td>
+              {/if}
+              {#if 'possible_float' in Object.keys(param)}
+                <td>{JSON.stringify(param.possible_float)}</td>
+              {/if}
+            </tr>
+          {/each}
+        </tbody>
+      {/if}
     </table>
   </div>
 {/if}

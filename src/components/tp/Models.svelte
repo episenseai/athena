@@ -10,6 +10,7 @@
   $: if ($models) {
     console.log(get(models))
   }
+
   // for development purpose only
   //onMount(() => ($activeModel = $models[0].id))
   async function cancel_model(id) {
@@ -26,7 +27,8 @@
   async function rerun_model(id) {
     let modelids = [id]
     let changed_hparams = {}
-    changed_hparams[id] = changed_hyperparameters(id)
+    changed_hparams[id] = randomhyperparams_generator(id)
+
     let res = await PROJECT.model_build(modelids, changed_hparams)
     if (res) {
       models.update((ms) => {
@@ -63,7 +65,7 @@
   }
 
   function decisiontreeclf_hyperparams() {
-    console.log(JSON.stringify(get(GET_DATA)))
+    // console.log(JSON.stringify(get(GET_DATA)))
     return {
       criterion: ['gini', 'entropy'],
       splitter: ['best', 'random'],
@@ -83,6 +85,48 @@
       n_estimators: [50, getRandomIntInclusive(0, 50), getRandomIntInclusive(50, 100)],
       learning_rate: [1, getRandomFloatInclusive(0, 1), getRandomFloatInclusive(1, 3)],
     }
+  }
+
+  function randomhyperparams_generator(id) {
+    console.log('random_params function called')
+    const random_hyperparams = {}
+    let model = get(models).find((el) => el.id === id)
+    console.log(JSON.stringify(model.possible_model_params))
+    if (model.possible_model_params) {
+      const possible_params = model.possible_model_params
+      // const possible_params_name = Object.keys(possible_params)
+
+      console.log(JSON.stringify(possible_params))
+
+      for (const [key, value] of Object.entries(possible_params)) {
+        if (Math.random() >= 0.4) {
+          let tempArray = Object.keys(possible_params[key])
+          // console.log(tempArray)
+          if (tempArray.includes('possible_int')) {
+            random_hyperparams[key] = [
+              possible_params[key].default,
+              getRandomIntInclusive(possible_params[key].possible_int[0], possible_params[key].possible_int[1]),
+            ]
+            //console.log(random_hyperparams)
+          }
+          if (tempArray.includes('possible_float')) {
+            random_hyperparams[key] = [
+              possible_params[key].default,
+              getRandomFloatInclusive(possible_params[key].possible_float[0], possible_params[key].possible_float[1]),
+            ]
+            //console.log(random_hyperparams)
+            //console.log(possible_params[key].possible_float)
+          }
+          if (tempArray.includes('possible_str')) {
+            random_hyperparams[key] = possible_params[key].possible_str
+            //console.log(random_hyperparams)
+            //console.log(possible_params[key].possible_str)
+          }
+        }
+      }
+    }
+    console.log(random_hyperparams)
+    return random_hyperparams
   }
 
 </script>
