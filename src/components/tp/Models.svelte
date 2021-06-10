@@ -56,15 +56,24 @@
     max = Math.floor(max)
     return Math.random() * (max - min) + min //The maximum is inclusive and the minimum is inclusive
   }
-  function changed_hyperparameters(id) {
+  function getRandomListInclusive(list1, n = 2) {
+    let rand_list = []
+    let i = 1
+    while (i <= 2) {
+      i += 1
+      rand_list.push(list1[getRandomIntInclusive(0, list1.length - 1)])
+    }
+    return rand_list
+  }
+  /* function changed_hyperparameters(id) {
     if (id === '6bb167c7-fd88-4fc1-8cc9-5005b463a6b4') {
       return decisiontreeclf_hyperparams()
     } else if (id === '24ee24ed-6174-4a79-bf53-215d6fbcf680') {
       return adaboostclf_hyperparams()
     }
-  }
+  } */
 
-  function decisiontreeclf_hyperparams() {
+  /* function decisiontreeclf_hyperparams() {
     // console.log(JSON.stringify(get(GET_DATA)))
     return {
       criterion: ['gini', 'entropy'],
@@ -85,23 +94,20 @@
       n_estimators: [50, getRandomIntInclusive(0, 50), getRandomIntInclusive(50, 100)],
       learning_rate: [1, getRandomFloatInclusive(0, 1), getRandomFloatInclusive(1, 3)],
     }
-  }
+  } */
 
   function randomhyperparams_generator(id) {
-    console.log('random_params function called')
     const random_hyperparams = {}
     let model = get(models).find((el) => el.id === id)
-    console.log(JSON.stringify(model.possible_model_params))
+    // console.log(JSON.stringify(model.possible_model_params))
     if (model.possible_model_params) {
       const possible_params = model.possible_model_params
       // const possible_params_name = Object.keys(possible_params)
-
-      console.log(JSON.stringify(possible_params))
-
+      // console.log(JSON.stringify(possible_params))
       for (const [key, value] of Object.entries(possible_params)) {
-        if (Math.random() >= 0.4) {
+        if (Math.random() >= 0.3) {
           let tempArray = Object.keys(possible_params[key])
-          // console.log(tempArray)
+
           if (tempArray.includes('possible_int')) {
             random_hyperparams[key] = [
               possible_params[key].default,
@@ -110,7 +116,6 @@
                 possible_params[key].possible_int[1]
               ),
             ]
-            //console.log(random_hyperparams)
           }
           if (tempArray.includes('possible_float')) {
             random_hyperparams[key] = [
@@ -120,24 +125,12 @@
                 possible_params[key].possible_float[1]
               ),
             ]
-            //console.log(random_hyperparams)
-            //console.log(possible_params[key].possible_float)
           }
           if (tempArray.includes('possible_str')) {
             random_hyperparams[key] = possible_params[key].possible_str
-            //console.log(random_hyperparams)
-            //console.log(possible_params[key].possible_str)
           }
           if (tempArray.includes('possible_list')) {
-            random_hyperparams[key] = [
-              possible_params[key].default,
-              getRandomFloatInclusive(
-                possible_params[key].possible_float[0],
-                possible_params[key].possible_float[1]
-              ),
-            ]
-            //console.log(random_hyperparams)
-            //console.log(possible_params[key].possible_float)
+            random_hyperparams[key] = getRandomListInclusive(possible_params[key].possible_list)
           }
         }
       }
@@ -145,6 +138,7 @@
     console.log(random_hyperparams)
     return random_hyperparams
   }
+
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -410,4 +404,5 @@
     position: relative;
     color: rgba(var(--blue-rgb), 0.95);
   }
+
 </style>
