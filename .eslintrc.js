@@ -45,7 +45,10 @@ module.exports = {
     // 'no-invalid-this': 'error',
     'no-self-compare': 'error',
     'no-throw-literal': 'error',
-    'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }],
+    'no-unused-expressions': [
+      'error',
+      { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true },
+    ],
     'no-useless-concat': 'error',
     'no-useless-return': 'error',
     'prefer-rest-params': 'error',

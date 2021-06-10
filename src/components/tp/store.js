@@ -65,7 +65,9 @@ function project_store() {
 
   // reads the auth state from the local storage
   const read_proj = async (erro_msg) => {
-    const proj_id = await localForage.getItem(PROJ_ID_KEY).catch((err) => console.log(erro_msg, err))
+    const proj_id = await localForage
+      .getItem(PROJ_ID_KEY)
+      .catch((err) => console.log(erro_msg, err))
     if (proj_id) return proj_id
     return false
   }
@@ -90,7 +92,11 @@ function project_store() {
     set_state: async (projectid) => {
       // sets current / working project
       const current_proj_id = get(PROJECT).id
-      const response = await fetch_json_POST(TAB_SET_PROJECT_SERVICE(get(LOGIN).userid, projectid), {}, 'SET PROJECT')
+      const response = await fetch_json_POST(
+        TAB_SET_PROJECT_SERVICE(get(LOGIN).userid, projectid),
+        {},
+        'SET PROJECT'
+      )
 
       if (response && response.json.success) {
         // project created
@@ -102,7 +108,10 @@ function project_store() {
           reset_model_stores()
         }
         if (get(PROJECT).pipe_status === '0') {
-          await snack('info', `Your are on the ${get(PROJECT).current_stage} stage of the pipeline for this project`)
+          await snack(
+            'info',
+            `Your are on the ${get(PROJECT).current_stage} stage of the pipeline for this project`
+          )
         } else if (get(PROJECT).pipe_status === '1') {
           await snack('info', `You are on MODELS stage for the project`)
         } else if (get(PROJECT).pipe_status === '-1') {
@@ -123,7 +132,9 @@ function project_store() {
       //location.reload()
     },
     init_proj: async () => {
-      const porj_id = await read_proj('error reading project id from local storage while initialization')
+      const porj_id = await read_proj(
+        'error reading project id from local storage while initialization'
+      )
       if (!porj_id || typeof porj_id !== 'string' || porj_id === '') {
         await write_proj('', 'error writing auth state to local storage while initialization')
         return false
@@ -165,7 +176,10 @@ function project_store() {
     },
     list_all: async () => {
       // list all projects
-      const response = await fetch_json_GET(TAB_PROJECTS_LIST_SERVICE(get(LOGIN).userid), 'LIST PROJECTS')
+      const response = await fetch_json_GET(
+        TAB_PROJECTS_LIST_SERVICE(get(LOGIN).userid),
+        'LIST PROJECTS'
+      )
 
       if (response && response.json.success) {
         // project created
@@ -277,7 +291,10 @@ function project_store() {
     },
 
     get_token: async () => {
-      const response = await fetch_json_GET(GET_SSE_TOKEN_SERVICE(get(LOGIN).userid, get(PROJECT).id), 'GET SSE TOKEN')
+      const response = await fetch_json_GET(
+        GET_SSE_TOKEN_SERVICE(get(LOGIN).userid, get(PROJECT).id),
+        'GET SSE TOKEN'
+      )
       if (!response) return false
       if (response.json.success) {
         return response.json.data.token
@@ -342,9 +359,12 @@ function project_store() {
           return false
         }
         //console.log(token)
-        es_models = new EventSource(SSE_MODELS_UPDATE_SERVICE(get(LOGIN).userid, get(PROJECT).id, token), {
-          withCredentials: true,
-        })
+        es_models = new EventSource(
+          SSE_MODELS_UPDATE_SERVICE(get(LOGIN).userid, get(PROJECT).id, token),
+          {
+            withCredentials: true,
+          }
+        )
         es_models.addEventListener(
           'message',
           (e) => {
@@ -376,13 +396,15 @@ function project_store() {
                   if (data[m.id] !== 'DONE') {
                     // console.log(m.id, ' status changed but not done')
                     if (data[m.id] === 'ERROR') {
-                      snack('error', `Error building ${m.name} model for the ${get(PROJECT).name} project`).then(
-                        (val) => val
-                      )
+                      snack(
+                        'error',
+                        `Error building ${m.name} model for the ${get(PROJECT).name} project`
+                      ).then((val) => val)
                     } else if (data[m.id] === 'CANCELLED') {
-                      snack('error', `Cancelled building ${m.name} model for the ${get(PROJECT).name} project`).then(
-                        (val) => val
-                      )
+                      snack(
+                        'error',
+                        `Cancelled building ${m.name} model for the ${get(PROJECT).name} project`
+                      ).then((val) => val)
                     }
                     m.status = data[m.id]
                     return m
@@ -404,11 +426,14 @@ function project_store() {
               }
               if (
                 get(models).findIndex(
-                  (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
+                  (el) =>
+                    el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
                 ) === -1
               ) {
                 PROJECT.sse_models_close()
-                snack('info', `All the models completed for the ${get(PROJECT).name} project`).then((val) => val)
+                snack('info', `All the models completed for the ${get(PROJECT).name} project`).then(
+                  (val) => val
+                )
                 // console.log('All models finished. closing sse')
               }
             } else {
@@ -461,16 +486,27 @@ function project_store() {
           }
         })
         if (new_model.status === 'DONE') {
-          await snack('success', `Completed building ${new_model.name} model for the ${get(PROJECT).name} project`)
+          await snack(
+            'success',
+            `Completed building ${new_model.name} model for the ${get(PROJECT).name} project`
+          )
         } else if (new_model.status === 'RUNNING') {
-          await snack('info', `Started building ${new_model.name} model for the ${get(PROJECT).name} project`)
+          await snack(
+            'info',
+            `Started building ${new_model.name} model for the ${get(PROJECT).name} project`
+          )
         } else if (new_model.status === 'ERROR') {
           await snack(
             'error',
-            `Error occured while building ${new_model.name} model for the ${get(PROJECT).name} project`
+            `Error occured while building ${new_model.name} model for the ${
+              get(PROJECT).name
+            } project`
           )
         } else if (new_model.status === 'CANCELLED') {
-          await snack('warning', `Cancelled building ${new_model.name} model for the ${get(PROJECT).name} project`)
+          await snack(
+            'warning',
+            `Cancelled building ${new_model.name} model for the ${get(PROJECT).name} project`
+          )
         }
       }
       return true

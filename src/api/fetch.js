@@ -26,7 +26,10 @@ export async function fetch_json_POST(url, data, service_name) {
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
-      await snack('error', 'Either your lost your internet connectivity or episense ai server is down.')
+      await snack(
+        'error',
+        'Either your lost your internet connectivity or episense ai server is down.'
+      )
       return false
     })
 
@@ -54,7 +57,10 @@ export async function fetch_json_POST(url, data, service_name) {
 
     // malformed request
     if (response.status === 400) {
-      await snack('error', json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`)
+      await snack(
+        'error',
+        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`
+      )
       return false
     }
 
@@ -70,7 +76,10 @@ export async function fetch_json_POST(url, data, service_name) {
     }
   } catch (e) {
     console.log(e)
-    await snack('error', `something fatal happened during ${service_name} Serivce request. Check console for details.`)
+    await snack(
+      'error',
+      `something fatal happened during ${service_name} Serivce request. Check console for details.`
+    )
     return false
   }
 }
@@ -90,7 +99,10 @@ export async function fetch_json_GET(url, service_name) {
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
-      await snack('error', 'Either your lost your internet connectivity or episense ai server is down.')
+      await snack(
+        'error',
+        'Either your lost your internet connectivity or episense ai server is down.'
+      )
       return false
     })
 
@@ -118,7 +130,10 @@ export async function fetch_json_GET(url, service_name) {
 
     // malformed request
     if (response.status === 400) {
-      await snack('error', json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`)
+      await snack(
+        'error',
+        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`
+      )
       return false
     }
 
@@ -134,7 +149,10 @@ export async function fetch_json_GET(url, service_name) {
     }
   } catch (e) {
     console.log(e)
-    await snack('error', `something fatal happened during ${service_name} Serivce request. Check console for details.`)
+    await snack(
+      'error',
+      `something fatal happened during ${service_name} Serivce request. Check console for details.`
+    )
     return false
   }
 }
@@ -154,7 +172,10 @@ export async function fetch_upload_POST(url, formData) {
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
-      await snack('error', 'Either your lost your internet connectivity or episense ai server is down.')
+      await snack(
+        'error',
+        'Either your lost your internet connectivity or episense ai server is down.'
+      )
       return false
     })
 
@@ -186,7 +207,9 @@ export async function fetch_upload_POST(url, formData) {
     if (response.status === 400) {
       await snack(
         'error',
-        json.info ? json.info : `HTTP error: ${response.status}; Malformed FILE UPLOAD request (${filename})`
+        json.info
+          ? json.info
+          : `HTTP error: ${response.status}; Malformed FILE UPLOAD request (${filename})`
       )
       return false
     }
@@ -203,7 +226,10 @@ export async function fetch_upload_POST(url, formData) {
     }
   } catch (e) {
     console.log(e)
-    await snack('error', `something fatal happened while uploading (${filename}). Check console for details.`)
+    await snack(
+      'error',
+      `something fatal happened while uploading (${filename}). Check console for details.`
+    )
     return false
   }
 }

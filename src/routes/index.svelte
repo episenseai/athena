@@ -10,8 +10,9 @@
   <h1 class="welcome">Welcome to episense ai data inteligence app</h1>
   <p>Your Data has a Story. We help you Shape it.</p>
   <p>
-    Your data doesn’t belong in a silo. We help you craft custom Data Analytics Workflow that is uniquely suited for the
-    scale and scope of your organisation, so that you can be more informed while making your day to day decisions.
+    Your data doesn’t belong in a silo. We help you craft custom Data Analytics Workflow that is
+    uniquely suited for the scale and scope of your organisation, so that you can be more informed
+    while making your day to day decisions.
   </p>
   <div class="tabular">
     <h2>tabular</h2>

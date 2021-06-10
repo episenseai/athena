@@ -15,7 +15,9 @@
     if (get(PROJECT).current_stage !== 'transform:GET') {
       await snack(
         'warning',
-        `Currently processing data for the ${get(PROJECT).current_stage} stage. Can not move to the next stage.`
+        `Currently processing data for the ${
+          get(PROJECT).current_stage
+        } stage. Can not move to the next stage.`
       )
       return
     }
@@ -28,16 +30,18 @@
         data: {
           rows: get(GET_DATA).data.rows,
           target: get(GET_DATA).data.target,
-          features: get(GET_DATA).data.features.map(({ id, name, weight, include, origin, type }) => {
-            return {
-              id,
-              name,
-              weight,
-              include,
-              origin,
-              type,
+          features: get(GET_DATA).data.features.map(
+            ({ id, name, weight, include, origin, type }) => {
+              return {
+                id,
+                name,
+                weight,
+                include,
+                origin,
+                type,
+              }
             }
-          }),
+          ),
         },
       }
       dispatch('postdata', {

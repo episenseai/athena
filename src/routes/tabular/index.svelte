@@ -68,7 +68,10 @@
       <form
         on:submit|preventDefault|stopPropagation={async (event) => {
           disabled = true
-          const response = await PROJECT.new(event.target.projectname.value, event.target.projectdesc.value)
+          const response = await PROJECT.new(
+            event.target.projectname.value,
+            event.target.projectdesc.value
+          )
           if (response) {
             await list_projects()
             await snack('info', 'Continue with the newly created and selected project.')
@@ -113,7 +116,9 @@
         </button>
       </div>
       {#if !getting_list && items.length === 0}
-        <p class="empty">!! You have not created any project yet. Create a new project to select from the list.</p>
+        <p class="empty">
+          !! You have not created any project yet. Create a new project to select from the list.
+        </p>
       {/if}
     </div>
   </div>

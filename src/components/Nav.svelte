@@ -12,7 +12,10 @@
   <div>
     <ul>
       <li class="brand">
-        <a class={segment === undefined && level === 'home' ? 'selected' : ''} href="." title="HOME: episense ai">
+        <a
+          class={segment === undefined && level === 'home' ? 'selected' : ''}
+          href="."
+          title="HOME: episense ai">
           <!-- width="158.4" -->
           <!-- height="51.36" -->
           <svg
@@ -34,7 +37,10 @@
             </defs>
             <metadata id="metadata44" />
             <g id="layer1" inkscape:groupmode="layer" inkscape:label="Layer 1">
-              <g style="fill:#622aff;fill-opacity:1;stroke-width:0.264583" id="text125" aria-label="ai">
+              <g
+                style="fill:#622aff;fill-opacity:1;stroke-width:0.264583"
+                id="text125"
+                aria-label="ai">
                 <path
                   id="path868"
                   style="fill:#622aff;fill-opacity:1;stroke-width:0.264583"
@@ -63,7 +69,10 @@
                 id="rect131"
                 style="fill:#ce7c3a;fill-opacity:1;stroke-width:0.263326"
                 d="M 3.8133676,20.769781 H 83.961088 V 21.58169 H 3.8133676 Z" />
-              <g style="fill:#e94256;fill-opacity:1;stroke-width:0.264583" id="text121" aria-label="episense">
+              <g
+                style="fill:#e94256;fill-opacity:1;stroke-width:0.264583"
+                id="text121"
+                aria-label="episense">
                 <path
                   id="path851"
                   style="fill:#e94256;fill-opacity:1;stroke-width:0.264583"
@@ -198,17 +207,23 @@
     <div>
       <ul>
         <li class="tabular">
-          <span class={segment === undefined && level === 'tabular' ? 'selected' : ''}> Tabular </span>
+          <span class={segment === undefined && level === 'tabular' ? 'selected' : ''}>
+            Tabular
+          </span>
         </li>
         <li class="pipeline">
           (
-          <span class={!($PROJECT.pipe_status === '1') ? 'selected' : ''} title="TABULAR: Pipeline"> Pipeline </span>)
+          <span class={!($PROJECT.pipe_status === '1') ? 'selected' : ''} title="TABULAR: Pipeline">
+            Pipeline
+          </span>)
         </li>
         <li>&nbsp;&nbsp;⮕ &nbsp;&nbsp;</li>
         <li class="models">
           (
           <span
-            class={$PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1' ? 'selected' : ''}
+            class={$PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'
+              ? 'selected'
+              : ''}
             title="TABULAR: Models">
             Models
           </span>)
@@ -266,9 +281,15 @@
         </button>
       </li>
 
-      <li><a class={segment === 'about' ? 'selected' : ''} href="faq" title="About episense ai">FAQ</a></li>
       <li>
-        <a class={segment === 'legal' ? 'selected' : ''} href="legal" title="Terms and Privacy policy of episense ai">
+        <a class={segment === 'about' ? 'selected' : ''} href="faq" title="About episense ai"
+          >FAQ</a>
+      </li>
+      <li>
+        <a
+          class={segment === 'legal' ? 'selected' : ''}
+          href="legal"
+          title="Terms and Privacy policy of episense ai">
           legal
         </a>
       </li>

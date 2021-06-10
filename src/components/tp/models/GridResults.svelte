@@ -4,7 +4,6 @@
   export let id
 
   $: model = $models.find((el) => el.id === id)
-
 </script>
 
 {#if $models && model && model.grid_results}
@@ -129,5 +128,4 @@
   .best-score {
     color: var(--green);
   }
-
 </style>

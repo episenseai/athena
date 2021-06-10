@@ -48,7 +48,13 @@
       </td>
       <td>{type}</td>
       <td>
-        <input type="number" bind:value={weight} min="0.0" max="1.0" step="0.1" on:input={verifyWeight} />
+        <input
+          type="number"
+          bind:value={weight}
+          min="0.0"
+          max="1.0"
+          step="0.1"
+          on:input={verifyWeight} />
         <!-->span class="weight">{ weight }</!-->
       </td>
       <td>{type === 'Category' ? stats.unique : ''}</td>

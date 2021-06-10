@@ -63,7 +63,6 @@
     // Dagnostic odds ratio
     DOR = LR_PLUS / LR_NEG
   }
-
 </script>
 
 {#if cm}
@@ -107,10 +106,14 @@
     <div class="fpr"><span>false positive rate (FPR)</span> <span>{FPR.toPrecision(4)}</span></div>
     <div class="fnr"><span>false negative rate (FNR)</span> <span>{FNR.toPrecision(4)}</span></div>
     <div class="tnr"><span>true negative rate (TNR)</span> <span>{TNR.toPrecision(4)}</span></div>
-    <div class="ppv"><span>positive predictive value (PPV)</span> <span>{PPV.toPrecision(4)}</span></div>
+    <div class="ppv">
+      <span>positive predictive value (PPV)</span> <span>{PPV.toPrecision(4)}</span>
+    </div>
     <div class="fdr"><span>false discovery rate (FDR)</span> <span>{FDR.toPrecision(4)}</span></div>
     <div class="for"><span>false omission rate (FOR)</span> <span>{FOR.toPrecision(4)}</span></div>
-    <div class="npv"><span>negative predictive value (NPV)</span> <span>{NPV.toPrecision(4)}</span></div>
+    <div class="npv">
+      <span>negative predictive value (NPV)</span> <span>{NPV.toPrecision(4)}</span>
+    </div>
     <div class="lrplus">
       <span>positive likelihood ratio (LR_PLUS)</span>
       <span>{LR_PLUS.toPrecision(4)}</span>
@@ -119,7 +122,9 @@
       <span>negative likelihood ratio (LR_NEG)</span>
       <span>{LR_NEG.toPrecision(4)}</span>
     </div>
-    <div class="dor"><span>diagnostic odds ratio (DOR)</span> <span>{DOR.toPrecision(4)}</span></div>
+    <div class="dor">
+      <span>diagnostic odds ratio (DOR)</span> <span>{DOR.toPrecision(4)}</span>
+    </div>
     <div class="acc"><span>accuracy (ACC)</span> <span>{ACC.toPrecision(4)}</span></div>
     <!-- For styling purposes only -->
     <div class="tr1" />
@@ -355,5 +360,4 @@
     color: #c05726;
     font-size: 13px;
   }
-
 </style>

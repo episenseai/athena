@@ -14,7 +14,9 @@
   function handleTransformSort(column, ascend) {
     // sort numbers and booleans
     if (['id', 'weight', 'include'].includes(column)) {
-      $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) => sortOrder(f1[column] - f2[column], ascend))
+      $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) =>
+        sortOrder(f1[column] - f2[column], ascend)
+      )
       return
     }
 
@@ -28,7 +30,9 @@
 
     // sort numbers in the "stats" which can have undefined values
     // undefined values are pushed to the end of the stack
-    if (['min', 'mean', 'median', 'max', 'std', 'correlation', 'unique', 'missing'].includes(column)) {
+    if (
+      ['min', 'mean', 'median', 'max', 'std', 'correlation', 'unique', 'missing'].includes(column)
+    ) {
       // get features for which the property is a sortable number
       let comparable = $GET_DATA.data.features.filter((f) => isNumber(f.stats[column]))
       // rest of the non sortable features
@@ -46,7 +50,8 @@
   <tr class="noselect">
     {#each headers as { name, column, ascend, info }, i (column)}
       <th>
-        <span class="help" use:tooltip={{ sample: [info], heading: name, translateX: '0px' }}>{name}</span>
+        <span class="help" use:tooltip={{ sample: [info], heading: name, translateX: '0px' }}
+          >{name}</span>
         <span
           class="sort"
           class:currentSort={currentSort === column}

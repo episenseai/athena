@@ -4,7 +4,6 @@
   export let id
 
   $: model = $models.find((el) => el.id === id)
-
 </script>
 
 <div class="container modelinfo">
@@ -28,5 +27,4 @@
   :global(.container.modelinfo) :global(h2) {
     margin-top: 20px;
   }
-
 </style>

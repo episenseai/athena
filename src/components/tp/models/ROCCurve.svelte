@@ -57,7 +57,6 @@
       responsive: true,
     })
   }
-
 </script>
 
 <div class="plots">
@@ -69,5 +68,4 @@
     width: 850px;
     margin: 30px auto 0;
   }
-
 </style>

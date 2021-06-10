@@ -78,7 +78,10 @@
         id="rect131"
         style="fill:#ce7c3a;fill-opacity:1;stroke-width:0.263326"
         d="M 3.8133676,20.769781 H 83.961088 V 21.58169 H 3.8133676 Z" />
-      <g style="fill:#e94256;fill-opacity:1;stroke-width:0.264583" id="text121" aria-label="episense">
+      <g
+        style="fill:#e94256;fill-opacity:1;stroke-width:0.264583"
+        id="text121"
+        aria-label="episense">
         <path
           id="path851"
           style="fill:#e94256;fill-opacity:1;stroke-width:0.264583"

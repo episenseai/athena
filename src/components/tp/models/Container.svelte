@@ -95,7 +95,6 @@
         return val
       })
   })
-
 </script>
 
 <div class="tabs">
@@ -110,7 +109,9 @@
   {/each}
 </div>
 <svelte:component
-  this={$activeTabs[uid] ? tabs.find((el) => el.name === $activeTabs[uid]).component : tabs[0].component}
+  this={$activeTabs[uid]
+    ? tabs.find((el) => el.name === $activeTabs[uid]).component
+    : tabs[0].component}
   {id} />
 
 <style>
@@ -159,5 +160,4 @@
   span:hover.active-tab {
     background-color: rgba(var(--lobster-rgb), 0.2);
   }
-
 </style>

@@ -77,11 +77,19 @@
     }
 
     // eslint-disable-next-line
-    Plotly.newPlot(fPlot, [fTrace], fLayout, { scrollZoom: false, displaylogo: false, responsive: true })
+    Plotly.newPlot(fPlot, [fTrace], fLayout, {
+      scrollZoom: false,
+      displaylogo: false,
+      responsive: true,
+    })
     if (Array.isArray(quantile) && quantile.length) {
       qPlotNode.style.opacity = 1
       // eslint-disable-next-line
-      Plotly.newPlot(qPlot, [qTrace], qLayout, { scrollZoom: false, displaylogo: false, responsive: true })
+      Plotly.newPlot(qPlot, [qTrace], qLayout, {
+        scrollZoom: false,
+        displaylogo: false,
+        responsive: true,
+      })
     } else {
       qPlotNode.style.opacity = 0
     }

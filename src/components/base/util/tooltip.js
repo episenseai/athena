@@ -18,7 +18,8 @@ export default function tooltip(node, text) {
     const { top, left, bottom, right } = node.getBoundingClientRect()
     const tip = tooltip.getBoundingClientRect()
     tooltip.style.top = `${(top + bottom) / 2}px`
-    if (right > (window.innerWidth * 2) / 3) tooltip.style.left = `${left - (tip.right - tip.left) - 10}px`
+    if (right > (window.innerWidth * 2) / 3)
+      tooltip.style.left = `${left - (tip.right - tip.left) - 10}px`
     else tooltip.style.left = `${right}px`
   }
 

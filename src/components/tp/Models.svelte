@@ -105,14 +105,20 @@
           if (tempArray.includes('possible_int')) {
             random_hyperparams[key] = [
               possible_params[key].default,
-              getRandomIntInclusive(possible_params[key].possible_int[0], possible_params[key].possible_int[1]),
+              getRandomIntInclusive(
+                possible_params[key].possible_int[0],
+                possible_params[key].possible_int[1]
+              ),
             ]
             //console.log(random_hyperparams)
           }
           if (tempArray.includes('possible_float')) {
             random_hyperparams[key] = [
               possible_params[key].default,
-              getRandomFloatInclusive(possible_params[key].possible_float[0], possible_params[key].possible_float[1]),
+              getRandomFloatInclusive(
+                possible_params[key].possible_float[0],
+                possible_params[key].possible_float[1]
+              ),
             ]
             //console.log(random_hyperparams)
             //console.log(possible_params[key].possible_float)
@@ -122,13 +128,23 @@
             //console.log(random_hyperparams)
             //console.log(possible_params[key].possible_str)
           }
+          if (tempArray.includes('possible_list')) {
+            random_hyperparams[key] = [
+              possible_params[key].default,
+              getRandomFloatInclusive(
+                possible_params[key].possible_float[0],
+                possible_params[key].possible_float[1]
+              ),
+            ]
+            //console.log(random_hyperparams)
+            //console.log(possible_params[key].possible_float)
+          }
         }
       }
     }
     console.log(random_hyperparams)
     return random_hyperparams
   }
-
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -150,7 +166,9 @@
       <section class:active={$activeModels[id]}>
         <div
           class="info"
-          title={$activeModels[id] ? 'Click to hide the details' : 'Click to show the details of:  ' + name}
+          title={$activeModels[id]
+            ? 'Click to hide the details'
+            : 'Click to show the details of:  ' + name}
           on:click|preventDefault|stopPropagation={() => {
             let val = true
             if (get(activeModels)[id]) {
@@ -186,9 +204,11 @@
           <p>{desc}</p>
         </div>
         {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
-          <button class="request request-rerun-btn" on:click|stopPropagation={rerun_model(id)}>Rerun</button>
+          <button class="request request-rerun-btn" on:click|stopPropagation={rerun_model(id)}
+            >Rerun</button>
         {:else}
-          <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}>Cancel</button>
+          <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
+            >Cancel</button>
         {/if}
         <p class="status noselect">
           {#if status === 'DONE'}
@@ -390,5 +410,4 @@
     position: relative;
     color: rgba(var(--blue-rgb), 0.95);
   }
-
 </style>

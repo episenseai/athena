@@ -5,7 +5,11 @@
 </script>
 
 <div class="detail">
-  <div class="summary" class:right={!expand} class:down={expand} on:click={() => (expand = !expand)}>
+  <div
+    class="summary"
+    class:right={!expand}
+    class:down={expand}
+    on:click={() => (expand = !expand)}>
     <slot name="summary">Summary</slot>
   </div>
   {#if expand}

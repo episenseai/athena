@@ -11,7 +11,8 @@
   <pre>ErrorType: {$PROJECT.error_type}</pre>
   <pre>ErrorStack: {$PROJECT.error_stack}</pre>
   <p>
-    If you want to try again or go back to the previous stage, please unfreeze the pipe by clicking the button below.
+    If you want to try again or go back to the previous stage, please unfreeze the pipe by clicking
+    the button below.
   </p>
   <button on:click={async () => await PROJECT.unfreeze()}>Unfreeze the PipeLine →</button>
   <p>Or you can start afresh by switching to a new project.</p>

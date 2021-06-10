@@ -28,7 +28,8 @@
   }
 
   const yCalc = (i) => {
-    if (offsets.length > 7 && i >= offsets.length - 2) return (8 - offsets.length + i) * yOffset + 60
+    if (offsets.length > 7 && i >= offsets.length - 2)
+      return (8 - offsets.length + i) * yOffset + 60
     return i * yOffset + 60
   }
 </script>
@@ -61,14 +62,24 @@
       {:else}
         <g stroke-width="1" stroke={strokeColor}>
           <rect x={xOffset} y={yCalc(i)} width={offset} height={barHeight} fill={trainColor} />
-          <rect x={xOffset + offset} y={yCalc(i)} width={valWidth} height={barHeight} fill={valColor} />
+          <rect
+            x={xOffset + offset}
+            y={yCalc(i)}
+            width={valWidth}
+            height={barHeight}
+            fill={valColor} />
           <rect
             x={xOffset + offset + valWidth}
             y={yCalc(i)}
             width={trainValWidth - offset - valWidth <= 0 ? 0 : trainValWidth - offset - valWidth}
             height={barHeight}
             fill={trainColor} />
-          <rect x={xOffset + trainValWidth} y={yCalc(i)} width={holdoutWidth} height={barHeight} fill={holdoutColor} />
+          <rect
+            x={xOffset + trainValWidth}
+            y={yCalc(i)}
+            width={holdoutWidth}
+            height={barHeight}
+            fill={holdoutColor} />
           <text
             x={xOffset + barWidth + 6}
             y={yCalc(i) + barHeight / 2}

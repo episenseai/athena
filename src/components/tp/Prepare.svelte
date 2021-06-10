@@ -23,7 +23,9 @@
     if (get(PROJECT).current_stage !== 'prepare:GET') {
       await snack(
         'warning',
-        `Currently processing data for the ${get(PROJECT).current_stage} stage. Can not move to the next stage.`
+        `Currently processing data for the ${
+          get(PROJECT).current_stage
+        } stage. Can not move to the next stage.`
       )
       return
     }
@@ -119,7 +121,8 @@
                 <span class="toggle" />
               </label>
             </td>
-            <td use:tooltip={{ sample, translateX: '-60px', heading: name }}>{smapleColumn(sample)}</td>
+            <td use:tooltip={{ sample, translateX: '-60px', heading: name }}
+              >{smapleColumn(sample)}</td>
           </tr>
         {/each}
       </tbody>
@@ -127,7 +130,9 @@
 
     <aside>
       <h2>Model Target</h2>
-      <p>Off all the columns in the input data, select the one which you want the model to predict.</p>
+      <p>
+        Off all the columns in the input data, select the one which you want the model to predict.
+      </p>
       <ul>
         <li>
           For
@@ -135,7 +140,10 @@
           variable, it will result in a
           <strong>Classification Model</strong>
         </li>
-        <li>For <strong>Number</strong> variable, it will result in a <strong>Regression Model</strong></li>
+        <li>
+          For <strong>Number</strong> variable, it will result in a
+          <strong>Regression Model</strong>
+        </li>
       </ul>
       <h3>Target Column</h3>
       <select bind:value={$GET_DATA.data.target}>

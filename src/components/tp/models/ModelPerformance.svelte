@@ -67,7 +67,6 @@
       responsive: true,
     })
   }
-
 </script>
 
 <table>
@@ -109,5 +108,4 @@
     width: 750px;
     margin: auto;
   }
-
 </style>

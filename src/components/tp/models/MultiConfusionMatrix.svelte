@@ -16,7 +16,6 @@
   $: avgPrecision = (precision.reduce(sumFunc) / precision.length).toFixed(2)
   $: avgRecall = (recall.reduce(sumFunc) / recall.length).toFixed(2)
   $: avgF1score = (f1score.reduce(sumFunc) / f1score.length).toFixed(2)
-
 </script>
 
 <div>
@@ -56,7 +55,8 @@
       {#each cm as row, i (model.classes[i])}
         <tr>
           {#if i === 0}
-            <th rowspan={model.classes.length} class="pClass headers"><span>MODEL PREDICTION</span></th>
+            <th rowspan={model.classes.length} class="pClass headers"
+              ><span>MODEL PREDICTION</span></th>
           {/if}
           <th class="headers">{model.classes[i]}</th>
           {#each row as col, j (j)}
@@ -205,5 +205,4 @@
   td {
     padding: 4px;
   }
-
 </style>

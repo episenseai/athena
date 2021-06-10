@@ -13,7 +13,9 @@
     if (get(PROJECT).current_stage !== 'build:GET') {
       await snack(
         'warning',
-        `Currently processing data for the ${get(PROJECT).current_stage} stage. Can not move to the next stage.`
+        `Currently processing data for the ${
+          get(PROJECT).current_stage
+        } stage. Can not move to the next stage.`
       )
       return
     }
@@ -106,8 +108,8 @@
         <div>
           <h3>Number of CV Folds (k-fold)</h3>
           <p>
-            Cross-Validation (CV) folds determine how the data is split between training, validation and holdout sets.
-            Number of folds should be between 2-20.
+            Cross-Validation (CV) folds determine how the data is split between training, validation
+            and holdout sets. Number of folds should be between 2-20.
           </p>
           <label class="cv">
             <input type="number" bind:value={$GET_DATA.data.cv.folds} min="2" max="20" step="1" />
@@ -118,7 +120,10 @@
 
         <div>
           <h3>Holdout Set (%)</h3>
-          <p>Holdout set is used to caculate the final model accuracy. Valued should be between 5% - 50%.</p>
+          <p>
+            Holdout set is used to caculate the final model accuracy. Valued should be between 5% -
+            50%.
+          </p>
           <label class="holdout">
             <input type="number" bind:value={$GET_DATA.data.cv.holdout} min="5" max="50" step="1" />
             <input type="range" bind:value={$GET_DATA.data.cv.holdout} min="5" max="50" step="1" />
@@ -148,7 +153,10 @@
 
       <div>
         <h3>Optimization Metric</h3>
-        <p>Metric used to penalize the difference between predicted and target values on validation set.</p>
+        <p>
+          Metric used to penalize the difference between predicted and target values on validation
+          set.
+        </p>
         <label class="metric">
           <select bind:value={$GET_DATA.data.optimizeUsing}>
             <option value={undefined}>Select a metric</option>
@@ -157,7 +165,10 @@
             {/each}
           </select>
         </label>
-        <span>Selected Metric: {$GET_DATA.data.optimizeUsing ? $GET_DATA.data.optimizeUsing : 'None'}</span>
+        <span
+          >Selected Metric: {$GET_DATA.data.optimizeUsing
+            ? $GET_DATA.data.optimizeUsing
+            : 'None'}</span>
       </div>
       <h3>Data split Visualization</h3>
       <CVLayout {...$GET_DATA.data.cv} />
