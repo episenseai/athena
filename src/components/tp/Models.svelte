@@ -105,7 +105,7 @@
       // const possible_params_name = Object.keys(possible_params)
       // console.log(JSON.stringify(possible_params))
       for (const [key, value] of Object.entries(possible_params)) {
-        if (Math.random() >= 0.3) {
+        if (Math.random() >= 0.1) {
           let tempArray = Object.keys(possible_params[key])
 
           if (tempArray.includes('possible_int')) {
