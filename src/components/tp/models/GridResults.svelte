@@ -4,6 +4,8 @@
   export let id
 
   $: model = $models.find((el) => el.id === id)
+  let changed_hparams_test = {}
+
 </script>
 
 {#if $models && model && model.grid_results}
@@ -55,6 +57,7 @@
           <th>Parameters</th>
           <th>Default Value</th>
           <th>Possible Values</th>
+          <th>Input Value</th>
         </tr>
       </thead>
       {#if model.possible_model_params}
@@ -67,21 +70,55 @@
                 {#if paramvalues != 'default'}
                   <td>{JSON.stringify(model.possible_model_params[param][paramvalues])}</td>
                 {/if}
+                {#if paramvalues === 'possible_str'}
+                  <td>
+                    <select bind:value={changed_hparams_test[param]}>
+                      {#each model.possible_model_params[param][paramvalues] as select_option}
+                        <option value={select_option}>
+                          {select_option}
+                        </option>
+                      {/each}
+                    </select>
+                  </td>
+                {/if}
+                {#if paramvalues === 'possible_list'}
+                  <td>
+                    <select bind:value={changed_hparams_test[param]}>
+                      {#each model.possible_model_params[param][paramvalues] as select_option}
+                        <option value={select_option}>
+                          {select_option}
+                        </option>
+                      {/each}
+                    </select>
+                  </td>
+                {/if}
+                {#if paramvalues === 'possible_int'}
+                  <td><input type="number" bind:value={changed_hparams_test[param]} /></td>
+                {/if}
+                {#if paramvalues === 'possible_float'}
+                  <td><input type="number" bind:value={changed_hparams_test[param]} /></td>
+                {/if}
               {/each}
               {#if 'possible_str' in Object.keys(param)}
                 <td>{JSON.stringify(param.possible_str)}</td>
               {/if}
               {#if 'possible_int' in Object.keys(param)}
                 <td>{JSON.stringify(param.possible_int)}</td>
+                <td><input type="number" bind:value={changed_hparams_test[param]} /></td>
               {/if}
               {#if 'possible_float' in Object.keys(param)}
                 <td>{JSON.stringify(param.possible_float)}</td>
+                <td><input type="number" bind:value={changed_hparams_test[param]} /></td>
+              {/if}
+              {#if 'possible_list' in Object.keys(param)}
+                <td>{JSON.stringify(param.possible_list)}</td>
               {/if}
             </tr>
           {/each}
         </tbody>
       {/if}
     </table>
+    <pre>{JSON.stringify(changed_hparams_test)}</pre>
   </div>
 {/if}
 
@@ -128,4 +165,5 @@
   .best-score {
     color: var(--green);
   }
+
 </style>
