@@ -3,6 +3,12 @@ import polka from 'polka'
 import compression from 'compression'
 import * as sapper from '@sapper/server'
 import { createServer } from 'http'
+import process from 'process'
+
+process.on('SIGINT', () => {
+  console.info('Interrupted')
+  process.exit(0)
+})
 
 const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
