@@ -1,10 +1,10 @@
 {
-  "name": "carbon-frontend",
-  "description": "frontend app for carbon data processing app",
+  "name": "athena",
+  "description": "frontend for carbon data processing app",
   "version": "3.0",
   "licence": "LICENSE",
   "private": true,
-  "repository": "github:sus009/carbon-frontend",
+  "repository": "github.com:episenseai/athena",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
@@ -24,25 +24,25 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
+    "@babel/core": "^7.14.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.14.3",
-    "@babel/preset-env": "^7.14.4",
-    "@babel/runtime": "^7.14.0",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/runtime": "^7.14.6",
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^17.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-replace": "^2.4.2",
     "@rollup/plugin-url": "^6.0.0",
-    "eslint": "^7.27.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.0",
-    "prettier": "^2.3.0",
-    "prettier-plugin-svelte": "^2.3.0",
-    "rollup": "^2.50.5",
+    "prettier": "^2.3.2",
+    "prettier-plugin-svelte": "^2.3.1",
+    "rollup": "^2.52.7",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
     "sapper": "^0.29.1",
-    "svelte": "^3.38.2"
+    "svelte": "^3.38.3"
   }
 }

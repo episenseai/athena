@@ -2,7 +2,7 @@
   import Container from './models/Container.svelte'
   import { models, modelType, activeModels, optimizeUsing } from './models/store.js'
   import { get } from 'svelte/store'
-  import { GET_DATA } from './store.js'
+  // import { GET_DATA } from './store.js'
   import Spinner from '../Spinner.svelte'
   import Jumper from '../Jumper.svelte'
   import { PROJECT } from '../../components/tp/store'
@@ -39,7 +39,7 @@
           }
           return m
         })
-        return ms
+        return new_ms
       })
       // console.log(get(models))
       await PROJECT.sse_models_update(true)
@@ -56,7 +56,7 @@
     max = Math.floor(max)
     return Math.random() * (max - min) + min //The maximum is inclusive and the minimum is inclusive
   }
-  function getRandomListInclusive(list1, n = 2) {
+  function getRandomListInclusive(list1) {
     let rand_list = []
     let i = 1
     while (i <= 2) {

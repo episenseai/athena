@@ -1,5 +1,5 @@
 <script>
-  import { keys } from 'localforage'
+  // import { keys } from 'localforage'
   import { models } from './store'
   export let id
 
@@ -67,7 +67,7 @@
               <td>{JSON.stringify(param)}</td>
               <td>{JSON.stringify(model.possible_model_params[param].default)}</td>
               {#each Object.keys(model.possible_model_params[param]) as paramvalues}
-                {#if paramvalues != 'default'}
+                {#if paramvalues !== 'default'}
                   <td>{JSON.stringify(model.possible_model_params[param][paramvalues])}</td>
                 {/if}
                 {#if paramvalues === 'possible_str'}
