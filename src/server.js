@@ -10,7 +10,10 @@ process.on('SIGINT', () => {
   process.exit(0)
 })
 
-const { PORT, NODE_ENV } = process.env
+const HOSTNAME = '0.0.0.0'
+const PORT = process.env.PORT || 3000
+const NODE_ENV = process.env.NODE_ENV || 'development'
+
 const dev = NODE_ENV === 'development'
 
 polka()
@@ -45,4 +48,6 @@ server.on('error', (err) => {
   console.log(`error:  ${err}`)
 })
 
-server.listen(PORT, () => {})
+server.listen(PORT, HOSTNAME, () => {
+  console.log(`Started athena frontend on http://${HOSTNAME}:${PORT}`)
+})

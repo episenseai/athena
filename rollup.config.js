@@ -26,6 +26,7 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.BACKEND_SERVER': 'http://localhost:3002',
         preventAssignment: true,
       }),
       svelte({

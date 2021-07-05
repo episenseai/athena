@@ -1,5 +1,7 @@
 // backend service
-const BACKEND = 'http://localhost:8000/'
+// `node replace` plugin replaces the value of `process.env.BACKEND_SERVER` with the one
+// provided in `rollup.config.js` file.
+const BACKEND = 'http://localhost:3002/'
 
 //  TABULAR SERVICE
 const TABULAR = `${BACKEND}tab/v1/`
