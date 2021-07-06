@@ -31,13 +31,13 @@ RUN --mount=target=.,rw set -x && \
 
 FROM node-base AS athena
 
-USER node
-
 COPY --from=node-build /target /app/
 
 COPY ./static ./static
 
 EXPOSE 3000
+
+USER node
 
 # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md
 
