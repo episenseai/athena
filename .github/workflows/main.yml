@@ -49,4 +49,4 @@ jobs:
         run: |
           if [ -z "${VERSION_TAG}" ]; then echo VERSION_TAG is empty && exit 1; fi
           DOCKER_BUILDKIT=1 docker build -t $ECR_REGISTRY/$AWS_ECR_REPOSITORY:$VERSION_TAG-$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_TAG-$IMAGE_TAG
+          docker push $ECR_REGISTRY/$AWS_ECR_REPOSITORY:$VERSION_TAG-$IMAGE_TAG
