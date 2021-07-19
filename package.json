@@ -17,9 +17,10 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
+    "express": "^4.17.1",
     "jwt-decode": "^3.1.2",
     "localforage": "^1.9.0",
-    "polka": "next",
+    "morgan": "^1.10.0",
     "sirv": "^1.0.12",
     "uuid": "^8.3.2"
   },

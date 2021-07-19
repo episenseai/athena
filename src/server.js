@@ -1,9 +1,9 @@
 import sirv from 'sirv'
-import polka from 'polka'
 import compression from 'compression'
 import * as sapper from '@sapper/server'
-import { createServer } from 'http'
 import process from 'process'
+import express from 'express'
+import morgan from 'morgan'
 
 process.on('SIGINT', () => {
   console.info('Interrupted')
@@ -16,16 +16,14 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 
 const dev = NODE_ENV === 'development'
 
-polka()
+const app = express()
 
-const { handler } = polka() // You can also use Express
+app.use(morgan(':remote-addr | :date[iso] | :status | :method | :url | :user-agent'))
+
+app
   .use((req, res, next) => {
-    req.mydata = 'data'
-    res.locals = { name: 'anon' }
-    next()
-  })
-  .use((req, _res, next) => {
-    req.user = { id: 0, name: 'anon' }
+    req.data = ''
+    res.locals = {}
     next()
   })
   .use(
@@ -34,20 +32,17 @@ const { handler } = polka() // You can also use Express
     sapper.middleware({
       session: (req, res) => ({
         // session data goes here
-        title: `${req.mydata} - ${res.locals.name}`,
+        // title: `${req._data} - ${res.locals}`,
         req: Object.keys(req),
         res: Object.keys(res),
-        user: req.user,
       }),
     })
   )
 
-const server = createServer(handler)
-
-server.on('error', (err) => {
+app.on('error', (err) => {
   console.log(`error:  ${err}`)
 })
 
-server.listen(PORT, HOSTNAME, () => {
+app.listen(PORT, HOSTNAME, () => {
   console.log(`Started athena frontend on http://${HOSTNAME}:${PORT}`)
 })

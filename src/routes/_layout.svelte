@@ -16,6 +16,7 @@
     if (!from_saved) await PROJECT.reset_proj()
     render_main = true
   })
+
 </script>
 
 {#if $LOGIN.success && $LOGIN.jwt && render_main}
@@ -250,4 +251,5 @@
     color: rgba(var(--pink-rgb), 1);
     font-size: 15px;
   }
+
 </style>

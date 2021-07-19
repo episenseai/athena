@@ -93,6 +93,77 @@ function login_store() {
     // a store must have a subscribe method
     subscribe,
 
+    // Oauth login with github, google, ...
+    oauth_login: async (provider) => {
+      // check if the user if already logged in
+      if (get(LOGIN).success === true) {
+        await LOGIN.oauth_logout()
+      }
+
+      // call the login endpoint
+      const response = await fetch_json_POST(LOGIN_SERVICE(), { username, password }, 'LOGIN')
+      // server error
+      if (!response) return
+
+      if (response.json.success) {
+        // login success
+        const decoded = jwt_decode(response.json.data.jwt)
+        // try putting the auth onto local storage
+        const auth_state = await write_auth(
+          {
+            success: true,
+            jwt: response.json.data.jwt,
+            username: decoded.username,
+            userid: decoded.userid,
+          },
+          'error setting local auth storage after successfull login '
+        )
+
+        // on success, set the authentication info in svelte store
+        if (auth_state) {
+          set(auth_state)
+          await snack('success', response.json.info)
+        }
+
+        // console.log(jwt_decode(response.json.data.jwt))
+      } else {
+        // login error
+        await snack('warning', response.json.info)
+        // console.log(response.json.data)
+      }
+    },
+
+    // Oauth logout
+    oauth_logout: async () => {
+      if (get(LOGIN).success === false) {
+        await snack('warning', 'You are not signed in??')
+        return
+      }
+      // call the logout endpoint
+      const response = await fetch_json_POST(LOGOUT_SERVICE(), {}, 'LOGOUT')
+
+      // error
+      if (!response) return false
+
+      if (response.json.success) {
+        // successfully logged out
+        // reset the local storage auth state
+        const auth_state = await write_auth(
+          clean_state,
+          'error resetting auth state to local storage while logout'
+        )
+        if (auth_state) {
+          // if reset is successfull, reset the value in svelte store
+          set(auth_state)
+          await snack('success', response.json.info)
+        }
+        return true
+      }
+      // can not log out
+      await snack('warning', response.json.info)
+      return false
+    },
+
     // custom store method for authentication
     login: async (username, password) => {
       // check if the user if already logged in
