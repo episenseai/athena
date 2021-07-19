@@ -18,7 +18,14 @@ const dev = NODE_ENV === 'development'
 
 const app = express()
 
-app.use(morgan(':remote-addr | :date[iso] | :status | :method | :url | :user-agent'))
+let logger
+
+if (dev) {
+  logger = morgan(':remote-addr | :date[iso] | :status | :method | :url')
+} else {
+  logger = morgan(':remote-addr | :date[iso] | :status | :method | :url | :user-agent')
+}
+app.use(logger)
 
 app
   .use((req, res, next) => {
@@ -40,7 +47,7 @@ app
   )
 
 app.on('error', (err) => {
-  console.log(`error:  ${err}`)
+  console.error(`error:  ${err}`)
 })
 
 app.listen(PORT, HOSTNAME, () => {
