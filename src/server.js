@@ -21,9 +21,9 @@ const app = express()
 let logger
 
 if (dev) {
-  logger = morgan(':remote-addr | :date[iso] | :status | :method | :url')
+  logger = morgan(':date[iso] | :status | :method | :url | :remote-addr')
 } else {
-  logger = morgan(':remote-addr | :date[iso] | :status | :method | :url | :user-agent')
+  logger = morgan(':date[iso] | :status | :method | :url | :remote-addr | :user-agent')
 }
 app.use(logger)
 
@@ -51,5 +51,5 @@ app.on('error', (err) => {
 })
 
 app.listen(PORT, HOSTNAME, () => {
-  console.log(`Started athena frontend on http://${HOSTNAME}:${PORT}`)
+  console.log(`Serving athena frontend @ http://${HOSTNAME}:${PORT}`)
 })
