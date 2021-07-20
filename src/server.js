@@ -1,9 +1,9 @@
-import sirv from 'sirv'
-import compression from 'compression'
 import * as sapper from '@sapper/server'
-import process from 'process'
+import compression from 'compression'
 import express from 'express'
 import morgan from 'morgan'
+import process from 'process'
+import sirv from 'sirv'
 
 process.on('SIGINT', () => {
   console.info('Interrupted')
@@ -45,7 +45,7 @@ app.use(
       // session data goes here
       // title: `${req._data} - ${res.locals}`,
     }),
-  })
+  }),
 )
 
 app.on('error', (err) => {

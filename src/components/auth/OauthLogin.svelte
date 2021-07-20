@@ -8,7 +8,6 @@
   }
 
   let disabled = false
-
 </script>
 
 <div class="auth-block">
@@ -43,5 +42,4 @@
     color: var(--lobster);
     border-color: var(--lobster);
   }
-
 </style>

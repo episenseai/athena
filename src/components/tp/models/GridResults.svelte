@@ -5,7 +5,6 @@
 
   $: model = $models.find((el) => el.id === id)
   let changed_hparams_test = {}
-
 </script>
 
 {#if $models && model && model.grid_results}
@@ -165,5 +164,4 @@
   .best-score {
     color: var(--green);
   }
-
 </style>

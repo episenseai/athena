@@ -70,7 +70,7 @@
           disabled = true
           const response = await PROJECT.new(
             event.target.projectname.value,
-            event.target.projectdesc.value
+            event.target.projectdesc.value,
           )
           if (response) {
             await list_projects()

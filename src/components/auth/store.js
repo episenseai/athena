@@ -1,14 +1,15 @@
-import { writable, get } from 'svelte/store'
-import { snack } from '../base/store/snack'
 import jwt_decode from 'jwt-decode'
 import localForage from 'localforage'
-import { fetch_json_POST } from '../../api/fetch'
+import { writable, get } from 'svelte/store'
+
 import {
   SIGNUP_SERVICE,
   LOGIN_SERVICE,
   LOGOUT_SERVICE,
   OAUTH2_LOGIN_SERVICE,
 } from '../../api/endpoints'
+import { fetch_json_POST } from '../../api/fetch'
+import { snack } from '../base/store/snack'
 
 function signup_store() {
   const { subscribe, set } = writable(false)
@@ -22,7 +23,7 @@ function signup_store() {
       if (get(LOGIN).success === true) {
         await snack(
           'warning',
-          'Already signed in with a diiferent account; signout to create a new account'
+          'Already signed in with a diiferent account; signout to create a new account',
         )
         return false
       }
@@ -51,7 +52,7 @@ function signup_store() {
       if (get(LOGIN).success === true) {
         await snack(
           'warning',
-          'Already signed in with a diiferent account; signout to create a new account'
+          'Already signed in with a diiferent account; signout to create a new account',
         )
         return
       }
@@ -158,7 +159,7 @@ function login_store() {
         // reset the local storage auth state
         const auth_state = await write_auth(
           clean_state,
-          'error resetting auth state to local storage while logout'
+          'error resetting auth state to local storage while logout',
         )
         if (auth_state) {
           // if reset is successfull, reset the value in svelte store
@@ -195,7 +196,7 @@ function login_store() {
             username: decoded.username,
             userid: decoded.userid,
           },
-          'error setting local auth storage after successfull login '
+          'error setting local auth storage after successfull login ',
         )
 
         // on success, set the authentication info in svelte store
@@ -229,7 +230,7 @@ function login_store() {
         // reset the local storage auth state
         const auth_state = await write_auth(
           clean_state,
-          'error resetting auth state to local storage while logout'
+          'error resetting auth state to local storage while logout',
         )
         if (auth_state) {
           // if reset is successfull, reset the value in svelte store
@@ -245,12 +246,12 @@ function login_store() {
 
     init_auth: async () => {
       let load_state = await read_auth(
-        'error reading auth state from local storage while initialization'
+        'error reading auth state from local storage while initialization',
       )
       if (!load_state || !load_state.success) {
         load_state = await write_auth(
           clean_state,
-          'error writing auth state to local storage while initialization'
+          'error writing auth state to local storage while initialization',
         )
         set(load_state)
         return false

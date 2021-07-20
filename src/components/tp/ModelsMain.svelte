@@ -13,7 +13,7 @@
   async function all_models() {
     const response = await fetch_json_GET(
       TAB_ALL_MODELS_SERVICE(get(LOGIN).userid, get(PROJECT).id),
-      'ALL MODELS'
+      'ALL MODELS',
     )
     if (!response) return false
     if (response.json.success) {
@@ -24,7 +24,7 @@
       })
       activeModels.set(active_models)
       models.set(
-        get_models.map((m) => ({ ...m, ...modelsInfo.models.find((el) => m.id === el.id) }))
+        get_models.map((m) => ({ ...m, ...modelsInfo.models.find((el) => m.id === el.id) })),
       )
       modelType.set(response.json.data.modelType)
       optimizeUsing.set(response.json.data.optimizeUsing)

@@ -19,7 +19,6 @@
     if (!from_saved) await PROJECT.reset_proj()
     render_main = true
   })
-
 </script>
 
 {#if render_main}
@@ -98,5 +97,4 @@
     color: rgba(var(--lobster-rgb), 1);
     border-color: rgba(var(--lobster-rgb), 1);
   }
-
 </style>

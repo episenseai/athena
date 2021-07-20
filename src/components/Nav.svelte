@@ -245,7 +245,7 @@
               if (get(SWITCH_PROJECT) === true) {
                 await snack(
                   'warning',
-                  'Already in the process of switching project. Try selecting a project from the list below.'
+                  'Already in the process of switching project. Try selecting a project from the list below.',
                 )
                 return
               }

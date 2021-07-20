@@ -15,7 +15,7 @@
     // sort numbers and booleans
     if (['id', 'weight', 'include'].includes(column)) {
       $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) =>
-        sortOrder(f1[column] - f2[column], ascend)
+        sortOrder(f1[column] - f2[column], ascend),
       )
       return
     }
@@ -23,7 +23,7 @@
     // sort string
     if (['name', 'type', 'origin'].includes(column)) {
       $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) =>
-        sortOrder(f1[column].localeCompare(f2[column]), ascend)
+        sortOrder(f1[column].localeCompare(f2[column]), ascend),
       )
       return
     }

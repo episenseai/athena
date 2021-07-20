@@ -1,7 +1,7 @@
+import buildData from './_mock/build.js'
 import importData from './_mock/consume.js'
 import prepareData from './_mock/prepare.js'
 import transformData from './_mock/transform.js'
-import buildData from './_mock/build.js'
 
 // mock data for all the stages
 const mock = [

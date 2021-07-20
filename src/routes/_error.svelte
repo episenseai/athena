@@ -3,7 +3,6 @@
   export let error
 
   const dev = process.env.NODE_ENV === 'development'
-
 </script>
 
 <svelte:head>
@@ -33,5 +32,4 @@
     color: rgba(var(--lobster-rgb), 1);
     border-color: rgba(var(--lobster-rgb), 1);
   }
-
 </style>

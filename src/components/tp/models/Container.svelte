@@ -55,21 +55,21 @@
       if (modelStatus === 'WAIT') {
         await snack(
           'warning',
-          `Model building has not started yet to view the data in "${tab.name.toLowerCase()}" tab.`
+          `Model building has not started yet to view the data in "${tab.name.toLowerCase()}" tab.`,
         )
         return false
       }
       if (modelStatus === 'RUNNING') {
         await snack(
           'warning',
-          `Model building is not yet complete to view the data in "${tab.name.toLowerCase()}" tab.`
+          `Model building is not yet complete to view the data in "${tab.name.toLowerCase()}" tab.`,
         )
         return false
       }
       if (modelStatus === 'ERROR') {
         await snack(
           'warning',
-          `Error happened during model building. You can not view the data in "${tab.name.toLowerCase()}" tab.`
+          `Error happened during model building. You can not view the data in "${tab.name.toLowerCase()}" tab.`,
         )
         return false
       }

@@ -19,7 +19,7 @@
         SSE_MODELS_UPDATE_SERVICE(get(LOGIN).userid, get(PROJECT).id, token),
         {
           withCredentials: true,
-        }
+        },
       )
       es.addEventListener(
         'message',
@@ -47,7 +47,7 @@
           //    console.log()
           //  }
         },
-        false
+        false,
       )
     } catch (e) {
       console.log('event source exception: ', e)
@@ -57,7 +57,7 @@
   async function get_token() {
     const response = await fetch_json_GET(
       GET_SSE_TOKEN_SERVICE(get(LOGIN).userid, get(PROJECT).id),
-      'GET SSE TOKEN'
+      'GET SSE TOKEN',
     )
     if (!response) return false
     if (response.json.success) {

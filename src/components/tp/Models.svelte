@@ -113,7 +113,7 @@
               possible_params[key].default,
               getRandomIntInclusive(
                 possible_params[key].possible_int[0],
-                possible_params[key].possible_int[1]
+                possible_params[key].possible_int[1],
               ),
             ]
           }
@@ -122,7 +122,7 @@
               possible_params[key].default,
               getRandomFloatInclusive(
                 possible_params[key].possible_float[0],
-                possible_params[key].possible_float[1]
+                possible_params[key].possible_float[1],
               ),
             ]
           }
@@ -138,7 +138,6 @@
     console.log(random_hyperparams)
     return random_hyperparams
   }
-
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -404,5 +403,4 @@
     position: relative;
     color: rgba(var(--blue-rgb), 0.95);
   }
-
 </style>

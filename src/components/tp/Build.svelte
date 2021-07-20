@@ -15,7 +15,7 @@
         'warning',
         `Currently processing data for the ${
           get(PROJECT).current_stage
-        } stage. Can not move to the next stage.`
+        } stage. Can not move to the next stage.`,
       )
       return
     }

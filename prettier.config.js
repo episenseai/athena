@@ -1,13 +1,16 @@
 module.exports = {
-  trailingComma: 'es5',
+  trailingComma: 'all',
   tabWidth: 2,
   semi: false,
   singleQuote: true,
   printWidth: 100,
-  plugins: ['prettier-plugin-svelte'],
+  plugins: ['prettier-plugin-svelte', '@trivago/prettier-plugin-sort-imports'],
   svelteSortOrder: 'options-scripts-markup-styles',
   svelteStrictMode: false,
   svelteBracketNewLine: false,
   svelteAllowShorthand: true,
   svelteIndentScriptAndStyle: true,
+  importOrder: ['^@core/(.*)$', '^@server/(.*)$', '^@ui/(.*)$', '^[./]'],
+  importOrderSeparation: true,
+  jsxBracketSameLine: true,
 }

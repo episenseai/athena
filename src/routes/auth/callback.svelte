@@ -69,7 +69,6 @@
     let success = await callback()
     console.log(success)
   })
-
 </script>
 
 <pre>

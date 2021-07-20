@@ -1,6 +1,6 @@
-import { writable, get } from 'svelte/store'
-import { LOGIN } from '../auth/store'
 import localForage from 'localforage'
+import { writable, get } from 'svelte/store'
+
 import {
   TAB_CREATE_PROJECTS_SERVICE,
   TAB_PROJECTS_LIST_SERVICE,
@@ -17,8 +17,9 @@ import {
   TAB_MODEL_CANCEL_SERVICE,
 } from '../../api/endpoints'
 import { fetch_json_POST, fetch_json_GET } from '../../api/fetch'
-import { snack } from '../base/store/snack'
 import modelsInfo from '../../routes/tabular/models/_mock/models.js'
+import { LOGIN } from '../auth/store'
+import { snack } from '../base/store/snack'
 import { models, reset_model_stores } from './models/store'
 
 export const GET_DATA = writable({})
@@ -81,7 +82,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_CREATE_PROJECTS_SERVICE(get(LOGIN).userid),
         { projectname, projectdesc },
-        'CREATE PROJECT'
+        'CREATE PROJECT',
       )
       if (response && response.json.success) {
         // project created
@@ -95,7 +96,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_SET_PROJECT_SERVICE(get(LOGIN).userid, projectid),
         {},
-        'SET PROJECT'
+        'SET PROJECT',
       )
 
       if (response && response.json.success) {
@@ -110,7 +111,7 @@ function project_store() {
         if (get(PROJECT).pipe_status === '0') {
           await snack(
             'info',
-            `Your are on the ${get(PROJECT).current_stage} stage of the pipeline for this project`
+            `Your are on the ${get(PROJECT).current_stage} stage of the pipeline for this project`,
           )
         } else if (get(PROJECT).pipe_status === '1') {
           await snack('info', `You are on MODELS stage for the project`)
@@ -133,7 +134,7 @@ function project_store() {
     },
     init_proj: async () => {
       const porj_id = await read_proj(
-        'error reading project id from local storage while initialization'
+        'error reading project id from local storage while initialization',
       )
       if (!porj_id || typeof porj_id !== 'string' || porj_id === '') {
         await write_proj('', 'error writing auth state to local storage while initialization')
@@ -152,7 +153,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_PIPE_GET_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         data,
-        'GET STAGE DATA'
+        'GET STAGE DATA',
       )
       if (!response) return false
       if (response.json.success) {
@@ -166,7 +167,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_PIPE_POST_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         data,
-        'POST STAGE DATA'
+        'POST STAGE DATA',
       )
       if (!response) return
       if (response.json.success) {
@@ -178,7 +179,7 @@ function project_store() {
       // list all projects
       const response = await fetch_json_GET(
         TAB_PROJECTS_LIST_SERVICE(get(LOGIN).userid),
-        'LIST PROJECTS'
+        'LIST PROJECTS',
       )
 
       if (response && response.json.success) {
@@ -192,7 +193,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_UNFREEZE_PIPE_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         {},
-        'UNFREEZE PIPE'
+        'UNFREEZE PIPE',
       )
       if (!response) return false
       if (response.json.success) {
@@ -208,7 +209,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_REVERT_STAGE_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         { from: from_stage, to: to_stage },
-        'UNFREEZE PIPE'
+        'UNFREEZE PIPE',
       )
       if (!response) return false
       if (response.json.success) {
@@ -224,7 +225,7 @@ function project_store() {
         if (!('EventSource' in window)) {
           await snack(
             'warning',
-            'Your browser does not support SSE. You have to manully refresh your browser to check the progress of pipeline. Or, you can switch to Chrome, Safari or Mozilla.'
+            'Your browser does not support SSE. You have to manully refresh your browser to check the progress of pipeline. Or, you can switch to Chrome, Safari or Mozilla.',
           )
           return false
         }
@@ -267,12 +268,12 @@ function project_store() {
               PROJECT.sse_close()
             }
           },
-          false
+          false,
         )
         es.onerror = async (_) => {
           await snack(
             'error',
-            'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.'
+            'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.',
           )
           PROJECT.sse_close()
         }
@@ -293,7 +294,7 @@ function project_store() {
     get_token: async () => {
       const response = await fetch_json_GET(
         GET_SSE_TOKEN_SERVICE(get(LOGIN).userid, get(PROJECT).id),
-        'GET SSE TOKEN'
+        'GET SSE TOKEN',
       )
       if (!response) return false
       if (response.json.success) {
@@ -307,7 +308,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_MODEL_BUILD_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         { modelids, changed_hparams },
-        'MODEL BUILD SERVICE'
+        'MODEL BUILD SERVICE',
       )
       if (!response) return false
       // console.log(response.json)
@@ -322,7 +323,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_MODEL_CANCEL_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         { modelid },
-        'CANCEL MODEl JOB'
+        'CANCEL MODEl JOB',
       )
       if (!response) return false
       // console.log(new_model)
@@ -339,14 +340,14 @@ function project_store() {
         if (!('EventSource' in window)) {
           await snack(
             'warning',
-            'Your browser does not support SSE. You have to manully refresh your browser to check the progress of models. Or, you can switch to Chrome, Safari or Mozilla.'
+            'Your browser does not support SSE. You have to manully refresh your browser to check the progress of models. Or, you can switch to Chrome, Safari or Mozilla.',
           )
           return false
         }
         if (
           !rerun &&
           get(models).findIndex(
-            (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
+            (el) => el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL',
           ) === -1
         ) {
           // console.log('All models already done. no sse required')
@@ -363,7 +364,7 @@ function project_store() {
           SSE_MODELS_UPDATE_SERVICE(get(LOGIN).userid, get(PROJECT).id, token),
           {
             withCredentials: true,
-          }
+          },
         )
         es_models.addEventListener(
           'message',
@@ -398,12 +399,12 @@ function project_store() {
                     if (data[m.id] === 'ERROR') {
                       snack(
                         'error',
-                        `Error building ${m.name} model for the ${get(PROJECT).name} project`
+                        `Error building ${m.name} model for the ${get(PROJECT).name} project`,
                       ).then((val) => val)
                     } else if (data[m.id] === 'CANCELLED') {
                       snack(
                         'error',
-                        `Cancelled building ${m.name} model for the ${get(PROJECT).name} project`
+                        `Cancelled building ${m.name} model for the ${get(PROJECT).name} project`,
                       ).then((val) => val)
                     }
                     m.status = data[m.id]
@@ -427,12 +428,12 @@ function project_store() {
               if (
                 get(models).findIndex(
                   (el) =>
-                    el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL'
+                    el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL',
                 ) === -1
               ) {
                 PROJECT.sse_models_close()
                 snack('info', `All the models completed for the ${get(PROJECT).name} project`).then(
-                  (val) => val
+                  (val) => val,
                 )
                 // console.log('All models finished. closing sse')
               }
@@ -440,12 +441,12 @@ function project_store() {
               PROJECT.sse_models_close()
             }
           },
-          false
+          false,
         )
         es_models.onerror = async (_) => {
           await snack(
             'error',
-            'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.'
+            'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.',
           )
           PROJECT.sse_models_close()
         }
@@ -465,7 +466,7 @@ function project_store() {
       const response = await fetch_json_POST(
         TAB_MODELS_SERVICE(get(LOGIN).userid, get(PROJECT).id),
         { modelid },
-        'GET MODEL BY ID'
+        'GET MODEL BY ID',
       )
       if (!response) return false
       let new_model = response.json.data
@@ -488,24 +489,24 @@ function project_store() {
         if (new_model.status === 'DONE') {
           await snack(
             'success',
-            `Completed building ${new_model.name} model for the ${get(PROJECT).name} project`
+            `Completed building ${new_model.name} model for the ${get(PROJECT).name} project`,
           )
         } else if (new_model.status === 'RUNNING') {
           await snack(
             'info',
-            `Started building ${new_model.name} model for the ${get(PROJECT).name} project`
+            `Started building ${new_model.name} model for the ${get(PROJECT).name} project`,
           )
         } else if (new_model.status === 'ERROR') {
           await snack(
             'error',
             `Error occured while building ${new_model.name} model for the ${
               get(PROJECT).name
-            } project`
+            } project`,
           )
         } else if (new_model.status === 'CANCELLED') {
           await snack(
             'warning',
-            `Cancelled building ${new_model.name} model for the ${get(PROJECT).name} project`
+            `Cancelled building ${new_model.name} model for the ${get(PROJECT).name} project`,
           )
         }
       }

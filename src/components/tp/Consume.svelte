@@ -19,7 +19,7 @@
         'warning',
         `Currently processing data for the ${get(PROJECT)
           .current_stage.split(':')[0]
-          .toUpperCase()} stage. Can not move to the next stage.`
+          .toUpperCase()} stage. Can not move to the next stage.`,
       )
       return
     }
@@ -88,7 +88,7 @@
     const response = await fetch_upload_POST(
       FILE_UPLOAD_SERVICE(get(LOGIN).userid),
       formData,
-      'FILE UPLOAD'
+      'FILE UPLOAD',
     )
     disabled = false
     // server error

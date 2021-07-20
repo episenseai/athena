@@ -1,6 +1,7 @@
-import { snack } from '../components/base/store/snack'
-import { LOGIN } from '../components/auth/store'
 import { get } from 'svelte/store'
+
+import { LOGIN } from '../components/auth/store'
+import { snack } from '../components/base/store/snack'
 
 function get_auth_header() {
   const login_store = get(LOGIN)
@@ -28,7 +29,7 @@ export async function fetch_json_POST(url, data, service_name) {
     }).catch(async (_) => {
       await snack(
         'error',
-        'Either your lost your internet connectivity or episense ai server is down.'
+        'Either your lost your internet connectivity or episense ai server is down.',
       )
       return false
     })
@@ -50,7 +51,7 @@ export async function fetch_json_POST(url, data, service_name) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Unhandled server error occured while handling ${service_name} request`
+          : `HTTP error: ${response.status}; Unhandled server error occured while handling ${service_name} request`,
       )
       return false
     }
@@ -59,7 +60,7 @@ export async function fetch_json_POST(url, data, service_name) {
     if (response.status === 400) {
       await snack(
         'error',
-        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`
+        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`,
       )
       return false
     }
@@ -70,7 +71,7 @@ export async function fetch_json_POST(url, data, service_name) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Unauthorized ${service_name} request. Wrong or expired credentials.`
+          : `HTTP error: ${response.status}; Unauthorized ${service_name} request. Wrong or expired credentials.`,
       )
       return false
     }
@@ -78,7 +79,7 @@ export async function fetch_json_POST(url, data, service_name) {
     console.log(e)
     await snack(
       'error',
-      `something fatal happened during ${service_name} Serivce request. Check console for details.`
+      `something fatal happened during ${service_name} Serivce request. Check console for details.`,
     )
     return false
   }
@@ -101,7 +102,7 @@ export async function fetch_json_GET(url, service_name) {
     }).catch(async (_) => {
       await snack(
         'error',
-        'Either your lost your internet connectivity or episense ai server is down.'
+        'Either your lost your internet connectivity or episense ai server is down.',
       )
       return false
     })
@@ -123,7 +124,7 @@ export async function fetch_json_GET(url, service_name) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Unhandled server error occured while handling ${service_name} request`
+          : `HTTP error: ${response.status}; Unhandled server error occured while handling ${service_name} request`,
       )
       return false
     }
@@ -132,7 +133,7 @@ export async function fetch_json_GET(url, service_name) {
     if (response.status === 400) {
       await snack(
         'error',
-        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`
+        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`,
       )
       return false
     }
@@ -143,7 +144,7 @@ export async function fetch_json_GET(url, service_name) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Unauthorized ${service_name} request. Wrong or expired credentials.`
+          : `HTTP error: ${response.status}; Unauthorized ${service_name} request. Wrong or expired credentials.`,
       )
       return false
     }
@@ -151,7 +152,7 @@ export async function fetch_json_GET(url, service_name) {
     console.log(e)
     await snack(
       'error',
-      `something fatal happened during ${service_name} Serivce request. Check console for details.`
+      `something fatal happened during ${service_name} Serivce request. Check console for details.`,
     )
     return false
   }
@@ -174,7 +175,7 @@ export async function fetch_upload_POST(url, formData) {
     }).catch(async (_) => {
       await snack(
         'error',
-        'Either your lost your internet connectivity or episense ai server is down.'
+        'Either your lost your internet connectivity or episense ai server is down.',
       )
       return false
     })
@@ -198,7 +199,7 @@ export async function fetch_upload_POST(url, formData) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Unhandled server error while uploading file (${filename})`
+          : `HTTP error: ${response.status}; Unhandled server error while uploading file (${filename})`,
       )
       return false
     }
@@ -209,7 +210,7 @@ export async function fetch_upload_POST(url, formData) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Malformed FILE UPLOAD request (${filename})`
+          : `HTTP error: ${response.status}; Malformed FILE UPLOAD request (${filename})`,
       )
       return false
     }
@@ -220,7 +221,7 @@ export async function fetch_upload_POST(url, formData) {
         'error',
         json.info
           ? json.info
-          : `HTTP error: ${response.status}; Unauthorized FILE UPLOAD request (${filename}). Wrong or expired credentials.`
+          : `HTTP error: ${response.status}; Unauthorized FILE UPLOAD request (${filename}). Wrong or expired credentials.`,
       )
       return false
     }
@@ -228,7 +229,7 @@ export async function fetch_upload_POST(url, formData) {
     console.log(e)
     await snack(
       'error',
-      `something fatal happened while uploading (${filename}). Check console for details.`
+      `something fatal happened while uploading (${filename}). Check console for details.`,
     )
     return false
   }

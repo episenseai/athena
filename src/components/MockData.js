@@ -1,4 +1,5 @@
 import { GET_DATA } from './tp/store'
+
 export async function getStageData(stage) {
   const res = await fetch(`https://localhost:3000/tabular/pipeline.json?stage=${stage}`)
 
