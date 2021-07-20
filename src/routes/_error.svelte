@@ -11,23 +11,11 @@
 </svelte:head>
 
 <main class="side-pages">
-  <h4>[ERROR] - {status} {error.message}</h4>
+  <h4>[ERROR]: {status} {error.message}</h4>
   <a class="btn" href="/">Go to home page</a>
-
-  {#if dev && error.stack}
-    <h4>[... Stack Trace ...]</h4>
-    <pre>{error.stack}</pre>
-  {/if}
 </main>
 
 <style>
-  pre {
-    margin: 0.5em auto 1em;
-  }
-  pre {
-    padding: 10px 5px;
-    overflow-y: scroll;
-  }
   h4 {
     letter-spacing: 0.02em;
     text-align: center;

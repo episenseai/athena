@@ -22,32 +22,34 @@
 
 </script>
 
-{#if $LOGIN.success && $LOGIN.jwt && render_main}
-  {#if segment !== 'tabular'}
-    <Nav {segment} level="home" />
-    <main class="outer-layout">
-      <slot />
-    </main>
+{#if render_main}
+  {#if $LOGIN.success && $LOGIN.jwt}
+    {#if segment !== 'tabular'}
+      <Nav {segment} level="home" />
+      <main class="outer-layout">
+        <slot />
+      </main>
+    {:else}
+      <main>
+        <slot />
+      </main>
+    {/if}
   {:else}
-    <main>
-      <slot />
-    </main>
-  {/if}
-{:else if render_main}
-  <a href="/"><AuthLogo /></a>
-  {#if $page.path === '/'}
-    <div class="auth">
-      <OauthLogin />
-    </div>
-  {:else if $page.path === '/auth/callback'}
-    <main>
-      <slot />
-    </main>
-  {:else}
-    <div class="error_msg">
-      <h4>[ERROR]: You are either logged out or the resource does not exist</h4>
-      <a class="btn" href="/">Go to login page</a>
-    </div>
+    <a href="/"><AuthLogo /></a>
+    {#if $page.path === '/'}
+      <div class="auth">
+        <OauthLogin />
+      </div>
+    {:else if $page.path === '/auth/callback'}
+      <main>
+        <slot />
+      </main>
+    {:else}
+      <div class="error_msg">
+        <h4>[ERROR]: You are either logged out or the resource does not exist</h4>
+        <a class="btn" href="/">Go to login page</a>
+      </div>
+    {/if}
   {/if}
 {/if}
 
