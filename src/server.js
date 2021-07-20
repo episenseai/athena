@@ -18,13 +18,23 @@ const dev = NODE_ENV === 'development'
 
 const app = express()
 
+// emit date in local timezone
+morgan.token('date', () => {
+  let p = new Date()
+    .toString()
+    .replace(/[A-Z]{3}\+/, '+')
+    .split(/ /)
+  return p[2] + '/' + p[1] + '/' + p[3] + ':' + p[4] + ' ' + p[5]
+})
+
 let logger
 
 if (dev) {
-  logger = morgan(':date[iso] | :status | :method | :url | :remote-addr')
+  logger = morgan('[:date[clf]] | :status | :method | :url | :remote-addr')
 } else {
-  logger = morgan(':date[iso] | :status | :method | :url | :remote-addr | :user-agent')
+  logger = morgan('[:date[clf]] | :status | :method | :url | :remote-addr | :user-agent')
 }
+
 app.use(logger)
 
 app
