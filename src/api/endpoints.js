@@ -1,4 +1,4 @@
-// backend service
+// BACKEND SERVICE
 // `node replace` plugin replaces the value of `process.env.BACKEND_SERVER` with the one
 // provided in `rollup.config.js` file.
 const BACKEND = 'process.env.BACKEND_SERVER'
@@ -22,51 +22,8 @@ export const OAUTH2_AUTH_CALLBACK_SERVICE = (code, state, scope = undefined) => 
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
-// signup service for creating new user accounts
-// POST https://localhost:8000/auth/signup
-// request:
-//      { username: username, password: password }
-// response: 201 Created
-//      {
-//          success: true or false,
-//          info: "Successfully signup. Congratulations!!!",
-//          version: "v1",
-//          data: { username: username, userid: userid }
-//      }
-// if created is false => something went wrong, check the info
-export const SIGNUP_SERVICE = () => encodeURI(`${BACKEND}/auth/signup`)
-
-// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
-// login for existing users
-// POST https://localhost:8000/auth/login
-// request:
-//      { username: username, password: password }
-// response: 200 OK
-//      {
-//          success: true or false,
-//          info: "some message",
-//          version: "v1",
-//          data: { jwt: jwt token }
-//      }
-// if success is false, login failed
-// When requesting data from the server send the `jwt` token in the Header of the request
-// Authorization: Bearer <token>
-// Authorization: Bearer eyJhbGci...<snip>...yu5CSpyHI
-export const LOGIN_SERVICE = () => encodeURI(`${BACKEND}/auth/login`)
-
-// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
-// logout of the account
-// POST https://localhost:8000/auth/logout
-// request:
-//      {}
-// response: 200 OK
-//      { success: true, version: "v1" }
-// just drop the jwt and call the server if necessary
-export const LOGOUT_SERVICE = () => encodeURI(`${BACKEND}/auth/logout`)
-
-// ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // file uploads (include file_name)
-// POST https://localhost:8000/uploads?userid=26r276re25r52456
+// POST ${BACKEND}/uploads?userid=26r276re25r52456
 // request:
 //      Content-Type: multipart/form-data;
 // response: 201 OK
@@ -88,7 +45,7 @@ export const FILE_UPLOAD_SERVICE = (userid) => encodeURI(`${BACKEND}/uploads?use
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // get a list of uploaded files for the user
-// GET https://localhost:8000/uploads?userid=26r276re25r52456
+// GET ${BACKEND}/uploads?userid=26r276re25r52456
 // response: 200 OK
 //      {
 //          success: true,
@@ -102,7 +59,7 @@ export const FILE_LIST_SERVICE = (userid) => encodeURI(`${BACKEND}/uploads?useri
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // create a new project
-// POST https://localhost:8000/tab/v1/projects?userid=26r276re25r52456
+// POST ${BACKEND}/tab/v1/projects?userid=26r276re25r52456
 // request:
 //      { projectname: projectname, projectdesc: projectdesc }
 // response: 201 OK
@@ -119,7 +76,7 @@ export const TAB_CREATE_PROJECTS_SERVICE = (userid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // change to a different project
-// POST https://localhost:8000/tab/v1/projects/current?userid=26r276re25r52456
+// POST ${BACKEND}/tab/v1/projects/current?userid=26r276re25r52456
 // request:
 //      {}
 // response: 200 OK
@@ -142,7 +99,7 @@ export const TAB_SET_PROJECT_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // get all the projects for a particlar user
-// GET https://localhost:8000/tab/v1/projects?userid=26r276re25r52456
+// GET ${BACKEND}/tab/v1/projects?userid=26r276re25r52456
 // response: 200 OK
 //      {
 //          success: true,
@@ -157,7 +114,7 @@ export const TAB_PROJECTS_LIST_SERVICE = (userid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // get the data for the current pipeline stage
-// POST https://localhost:8000/tab/v1/pipe/current?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/pipe/current?userid=26r276re25r52456&projectid=d267gd27f726fd
 // request { current_stage:  "consume:GET" }
 // response: 200 OK
 //      {
@@ -177,7 +134,7 @@ export const TAB_PIPE_GET_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // post data for the next pipeline stage
-// POST https://localhost:8000/tab/v1/pipe/next?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/pipe/next?userid=26r276re25r52456&projectid=d267gd27f726fd
 // request:
 //      { current_stage: "prepare:GET", next_stage: "prepare:POST", data: {  stage: "prepare:POST",
 //                                                                           data:  {stagedata...} }
@@ -203,7 +160,7 @@ export const TAB_PIPE_POST_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // revert to a previous pipeline stage
-// POST https://localhost:8000/tab/v1/pipe/revert?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/pipe/revert?userid=26r276re25r52456&projectid=d267gd27f726fd
 // request:
 //      { from: 'transform:POST', to: 'prpeare:GET' }
 // response: 201 OK
@@ -230,7 +187,7 @@ export const TAB_REVERT_STAGE_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // unfreeze the pipeline after to retry after pipeline error
-// POST https://localhost:8000/tab/v1/pipe/unfreeze?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/pipe/unfreeze?userid=26r276re25r52456&projectid=d267gd27f726fd
 // request:
 //      {}
 // response: 200 OK
@@ -256,7 +213,7 @@ export const TAB_UNFREEZE_PIPE_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // submit model build jobs for processing when at stage finalconfig:GET
-// POST https://localhost:8000/tab/v1/models/build?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/models/build?userid=26r276re25r52456&projectid=d267gd27f726fd
 // response: 200 OK
 //      {
 //          success: true,
@@ -277,7 +234,7 @@ export const TAB_MODEL_BUILD_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // submit model build jobs for processing when at stage finalconfig:GET
-// POST https://localhost:8000/tab/v1/models/build?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/models/build?userid=26r276re25r52456&projectid=d267gd27f726fd
 // request { modelid: modelid }
 // response: 200 OK
 //      {
@@ -294,7 +251,7 @@ export const TAB_MODEL_CANCEL_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // list all the models for a particlar project
-// GET https://localhost:8000/tab/v1/models/?userid=26r276re25r52456&projectid=d267gd27f726fd
+// GET ${BACKEND}/tab/v1/models/?userid=26r276re25r52456&projectid=d267gd27f726fd
 // response: 200 OK
 //      {
 //          success: true,
@@ -312,7 +269,7 @@ export const TAB_ALL_MODELS_SERVICE = (userid, projectid) =>
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // list all the models for a particlar project
-// POST https://localhost:8000/tab/v1/models/?userid=26r276re25r52456&projectid=d267gd27f726fd
+// POST ${BACKEND}/tab/v1/models/?userid=26r276re25r52456&projectid=d267gd27f726fd
 // request { modelid: modelid }
 // response: 200 OK
 //      {

@@ -1,7 +1,6 @@
 <script>
   import Snack from '../components/base/Snack.svelte'
   import Nav from '../components/Nav.svelte'
-  import Signup from '../components/auth/Signup.svelte'
   import OauthLogin from '../components/auth/OauthLogin.svelte'
   import AuthLogo from './AuthLogo.svelte'
   import { LOGIN } from '../components/auth/store.js'
@@ -19,10 +18,11 @@
     if (!from_saved) await PROJECT.reset_proj()
     render_main = true
   })
+
 </script>
 
 {#if render_main}
-  {#if $LOGIN.success && $LOGIN.jwt}
+  {#if $LOGIN.success && $LOGIN.access_token}
     {#if segment !== 'tabular'}
       <Nav {segment} level="home" />
       <main class="outer-layout">
@@ -97,4 +97,5 @@
     color: rgba(var(--lobster-rgb), 1);
     border-color: rgba(var(--lobster-rgb), 1);
   }
+
 </style>

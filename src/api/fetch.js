@@ -5,8 +5,8 @@ import { snack } from '../components/base/store/snack'
 
 function get_auth_header() {
   const login_store = get(LOGIN)
-  if (login_store.success && login_store.jwt) {
-    return { Authorization: `Bearer ${login_store.jwt}` }
+  if (login_store.success && login_store.access_token) {
+    return { Authorization: `Bearer ${login_store.access_token}` }
   }
   return {}
 }
@@ -39,7 +39,6 @@ export async function fetch_json_POST(url, data, service_name) {
     // parse json reponse
     const json = await response.json()
 
-    // for debugging
     // console.log(service_name, response)
 
     // good response

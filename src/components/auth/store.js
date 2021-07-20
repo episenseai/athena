@@ -1,71 +1,8 @@
-import jwt_decode from 'jwt-decode'
 import localForage from 'localforage'
-import { writable, get } from 'svelte/store'
+import { writable } from 'svelte/store'
 
-import {
-  SIGNUP_SERVICE,
-  LOGIN_SERVICE,
-  LOGOUT_SERVICE,
-  OAUTH2_LOGIN_SERVICE,
-  OAUTH2_AUTH_CALLBACK_SERVICE,
-} from '../../api/endpoints'
-import { fetch_json_POST } from '../../api/fetch'
+import { OAUTH2_LOGIN_SERVICE, OAUTH2_AUTH_CALLBACK_SERVICE } from '../../api/endpoints'
 import { snack } from '../base/store/snack'
-
-function signup_store() {
-  const { subscribe, set } = writable(false)
-
-  return {
-    subscribe,
-
-    // custom store method to handle signup
-    signup: async (username, password) => {
-      // logout before creating a new account
-      if (get(LOGIN).success === true) {
-        await snack(
-          'warning',
-          'Already signed in with a diiferent account; signout to create a new account',
-        )
-        return false
-      }
-
-      // call the signup endpoint
-      const response = await fetch_json_POST(SIGNUP_SERVICE(), { username, password }, 'SIGNUP')
-
-      // error
-      if (!response) return false
-
-      if (response.json.success) {
-        // account created
-        set(false)
-        await snack('success', response.json.info)
-        return true
-        //console.log(response.json.data)
-      }
-      // error in account creation
-      await snack('warning', response.json.info)
-      return false
-      // console.log(response.json.data)
-    },
-
-    // go to the signup page
-    new: async () => {
-      if (get(LOGIN).success === true) {
-        await snack(
-          'warning',
-          'Already signed in with a diiferent account; signout to create a new account',
-        )
-        return
-      }
-      set(true)
-    },
-
-    // cancel the signup
-    cancel: () => set(false),
-  }
-}
-
-export const SIGNUP = signup_store()
 
 function login_store() {
   const USTATE_KEY = 'ustatekey'
@@ -73,7 +10,7 @@ function login_store() {
 
   const clean_auth_state = {
     success: false,
-    jwt: undefined,
+    access_token: undefined,
     username: undefined,
     userid: undefined,
     expires: undefined,
@@ -227,7 +164,7 @@ function login_store() {
             // try setting auth_state into local storage
             const auth_state = await write_auth({
               success: true,
-              jwt: token.access_token,
+              access_token: token.access_token,
               username: token.full_name || '',
               userid: token.userid,
               refresh_token: token.refresh_token || '',
