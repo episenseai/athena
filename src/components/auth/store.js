@@ -135,8 +135,12 @@ function login_store() {
     return true
   }
 
-  const reset_auth = async () => {
+  const reset_ustate = async () => {
     await write_ustatekey({})
+  }
+
+  const reset_auth = async () => {
+    await reset_ustate()
     await write_auth(clean_auth_state)
     set({})
   }
@@ -146,6 +150,10 @@ function login_store() {
   return {
     // a store must have a subscribe method
     subscribe,
+
+    reset_ustate: async () => {
+      await reset_ustate()
+    },
 
     // Oauth login with github, google, ...
     oauth_login: async (provider) => {
@@ -232,7 +240,7 @@ function login_store() {
               set(auth_state)
               const redirect = (await read_ustatekey()).redirect
               // reset 'ustatekey'
-              await write_ustatekey({})
+              await reset_ustate()
               await snack('success', 'Authorization successfull')
               // authorization complete; redirect to the page before the start of login flow
               window.location.href = redirect
@@ -266,7 +274,7 @@ function login_store() {
     },
 
     // Oauth logout
-    oauth_logout: async (_provider) => {
+    oauth_logout: async () => {
       await reset_auth()
       await snack('info', 'Logged Out')
       return true

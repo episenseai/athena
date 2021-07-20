@@ -1,5 +1,6 @@
 <script>
   import ProgressL from '../../components/base/ProgressL.svelte'
+  import Spinner from '../../components/Spinner.svelte'
   import { snack } from '../../components/base/store/snack'
   import { onMount } from 'svelte'
   import { get } from 'svelte/store'
@@ -11,19 +12,35 @@
   let done = false
   let success = false
 
+  let interval
+  let seconds = 5
+  const handleTick = () => (seconds -= 1)
+
+  const redirect = () => {
+    if (interval) clearInterval(interval)
+    window.location.href = window.location.origin
+  }
   onMount(async () => {
     let login = get(LOGIN)
-    console.log(login)
-    if (login && login.success) {
-      window.location.href = window.location.origin
-    }
+    if (login && login.success) redirect()
+
     let code = get(page).query.code
     let state = get(page).query.state
     let scope_query = get(page).query.scope
 
     success = await LOGIN.oauth_callback(code, state, scope_query)
+    await LOGIN.reset_ustate()
+
+    if (!success) {
+      if (interval) clearInterval(interval)
+      seconds = 5
+      interval = setInterval(handleTick, 1000)
+    }
+
     done = true
   })
+
+  $: if (seconds <= 0) redirect()
 
 </script>
 
@@ -32,7 +49,13 @@
     <h3>Authentication in progress ...</h3>
     <ProgressL />
   {:else if !success}
-    <h3 class="failed">ERROR: Authentication failed...</h3>
+    <h3 class="failed">
+      ERROR: Authentication failed. Will redirect to home page in <span class="seconds"
+        >{seconds >= 0 ? seconds : 0}</span>
+      seconds
+      <span class="spinner"><Spinner color={'rgba(0,0,0,0.8)'} /></span>
+    </h3>
+    <button on:click|preventDefault|stopPropagation={() => redirect()}>Go to login page</button>
   {/if}
 </div>
 
@@ -47,6 +70,26 @@
   }
   h3.failed {
     color: rgb(var(--red-rgb));
+  }
+
+  button {
+    display: block;
+    text-align: center;
+    width: 320px;
+    margin: auto;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgba(var(--lobster-rgb), 1);
+    border-color: rgba(var(--lobster-rgb), 1);
+  }
+  span.seconds {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  span.spinner {
+    position: relative;
+    top: 8px;
+    padding-left: 5px;
   }
 
 </style>
