@@ -3,6 +3,7 @@
   export let error
 
   const dev = process.env.NODE_ENV === 'development'
+
 </script>
 
 <svelte:head>
@@ -10,10 +11,8 @@
 </svelte:head>
 
 <main class="side-pages">
-  <h1><span>HTTP Response</span> {status}</h1>
-
-  <h4>[... Error Message ...]</h4>
-  <p>{error.message}</p>
+  <h4>[ERROR] - {status} {error.message}</h4>
+  <a class="btn" href="/">Go to home page</a>
 
   {#if dev && error.stack}
     <h4>[... Stack Trace ...]</h4>
@@ -22,17 +21,6 @@
 </main>
 
 <style>
-  h1 {
-    color: var(--lobster);
-    padding-bottom: 6px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--light11);
-  }
-  h1 span {
-    color: var(--text-dark);
-    font-size: inherit;
-  }
-  p,
   pre {
     margin: 0.5em auto 1em;
   }
@@ -41,6 +29,21 @@
     overflow-y: scroll;
   }
   h4 {
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 700;
   }
+  .side-pages a {
+    display: block;
+    text-align: center;
+    width: 320px;
+    margin: auto;
+    margin-top: 20px;
+    color: rgba(var(--lobster-rgb), 1);
+    border-color: rgba(var(--lobster-rgb), 1);
+  }
+
 </style>

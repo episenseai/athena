@@ -56,7 +56,6 @@ module.exports = {
     'no-label-var': 'error',
     'no-useless-computed-key': 'error',
     'template-curly-spacing': ['error', 'never'],
-    // avoid subtle bugs due to race conditions in async and generator functions
-    'require-atomic-updates': 'error',
+    'require-atomic-updates': 'off',
   },
 }

@@ -3,9 +3,13 @@ import { snack } from '../base/store/snack'
 import jwt_decode from 'jwt-decode'
 import localForage from 'localforage'
 import { fetch_json_POST } from '../../api/fetch'
-import { SIGNUP_SERVICE, LOGIN_SERVICE, LOGOUT_SERVICE } from '../../api/endpoints'
-
-const AUTH_KEY = 'authkey123'
+import {
+  SIGNUP_SERVICE,
+  LOGIN_SERVICE,
+  LOGOUT_SERVICE,
+  OAUTH2_LOGIN_SERVICE,
+  OAUTH2_AUTH_CALLBACK_SERVICE,
+} from '../../api/endpoints'
 
 function signup_store() {
   const { subscribe, set } = writable(false)
@@ -63,7 +67,27 @@ function signup_store() {
 export const SIGNUP = signup_store()
 
 function login_store() {
+  const USTATE_KEY = 'ustatekey'
+  const AUTH_KEY = 'authkey'
+
   const clean_state = { success: false, jwt: undefined, username: undefined, userid: undefined }
+
+  // write the `ustate` to the local storage and returns the item written
+  const write_ustate = async (current_ustate, erro_msg = '') => {
+    const ustate = await localForage
+      .setItem(USTATE_KEY, current_ustate)
+      .then(() => localForage.getItem(USTATE_KEY))
+      .catch((err) => console.log(erro_msg, err))
+    if (ustate) return ustate
+    return false
+  }
+
+  // reads the `ustate` from the local storage
+  const read_ustate = async (erro_msg = '') => {
+    const ustate = await localForage.getItem(USTATE_KEY).catch((err) => console.log(erro_msg, err))
+    if (ustate) return ustate
+    return false
+  }
 
   // write the auth state to the local storage and returns the item written
   const write_auth = async (current_auth_state, erro_msg) => {
@@ -95,46 +119,31 @@ function login_store() {
 
     // Oauth login with github, google, ...
     oauth_login: async (provider) => {
-      // check if the user if already logged in
-      if (get(LOGIN).success === true) {
-        await LOGIN.oauth_logout()
-      }
-
       // call the login endpoint
-      const response = await fetch_json_POST(LOGIN_SERVICE(), { username, password }, 'LOGIN')
-      // server error
-      if (!response) return
+      if (window.crypto.getRandomValues) {
+        const byte_array = new Uint8Array(16)
+        window.crypto.getRandomValues(byte_array)
 
-      if (response.json.success) {
-        // login success
-        const decoded = jwt_decode(response.json.data.jwt)
-        // try putting the auth onto local storage
-        const auth_state = await write_auth(
-          {
-            success: true,
-            jwt: response.json.data.jwt,
-            username: decoded.username,
-            userid: decoded.userid,
-          },
-          'error setting local auth storage after successfull login '
-        )
+        const ustate = Array.from(byte_array, (byte) => {
+          return ('0' + (byte & 0xff).toString(16)).slice(-2)
+        }).join('')
+        console.log('Login not supported: ustate')
 
-        // on success, set the authentication info in svelte store
-        if (auth_state) {
-          set(auth_state)
-          await snack('success', response.json.info)
+        if (ustate !== (await write_ustate(ustate))) {
+          return false
         }
-
-        // console.log(jwt_decode(response.json.data.jwt))
-      } else {
-        // login error
-        await snack('warning', response.json.info)
-        // console.log(response.json.data)
+        window.location.href = OAUTH2_LOGIN_SERVICE(provider, ustate)
+        // http://localhost:3000/auth/callback?code=50cc19a8e4fb6a2377b5&state=Zr1ruAq6JiXzgiXsFWZlWIXV2msJh1JbSd2m3BPxZuXFrE2oLA4dtFDPAEDWRXYX
+        return true
       }
+      console.log('Login not supported')
+      return false
     },
 
+    oauth_callback: async () => {},
+
     // Oauth logout
-    oauth_logout: async () => {
+    oauth_logout: async (_provider) => {
       if (get(LOGIN).success === false) {
         await snack('warning', 'You are not signed in??')
         return
