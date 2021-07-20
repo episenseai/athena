@@ -22,9 +22,7 @@
     let scope_query = get(page).query.scope
 
     success = await LOGIN.oauth_callback(code, state, scope_query)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
     done = true
-    console.log(success)
   })
 
 </script>
@@ -35,8 +33,6 @@
     <ProgressL />
   {:else if !success}
     <h3 class="failed">ERROR: Authentication failed...</h3>
-  {:else}
-    <pre>{JSON.stringify($LOGIN)}</pre>
   {/if}
 </div>
 
