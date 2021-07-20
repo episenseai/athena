@@ -166,7 +166,8 @@
 
 <style>
   svg {
-    margin-top: 100px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
+
 </style>

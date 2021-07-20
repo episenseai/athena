@@ -6,6 +6,7 @@
   // tabular or home
   export let level
   import { get } from 'svelte/store'
+
 </script>
 
 <nav class="noselect">
@@ -270,7 +271,7 @@
       <li>
         <button
           on:click|stopPropagation={async () => {
-            const response = await LOGIN.logout()
+            const response = await LOGIN.oauth_logout()
             if (response) {
               await PROJECT.reset_proj()
               window.location.replace(window.location.origin)
@@ -421,4 +422,5 @@
     background-repeat: no-repeat;
     vertical-align: bottom;
   }
+
 </style>
