@@ -11,7 +11,14 @@ import pkg from './package.json'
 
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
+
 const legacy = !!process.env.SAPPER_LEGACY_BUILD
+
+// Currently we have no means of passing these values to the frontend at
+// runtime. Provide these values at build time. These values will be hardcoded
+// into the application
+const BACKEND_SERVER = process.env.BACKEND_SERVER || 'http://localhost:3002'
+const OAUTH2_BACKEND = process.env.OAUTH2_BACKEND || 'http://localhost:3001/oauth/o'
 
 const onwarn = (warning, onwarn) =>
   (warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
@@ -26,7 +33,8 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.BACKEND_SERVER': 'http://localhost:3002',
+        'process.env.BACKEND_SERVER': BACKEND_SERVER,
+        'process.env.OAUTH2_BACKEND': OAUTH2_BACKEND,
         preventAssignment: true,
       }),
       svelte({

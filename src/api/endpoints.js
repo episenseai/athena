@@ -1,22 +1,25 @@
 // backend service
 // `node replace` plugin replaces the value of `process.env.BACKEND_SERVER` with the one
 // provided in `rollup.config.js` file.
-const BACKEND = 'http://localhost:3002'
-const OAUTH2_BACKEND = 'http://localhost:3001/oauth/o'
-export const OAUTH2_LOGIN_SERVICE = (provider, ustate) =>
-  `${OAUTH2_BACKEND}/login?p=${provider}&ustate=${ustate}`
-export const OAUTH2_AUTH_CALLBACK_SERVICE = () => `${OAUTH2_BACKEND}/auth`
+const BACKEND = 'process.env.BACKEND_SERVER'
 
 //  TABULAR SERVICE
 const TABULAR = `${BACKEND}/tab/v1`
 
-// COMMON HTTP ERRORS to all endpoints
-// 401 Unauthorized => if the user is not logged in or invalid jwt token
+// Authentication
+const OAUTH2_BACKEND = 'process.env.OAUTH2_BACKEND'
 
-// JSON POST request headers
-// Content - Type: application/json
-// Accept: application/json
-// body: JSON.stringify(content)
+export const OAUTH2_LOGIN_SERVICE = (provider, ustate) =>
+  encodeURI(`${OAUTH2_BACKEND}/login?p=${provider}&ustate=${ustate}`)
+
+export const OAUTH2_AUTH_CALLBACK_SERVICE = (code, state, scope = undefined) => {
+  let url = `${OAUTH2_BACKEND}/auth?code=${code}&state=${state}`
+  if (scope && Object.prototype.toString.call(code) === '[object String]') {
+    url = `${url}&scope=${scope}`
+  }
+  console.log(encodeURI(url))
+  return encodeURI(url)
+}
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // signup service for creating new user accounts
@@ -31,7 +34,7 @@ const TABULAR = `${BACKEND}/tab/v1`
 //          data: { username: username, userid: userid }
 //      }
 // if created is false => something went wrong, check the info
-export const SIGNUP_SERVICE = () => `${BACKEND}/auth/signup`
+export const SIGNUP_SERVICE = () => encodeURI(`${BACKEND}/auth/signup`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // login for existing users
@@ -49,7 +52,7 @@ export const SIGNUP_SERVICE = () => `${BACKEND}/auth/signup`
 // When requesting data from the server send the `jwt` token in the Header of the request
 // Authorization: Bearer <token>
 // Authorization: Bearer eyJhbGci...<snip>...yu5CSpyHI
-export const LOGIN_SERVICE = () => `${BACKEND}/auth/login`
+export const LOGIN_SERVICE = () => encodeURI(`${BACKEND}/auth/login`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // logout of the account
@@ -59,7 +62,7 @@ export const LOGIN_SERVICE = () => `${BACKEND}/auth/login`
 // response: 200 OK
 //      { success: true, version: "v1" }
 // just drop the jwt and call the server if necessary
-export const LOGOUT_SERVICE = () => `${BACKEND}/auth/logout`
+export const LOGOUT_SERVICE = () => encodeURI(`${BACKEND}/auth/logout`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // file uploads (include file_name)
@@ -81,7 +84,7 @@ export const LOGOUT_SERVICE = () => `${BACKEND}/auth/logout`
 //          info: "error during file upload"
 //          version: "v1",
 //      }
-export const FILE_UPLOAD_SERVICE = (userid) => `${BACKEND}/uploads?userid=${userid}`
+export const FILE_UPLOAD_SERVICE = (userid) => encodeURI(`${BACKEND}/uploads?userid=${userid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // get a list of uploaded files for the user
@@ -95,7 +98,7 @@ export const FILE_UPLOAD_SERVICE = (userid) => `${BACKEND}/uploads?userid=${user
 //      }
 // response: 400 Bad Request => if the userid does not match the one that is logged in
 //      { succuess: false, info: "error message", version: "v1" }
-export const FILE_LIST_SERVICE = (userid) => `${BACKEND}/uploads?userid=${userid}`
+export const FILE_LIST_SERVICE = (userid) => encodeURI(`${BACKEND}/uploads?userid=${userid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // create a new project
@@ -111,7 +114,8 @@ export const FILE_LIST_SERVICE = (userid) => `${BACKEND}/uploads?userid=${userid
 //      }
 // response: 400 Bad Request => if the userid does match the one that is logged in
 //      { succuess: false, info: "error message", version: "v1" }
-export const TAB_CREATE_PROJECTS_SERVICE = (userid) => `${TABULAR}/projects?userid=${userid}`
+export const TAB_CREATE_PROJECTS_SERVICE = (userid) =>
+  encodeURI(`${TABULAR}/projects?userid=${userid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // change to a different project
@@ -134,7 +138,7 @@ export const TAB_CREATE_PROJECTS_SERVICE = (userid) => `${TABULAR}/projects?user
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_SET_PROJECT_SERVICE = (userid, projectid) =>
-  `${TABULAR}/projects/current?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/projects/current?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // get all the projects for a particlar user
@@ -148,7 +152,8 @@ export const TAB_SET_PROJECT_SERVICE = (userid, projectid) =>
 //      }
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
-export const TAB_PROJECTS_LIST_SERVICE = (userid) => `${TABULAR}/projects?userid=${userid}`
+export const TAB_PROJECTS_LIST_SERVICE = (userid) =>
+  encodeURI(`${TABULAR}/projects?userid=${userid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // get the data for the current pipeline stage
@@ -168,7 +173,7 @@ export const TAB_PROJECTS_LIST_SERVICE = (userid) => `${TABULAR}/projects?userid
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_PIPE_GET_SERVICE = (userid, projectid) =>
-  `${TABULAR}/pipe/current?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/pipe/current?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // post data for the next pipeline stage
@@ -194,7 +199,7 @@ export const TAB_PIPE_GET_SERVICE = (userid, projectid) =>
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_PIPE_POST_SERVICE = (userid, projectid) =>
-  `${TABULAR}/pipe/next?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/pipe/next?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // revert to a previous pipeline stage
@@ -221,7 +226,7 @@ export const TAB_PIPE_POST_SERVICE = (userid, projectid) =>
 //              or any other type of malformed request
 //          can only revert to a GET stage
 export const TAB_REVERT_STAGE_SERVICE = (userid, projectid) =>
-  `${TABULAR}/pipe/revert?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/pipe/revert?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // unfreeze the pipeline after to retry after pipeline error
@@ -247,7 +252,7 @@ export const TAB_REVERT_STAGE_SERVICE = (userid, projectid) =>
 //          ex. pipe was never frozen to begin with
 //              or any other type of malformed request
 export const TAB_UNFREEZE_PIPE_SERVICE = (userid, projectid) =>
-  `${TABULAR}/pipe/unfreeze?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/pipe/unfreeze?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // submit model build jobs for processing when at stage finalconfig:GET
@@ -268,7 +273,7 @@ export const TAB_UNFREEZE_PIPE_SERVICE = (userid, projectid) =>
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_MODEL_BUILD_SERVICE = (userid, projectid) =>
-  `${TABULAR}/models/build?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/models/build?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // submit model build jobs for processing when at stage finalconfig:GET
@@ -285,7 +290,7 @@ export const TAB_MODEL_BUILD_SERVICE = (userid, projectid) =>
 // response: 500 Server Error
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_MODEL_CANCEL_SERVICE = (userid, projectid) =>
-  `${TABULAR}/models/cancel?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/models/cancel?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // list all the models for a particlar project
@@ -303,7 +308,7 @@ export const TAB_MODEL_CANCEL_SERVICE = (userid, projectid) =>
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_ALL_MODELS_SERVICE = (userid, projectid) =>
-  `${TABULAR}/models?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/models?userid=${userid}&projectid=${projectid}`)
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 // list all the models for a particlar project
@@ -322,14 +327,14 @@ export const TAB_ALL_MODELS_SERVICE = (userid, projectid) =>
 // response: 400 Bad Request
 //      { succuess: false, info: "error message", version: "v1" }
 export const TAB_MODELS_SERVICE = (userid, projectid) =>
-  `${TABULAR}/models?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${TABULAR}/models?userid=${userid}&projectid=${projectid}`)
 
 // GET request
 export const GET_SSE_TOKEN_SERVICE = (userid, projectid) =>
-  `${BACKEND}/sse/token?userid=${userid}&projectid=${projectid}`
+  encodeURI(`${BACKEND}/sse/token?userid=${userid}&projectid=${projectid}`)
 
 export const SSE_UPDATE_SERVICE = (userid, projectid, token) =>
-  `${BACKEND}/sse/events?userid=${userid}&projectid=${projectid}&token=${token}`
+  encodeURI(`${BACKEND}/sse/events?userid=${userid}&projectid=${projectid}&token=${token}`)
 
 export const SSE_MODELS_UPDATE_SERVICE = (userid, projectid, token) =>
-  `${BACKEND}/sse/events/models?userid=${userid}&projectid=${projectid}&token=${token}`
+  encodeURI(`${BACKEND}/sse/events/models?userid=${userid}&projectid=${projectid}&token=${token}`)

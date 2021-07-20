@@ -37,24 +37,16 @@ if (dev) {
 
 app.use(logger)
 
-app
-  .use((req, res, next) => {
-    req.data = ''
-    res.locals = {}
-    next()
+app.use(
+  compression({ threshold: 0 }),
+  sirv('static', { dev }),
+  sapper.middleware({
+    session: (_req, _res) => ({
+      // session data goes here
+      // title: `${req._data} - ${res.locals}`,
+    }),
   })
-  .use(
-    compression({ threshold: 0 }),
-    sirv('static', { dev }),
-    sapper.middleware({
-      session: (req, res) => ({
-        // session data goes here
-        // title: `${req._data} - ${res.locals}`,
-        req: Object.keys(req),
-        res: Object.keys(res),
-      }),
-    })
-  )
+)
 
 app.on('error', (err) => {
   console.error(`error:  ${err}`)

@@ -8,7 +8,6 @@ import {
   LOGIN_SERVICE,
   LOGOUT_SERVICE,
   OAUTH2_LOGIN_SERVICE,
-  OAUTH2_AUTH_CALLBACK_SERVICE,
 } from '../../api/endpoints'
 
 function signup_store() {
