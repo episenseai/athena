@@ -1,5 +1,5 @@
 <script>
-  import { v4 as uuidv4 } from 'uuid'
+  import { v4 as uuidv4 } from '@lukeed/uuid'
   import { models } from './store'
   export let id
 
@@ -67,6 +67,7 @@
       responsive: true,
     })
   }
+
 </script>
 
 <table>
@@ -108,4 +109,5 @@
     width: 750px;
     margin: auto;
   }
+
 </style>

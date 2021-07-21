@@ -17,8 +17,8 @@
     "lint:fix": "eslint --ignore-path .eslintignore --fix './**/*.{js,svelte}'"
   },
   "dependencies": {
-    "localforage": "^1.9.0",
-    "uuid": "^8.3.2"
+    "@lukeed/uuid": "^2.0.0",
+    "localforage": "^1.9.0"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "^1.0.0-next.35",

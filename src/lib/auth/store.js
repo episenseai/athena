@@ -2,6 +2,7 @@ import { snack } from '$lib/base/snack'
 import { OAUTH2_LOGIN_SERVICE, OAUTH2_AUTH_CALLBACK_SERVICE } from '../../api/endpoints'
 import localForage from 'localforage'
 import { writable } from 'svelte/store'
+import { v4 as uuidv4 } from '@lukeed/uuid'
 
 function login_store() {
   const USTATE_KEY = 'ustatekey'
@@ -95,32 +96,24 @@ function login_store() {
     oauth_login: async (provider) => {
       // reset previous login token
       await reset_auth()
-      // call the login endpoint
-      if (window.crypto.getRandomValues) {
-        const byte_array = new Uint8Array(16)
-        window.crypto.getRandomValues(byte_array)
+      // generate non-cryptographically secure uuidv4
+      const ustate = uuidv4()
 
-        const ustate = Array.from(byte_array, (byte) => {
-          return ('0' + (byte & 0xff).toString(16)).slice(-2)
-        }).join('')
-        console.log('Login not supported: ustate')
+      const expires = new Date()
+      expires.setMinutes(expires.getMinutes() + 5)
 
-        const expires = new Date()
-        expires.setMinutes(expires.getMinutes() + 5)
-        const ustatekey = {
-          ustate,
-          redirect: window.location.href,
-          expires,
-        }
-        const written = await write_ustatekey(ustatekey)
-        if (!written || ustate !== written.ustate) {
-          return false
-        }
-        window.location.href = OAUTH2_LOGIN_SERVICE(provider, ustate)
-        return true
+      const ustatekey = {
+        ustate,
+        redirect: window.location.href,
+        expires,
       }
-      console.log('Login not supported')
-      return false
+
+      const written = await write_ustatekey(ustatekey)
+      if (!written || ustate !== written.ustate) {
+        return false
+      }
+      window.location.href = OAUTH2_LOGIN_SERVICE(provider, ustate)
+      return true
     },
 
     oauth_callback: async (code, state, scope_query) => {

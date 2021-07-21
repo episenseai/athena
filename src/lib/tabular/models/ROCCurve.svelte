@@ -1,6 +1,6 @@
 <script>
   import { models } from './store'
-  import { v4 as uuidv4 } from 'uuid'
+  import { v4 as uuidv4 } from '@lukeed/uuid'
   export let id
 
   $: model = $models.find((el) => el.id === id)
@@ -57,6 +57,7 @@
       responsive: true,
     })
   }
+
 </script>
 
 <div class="plots">
@@ -68,4 +69,5 @@
     width: 850px;
     margin: 30px auto 0;
   }
+
 </style>
