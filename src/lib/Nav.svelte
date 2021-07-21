@@ -199,6 +199,9 @@
     padding: 4px 10px;
     border: 1px solid rgba(97, 125, 144, 0.6);
   }
+  button:hover {
+    border: 1px solid rgba(var(--lobster-rgb), 1);
+  }
   .username {
     font-weight: 500;
   }

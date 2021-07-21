@@ -233,7 +233,7 @@
   }
   main button:first-child {
     border-radius: 3px 0 0 3px;
-    border-left: 1px solid rgba(97, 125, 144, 0.5);
+    border-left: 1px solid var(--pink);
   }
   main button:last-child {
     border-radius: 0 3px 3px 0;
@@ -257,8 +257,7 @@
   }
   .cv span,
   .holdout span,
-  .switch + span,
-  .metric + span {
+  .switch + span {
     font-family: Inter;
     margin-left: 20px;
   }

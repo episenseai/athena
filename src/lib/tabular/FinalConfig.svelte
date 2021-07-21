@@ -13,12 +13,15 @@
   async function handleBuild() {
     await PROJECT.model_build()
   }
+
 </script>
 
-{#if $PROJECT && $PROJECT.current_stage === 'finalconfig:GET' && $GET_DATA.stage === 'finalconfig:GET'}
+{#if $PROJECT &&
+  $PROJECT.current_stage === 'finalconfig:GET' &&
+  $GET_DATA.stage === 'finalconfig:GET'}
   <div class="container">
     <h3>
-      All the pipeline stages for the project
+      All the pipeline stages for
       <span>{$PROJECT.name}</span>
       successfully completed and merged.
       <span class="emoji">✔</span>
@@ -61,7 +64,6 @@
   button {
     margin-top: 10px;
     width: 360px;
-    border-color: var(--pink);
     color: var(--text-dark);
   }
   span {
@@ -70,7 +72,7 @@
   h3 {
     margin-bottom: 30px;
     padding-bottom: 5px;
-    border-bottom: 2px solid var(--text-lighter);
+    border-bottom: 2px solid var(--light-border-color);
   }
   h3 span {
     color: var(--pink);
@@ -83,4 +85,5 @@
     font-size: 14px;
     color: var(--green);
   }
+
 </style>
