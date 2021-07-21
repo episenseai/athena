@@ -214,5 +214,8 @@
   input:focus {
     border-color: #ffa27b;
   }
+  button:hover {
+    border-color: var(--blue);
+  }
 
 </style>

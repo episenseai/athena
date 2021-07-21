@@ -13,7 +13,7 @@
     <div class="tabular">
       <h2>tabular</h2>
       <p>Setup pipeline and build models to draw insights from tabular data</p>
-      <a href="tabular" class="btn"> Go <span class="logo-global">→</span> </a>
+      <a href="tabular" class="btn"> Go <span>&rarr;</span> </a>
     </div>
   </div>
 </div>
@@ -27,14 +27,15 @@
   .welcome {
     padding-top: 50px;
     padding-bottom: 10px;
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto 20px;
-    border-bottom: var(--dark-border);
+    border-bottom: var(--light-border);
+    font-size: 20px;
   }
   .tabular {
     text-align: left;
     margin: 0px auto 10px;
-    max-width: 500px;
+    max-width: 600px;
     border: var(--medium-border);
     padding: 1.5em 1.5em 0.75em;
     border-radius: 5px;
@@ -62,9 +63,10 @@
   }
   .btn {
     border-color: rgba(var(--pink-rgb), 1);
+    min-width: 100px;
   }
   .apps {
-    padding-top: 20px;
+    padding-top: 30px;
   }
 
 </style>
