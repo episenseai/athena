@@ -36,7 +36,6 @@
 </svelte:head>
 
 <!--
-  for debugging
 {#if false}
   <Details>
     <h4 slot="summary">PROJECT state</h4>
@@ -72,7 +71,6 @@
           )
           if (response) {
             await list_projects()
-            await snack('info', 'Continue with the newly created and selected project.')
             event.target.projectname.value = ''
             event.target.projectdesc.value = ''
             if (items.length > 0) {

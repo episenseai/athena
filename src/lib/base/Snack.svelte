@@ -66,7 +66,7 @@
     position: relative;
     width: 340px;
     padding: 0.5em 1.5em 0.5em 0.5em;
-    background: rgba(235, 235, 235, 0.6);
+    background: rgba(235, 235, 235, 0.65);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);

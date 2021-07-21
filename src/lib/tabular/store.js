@@ -108,12 +108,9 @@ function project_store() {
           reset_model_stores()
         }
         if (get(PROJECT).pipe_status === '0') {
-          await snack(
-            'info',
-            `Your are on the ${get(PROJECT).current_stage} stage of the pipeline for this project`,
-          )
+          await snack('info', `Your are on the ${get(PROJECT).current_stage} stage of the pipeline`)
         } else if (get(PROJECT).pipe_status === '1') {
-          await snack('info', `You are on MODELS stage for the project`)
+          await snack('info', `You are on MODELS view of the pipeline`)
         } else if (get(PROJECT).pipe_status === '-1') {
           await snack('warning', `A pipeline error has occured while processing.`)
         }

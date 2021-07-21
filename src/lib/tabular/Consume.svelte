@@ -125,9 +125,6 @@
       await get_uploads()
       getting_uploads = false
     }
-    if (items.length === 0) {
-      await snack('warning', "You haven't uploaded any file yet.")
-    }
   })
 
   $: if (files) readContent()
