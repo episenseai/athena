@@ -21,10 +21,8 @@
       )
       return
     }
-    // eslint-disable-next-line
+
     if (true || get(PROJECT).current_stage === 'transform:GET') {
-      //let item = items.find(({ value }) => value === selected)
-      // eslint-disable-next-line
       $POST_DATA = {
         stage: 'transform:POST',
         data: {
@@ -76,12 +74,12 @@
       }
     }
   })
+
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
-  <span class="logo-global">&#x21d2;&nbsp;</span>
-  Next stage
-  <span class="logo-global">&nbsp;&#x21d2;</span>
+  <span class="logo-global">&#9654;</span>
+  Build current stage
 </button>
 
 {#if $PROJECT && $PROJECT.current_stage === 'transform:GET' && $GET_DATA.stage === 'transform:GET'}
@@ -107,7 +105,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    margin-top: 24px;
+    margin-top: 28px;
   }
   .plots-container {
     min-height: 390px;
@@ -120,4 +118,5 @@
     width: max-content;
     min-width: 100%;
   }
+
 </style>

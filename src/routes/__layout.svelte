@@ -18,6 +18,7 @@
     if (!from_saved) await PROJECT.reset_proj()
     render_main = true
   })
+
 </script>
 
 {#if render_main}
@@ -68,7 +69,7 @@
     position: relative;
   }
   main.outer-layout {
-    padding: 3em 1em 0;
+    padding: 3em 0.5em 0;
   }
   :global(.side-pages) {
     width: 660px;
@@ -96,4 +97,5 @@
     color: rgba(var(--lobster-rgb), 1);
     border-color: rgba(var(--lobster-rgb), 1);
   }
+
 </style>

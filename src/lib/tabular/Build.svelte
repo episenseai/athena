@@ -56,12 +56,12 @@
       }
     }
   })
+
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
-  <span class="logo-global">&#x21d2;&nbsp;</span>
-  Next stage
-  <span class="logo-global">&nbsp;&#x21d2;</span>
+  <span class="logo-global">&#9654;</span>
+  Build current stage
 </button>
 
 {#if $PROJECT && $PROJECT.current_stage === 'build:GET' && $GET_DATA.stage === 'build:GET'}
@@ -167,11 +167,6 @@
             {/each}
           </select>
         </label>
-        <span
-          >Selected Metric: {$GET_DATA.data.optimizeUsing
-            ? $GET_DATA.data.optimizeUsing
-            : 'None'}</span
-        >
       </div>
       <h3>Data split Visualization</h3>
       <CVLayout {...$GET_DATA.data.cv} />
@@ -274,4 +269,5 @@
   .tvh p {
     font-family: Inter;
   }
+
 </style>

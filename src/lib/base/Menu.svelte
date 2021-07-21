@@ -1,4 +1,5 @@
 <script>
+  import { snack } from '$lib/base/snack'
   import { fly } from 'svelte/transition'
   import { quadOut, quadIn } from 'svelte/easing'
   export let items = []
@@ -7,12 +8,12 @@
   export let width
   export let color // maroon, violet, green, pink, blue, teal, purple
   $: selectedName = selected ? items[items.findIndex((el) => el.value === selected)].name : ''
+
 </script>
 
 <svelte:window on:click={() => (open = false)} />
 <div
   class="menu"
-  on:click|stopPropagation
   style="width: {width}px;"
   class:maroon={color === 'maroon'}
   class:violet={color === 'violet'}
@@ -21,6 +22,9 @@
   class:purple={color === 'purple'}
   class:blue={color === 'blue'}
   class:teal={color === 'teal'}
+  on:click|stopPropagation={async () => {
+    if (items.length === 0) await snack('warning', 'The list is empty...')
+  }}
 >
   {#if color === 'maroon'}
     <button on:click={() => (open = !open)} btn-maroon>
@@ -125,10 +129,10 @@
   button {
     display: block;
     width: 100%;
-    border-width: 1px;
     text-align: left;
     padding: 4px 20px 5px 12px;
     height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.3);
   }
   span.txt::after {
     content: '';
@@ -270,4 +274,5 @@
   .purple .name {
     color: rgba(var(--btn-purple-rgb), 0.9);
   }
+
 </style>

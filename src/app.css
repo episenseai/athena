@@ -114,11 +114,13 @@
 
   --gentler-border-color: #f0f0f0;
   --gentle-border-color: #eaecef;
-  --light-border-color: #e5e5e5;
-  --dark-border-color: rgba(0, 0, 0, 0.26);
+  --light-border-color: #d5d5d5;
+  --medium-border-color: rgba(0, 0, 0, 0.3);
+  --dark-border-color: rgba(0, 0, 0, 0.4);
   --gentler-border: 1px solid var(--gentler-border-color);
   --gentle-border: 1px solid var(--gentle-border-color);
   --light-border: 1px solid var(--light-border-color);
+  --medium-border: 1px solid var(--medium-border-color);
   --dark-border: 1px solid var(--dark-border-color);
 
   --chip-rgb: 33, 135, 153;
@@ -268,8 +270,8 @@ button,
 
 button:hover,
 .btn:hover {
-  background-color: #f6f9fc !important;
-  border-color: var(--blue) !important;
+  background-color: #f0f0f0;
+  border-color: var(--blue);
 }
 
 /* use btn-disabled class to style a disabled button*/

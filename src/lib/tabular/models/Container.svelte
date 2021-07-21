@@ -95,6 +95,7 @@
         return val
       })
   })
+
 </script>
 
 <div class="tabs">
@@ -123,18 +124,18 @@
     margin-bottom: 4px;
   }
   span {
-    padding: 3px 22px;
+    padding: 5px 22px;
     letter-spacing: 0.04em;
     font-size: 12px;
     font-family: Inter;
-    color: var(--text-light);
+    color: var(--text-medium);
     cursor: pointer;
     border: var(--dark-border);
     border-right: none;
     text-transform: lowercase;
     font-weight: 500;
     background-color: #fff;
-    border-color: rgba(var(--lobster-rgb), 0.5);
+    border-color: var(--dark-border-color);
   }
   span:first-child {
     border-radius: 3px 0 0 3px;
@@ -142,24 +143,14 @@
   span:last-child {
     border-right: var(--dark-border);
     border-radius: 0 3px 3px 0;
-    border-color: rgba(var(--lobster-rgb), 0.5);
+    border-color: var(--dark-border-color);
   }
   span:only-child {
     border-radius: 3px;
   }
+  span:hover,
   span.active-tab {
-    background-color: rgba(var(--lobster-rgb), 0.2);
+    background-color: #eeeeee;
   }
-  span:hover {
-    background-color: rgba(var(--lobster-rgb), 0.12);
-  }
-  span:hover {
-    background-color: rgba(var(--lobster-rgb), 0.12);
-  }
-  span:hover.notdone {
-    background-color: #fff;
-  }
-  span:hover.active-tab {
-    background-color: rgba(var(--lobster-rgb), 0.2);
-  }
+
 </style>

@@ -9,6 +9,7 @@
     // initalize the auth store from the local storage
     await PROJECT.init_proj()
   })
+
 </script>
 
 <Nav {segment} level="tabular" />
@@ -24,9 +25,10 @@
     min-height: calc(100% - 40px);
     position: relative;
     background-color: white;
-    padding: 0.5em 1em 0;
+    padding: 0.5em 0 0;
     margin: 0 auto;
     box-sizing: border-box;
-    padding-top: 50px;
+    padding-top: 10px;
   }
+
 </style>

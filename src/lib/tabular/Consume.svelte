@@ -19,7 +19,7 @@
         'warning',
         `Currently processing data for the ${get(PROJECT)
           .current_stage.split(':')[0]
-          .toUpperCase()} stage. Can not move to the next stage.`,
+          .toUpperCase()} stage. Can not move to the prepare stage.`,
       )
       return
     }
@@ -57,7 +57,7 @@
 
   /* let buffersize = 1048576 * 5 // 1 MB * 5 = 5 */
   let start = 0
-  let end = 1024 * 50 // 50KB
+  let end = 1024 * 30 // 50KB
 
   let content = ''
 
@@ -136,22 +136,22 @@
   let open = false
   let selected
   let items = []
+
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
-  <span class="logo-global">&#x21d2;&nbsp;</span>
-  Next stage
-  <span class="logo-global">&nbsp;&#x21d2;</span>
+  <span class="logo-global">&#9654;</span>
+  Build current stage
 </button>
 {#if $PROJECT && $PROJECT.current_stage === 'consume:GET' && $GET_DATA.stage === 'consume:GET'}
   <div class="import-stage">
     <div>
-      <h4>Zip compress your CSV file for upload</h4>
+      <h4>Compressed CSV data file</h4>
       <div class="btns">
         <label class="btn">
-          Choose
+          Select
           {uploadfiles ? 'another' : 'a'}
-          file to upload &nbsp;&nbsp;(.zip)
+          file for upload (.zip)
           <input
             {disabled}
             type="file"
@@ -165,7 +165,7 @@
       </div>
       {#if uploadfiles && uploadfiles.length > 0}
         <div class="file-info">
-          <h3>Choosen file info</h3>
+          <h3>File info:</h3>
           <p>FileName: {uploadfiles[0].name}</p>
           <p>Size: {formatBytes(uploadfiles[0].size)}</p>
           <p>LastModified: {new Date(uploadfiles[0].lastModified)}</p>
@@ -180,16 +180,16 @@
 
       <div class="btns">
         <label class="btn">
-          Choose
+          Select
           {file ? 'another' : 'a'}
-          file to preview &nbsp;&nbsp;(.csv)
+          file for preview (.csv)
           <input {disabled} type="file" bind:files accept="text/csv, .csv" />
         </label>
         {#if file}<span>✔</span>{/if}
       </div>
       {#if file}
         <div class="file-info">
-          <h3>Preview file info</h3>
+          <h3>File info:</h3>
           <p>FileName: {file.name}</p>
           <p>Size: {formatBytes(file.size)}</p>
           <p>LastModified: {new Date(file.lastModified)}</p>
@@ -212,14 +212,9 @@
       <div class="filemenu">
         <Menu bind:open bind:selected {items} width="350" color="maroon" />
       </div>
-      {#if !getting_uploads && items.length === 0}
-        <p class="note empty">
-          !! You have not uploaded any file yet. Uploaded a file to select from the list.
-        </p>
-      {/if}
 
       <p class="note">
-        Note: try refreshing the page if the uploaded file does not appear in the list.
+        INFO: Try reloding the page if the uploaded file does not appear in the list.
       </p>
     </div>
   </div>
@@ -243,7 +238,7 @@
     margin-bottom: 0px;
   }
   .import-stage {
-    margin: 38px auto 0;
+    margin: 60px auto 0;
     width: 820px;
     display: flex;
     justify-content: space-around;
@@ -261,7 +256,7 @@
   .btn {
     display: inline-grid;
     width: 350px;
-    background-color: rgba(var(--lobster-rgb), 0.1);
+    border: var(--medium-border);
   }
   .preview-error {
     margin-bottom: 10px;
@@ -281,7 +276,8 @@
   }
   .btn:hover,
   .upload:hover {
-    background-color: var(--light2);
+    background-color: #fafafa;
+    border-color: var(--blue);
   }
   .btns span {
     color: var(--teal);
@@ -293,13 +289,11 @@
     border-top: 1px solid rgba(0, 0, 0, 0.2);
   }
   .filemenu {
-    margin-top: 30px;
+    margin-top: 10px;
   }
   .note {
     margin-top: 20px;
     color: var(--text-lighter);
   }
-  .empty {
-    color: var(--reddish);
-  }
+
 </style>

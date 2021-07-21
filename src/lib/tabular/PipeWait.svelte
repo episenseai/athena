@@ -8,28 +8,25 @@
     await PROJECT.sse_update()
     return async () => PROJECT.sse_close()
   })
+
 </script>
 
 <div class="container">
   {#if $PROJECT.pipe_status === '0'}
     <h3>
       <span class="emoji">🚚</span>
-      ... Currently processing data for the
+      Building
       <span>{$PROJECT.current_stage.split(':')[0].toUpperCase()}</span>
       stage of the
-      <span>{$PROJECT.name}</span>
-      project.
+      <span>({$PROJECT.name})</span>
+      pipeline
     </h3>
     <ProgressL />
-    <p>The page will automatically refresh when the job gets completed.</p>
+    <p>(If it is taking longer than usual try reloading the page)</p>
 
-    <h4 class="side-note">
-      While the job is in progress you can switch to another project or start a new one.
-      <br />
-      <span>🍺</span>
-      or
-      <span>☕</span>
-      ...
+    <h4 class="note">
+      INFO: While the pipeline stage is building you can switch to another project or start a new
+      one.
     </h4>
   {:else if $PROJECT.pipe_status === '-1'}
     <Unfreeze />
@@ -47,20 +44,24 @@
     padding: 0 5px;
   }
   .container h3 {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
   p {
-    color: var(--text-lighter);
-    margin-bottom: 20px;
+    color: var(--lobster);
+    margin: 10px 0;
   }
-  h4.side-note {
+  h4.note {
     margin-top: 60px;
-    color: var(--text-medium);
+    color: var(--text-lighter);
+    font-size: 15px;
+    text-align: center;
+    max-width: 450px;
+    display: inline-block;
   }
-  .side-note span,
   .emoji {
     font-size: 30px;
     top: 4px;
     position: relative;
   }
+
 </style>

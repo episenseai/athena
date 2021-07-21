@@ -1,6 +1,7 @@
 <script>
   import { snacklist } from '$lib/base/snack'
   import { fly } from 'svelte/transition'
+
 </script>
 
 <div class="snack-container">
@@ -58,15 +59,14 @@
     background: transparent;
     position: fixed;
     top: 48px;
-    right: 10px;
+    right: 4px;
     z-index: 2000;
   }
   .snack-box {
     position: relative;
-    background: var(--light1);
-    width: 320px;
+    width: 340px;
     padding: 0.5em 1.5em 0.5em 0.5em;
-    background: var(--light2);
+    background: rgba(235, 235, 235, 0.6);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
@@ -78,26 +78,26 @@
     width: 0.94em;
     height: 0.94em;
     display: inline;
-    font-size: 1.4em;
+    font-size: 1.3em;
     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
     vertical-align: text-top;
   }
   .msg {
     color: rgba(0, 0, 0, 1);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
   }
   button {
-    border: 1px solid #ababab;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     padding: 0 2px;
     position: absolute;
     left: -10px;
     top: -10px;
     margin: 0;
-    height: 20px;
-    background: #fff;
-    border-radius: 4px;
+    height: 22px;
+    background: #ffffff;
+    border-radius: 50%;
   }
   button:hover {
     border-color: rgba(0, 0, 0, 0.4);
@@ -110,12 +110,10 @@
   }
 
   .snack-box.info {
-    background: rgb(198, 213, 243, 0.7);
-    border-color: rgba(49, 114, 221, 0.2);
+    border-color: rgba(49, 114, 221, 0.4);
   }
   .snack-box.warning {
-    background: rgb(231, 222, 223, 0.7);
-    border-color: rgba(114, 47, 55, 0.2);
+    border-color: rgba(114, 47, 55, 0.4);
   }
   .info .icon {
     fill: rgb(49, 114, 231);
@@ -124,28 +122,27 @@
     fill: rgb(114, 47, 55);
   }
   .info button:hover {
-    border: 1px solid rgba(49, 114, 221, 0.8);
+    border: 1px solid rgba(49, 114, 221, 1);
   }
 
   .snack-box.success {
-    background: rgb(198, 229, 198, 0.7);
-    border-color: rgba(1, 143, 105, 0.2);
+    border-color: rgba(1, 143, 105, 0.4);
   }
   .success .icon {
     fill: rgb(1, 143, 105);
   }
   .success button:hover {
-    border: 1px solid rgba(1, 143, 105, 0.7);
+    border: 1px solid rgba(1, 143, 105, 1);
   }
 
   .snack-box.error {
-    background: rgb(231, 200, 199, 0.7);
-    border-color: rgba(188, 64, 64, 0.2);
+    border-color: rgba(188, 64, 64, 0.4);
   }
   .error .icon {
     fill: rgb(188, 64, 64);
   }
   .error button:hover {
-    border: 1px solid rgba(188, 64, 64, 0.9);
+    border: 1px solid rgba(188, 64, 64, 1);
   }
+
 </style>

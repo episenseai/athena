@@ -65,12 +65,12 @@
 
     return `${x.length === 0 ? '' : x.slice(0, 2).join(' , ').slice(0, 40)} ...`
   }
+
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
-  <span class="logo-global">&#x21d2;&nbsp;</span>
-  Next stage
-  <span class="logo-global">&nbsp;&#x21d2;</span>
+  <span class="logo-global">&#9654;</span>
+  Build current stage
 </button>
 
 {#if $PROJECT && $PROJECT.current_stage === 'prepare:GET' && $GET_DATA.stage === 'prepare:GET'}
@@ -212,6 +212,7 @@
     margin-bottom: 18px;
   }
   thead {
-    background-color: rgb(255, 248, 220);
+    background-color: #eeeeee;
   }
+
 </style>

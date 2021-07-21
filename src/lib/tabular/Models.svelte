@@ -137,6 +137,7 @@
     console.log(random_hyperparams)
     return random_hyperparams
   }
+
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -246,8 +247,9 @@
     grid-auto-rows: minmax(36px, auto);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     margin: 0 0;
-    padding-bottom: 0;
-    background: rgb(255, 248, 220);
+    padding: 5px 0;
+    background: #eeeeee;
+    border-radius: 8px 8px 0 0;
   }
   section {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -260,17 +262,17 @@
     color: var(--lobster);
   }
   section.active {
-    background-color: #fffff0;
+    background-color: rgb(250, 248, 220);
   }
   section.active .container,
   section:hover.active .container {
-    background-color: #fffff0;
+    background-color: #ffffff;
   }
   section.active h3.name {
     color: rgba(var(--reddish-rgb), 0.96);
   }
   .info {
-    grid-column: 1 / 8;
+    grid-column: 1 / 7;
     padding-left: 10px;
     cursor: pointer;
   }
@@ -278,15 +280,15 @@
     cursor: default;
   }
   .request {
-    grid-column: 8/ 9;
+    grid-column: 7/ 8;
     margin: auto;
   }
   .status {
-    grid-column: 9/ 10;
+    grid-column: 8/ 9;
     margin: auto;
   }
   .val {
-    grid-column: 10 / 11;
+    grid-column: 9 / 11;
     margin: auto;
   }
   .empty {
@@ -406,4 +408,5 @@
     position: relative;
     color: rgba(var(--blue-rgb), 0.95);
   }
+
 </style>
