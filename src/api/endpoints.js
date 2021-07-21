@@ -1,13 +1,15 @@
+import { variables } from '$lib/env'
+
 // BACKEND SERVICE
 // `node replace` plugin replaces the value of `process.env.BACKEND_SERVER` with the one
 // provided in `rollup.config.js` file.
-const BACKEND = 'process.env.BACKEND_SERVER'
+const BACKEND = variables.BACKEND_SERVER
 
 //  TABULAR SERVICE
 const TABULAR = `${BACKEND}/tab/v1`
 
 // Authentication
-const OAUTH2_BACKEND = 'process.env.OAUTH2_BACKEND'
+const OAUTH2_BACKEND = variables.OAUTH2_BACKEND
 
 export const OAUTH2_LOGIN_SERVICE = (provider, ustate) =>
   encodeURI(`${OAUTH2_BACKEND}/login?p=${provider}&ustate=${ustate}`)

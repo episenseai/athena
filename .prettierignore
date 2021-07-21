@@ -1,5 +1,4 @@
-node_modules/
-__sapper__/
-src/node_modules/@sapper
-static
-scripts/setupTypeScript.js
+.svelte-kit/**
+static/**
+build/**
+node_modules/**

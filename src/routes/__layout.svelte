@@ -1,4 +1,5 @@
 <script>
+  import '../app.css'
   import Snack from '../components/base/Snack.svelte'
   import Nav from '../components/Nav.svelte'
   import OauthLogin from '../components/auth/OauthLogin.svelte'
@@ -6,8 +7,7 @@
   import { LOGIN } from '../components/auth/store.js'
   import { PROJECT } from '../components/tp/store'
   import { onMount } from 'svelte'
-  import { stores } from '@sapper/app'
-  const { page } = stores()
+  import { page } from '$app/stores'
 
   export let segment
   let render_main = false

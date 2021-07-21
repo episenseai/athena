@@ -4,10 +4,8 @@
   import { snack } from '../../components/base/store/snack'
   import { onMount } from 'svelte'
   import { get } from 'svelte/store'
-  import { stores } from '@sapper/app'
   import { LOGIN } from '../../components/auth/store'
-
-  const { page } = stores()
+  import { page } from '$app/stores'
 
   let done = false
   let success = false
@@ -21,14 +19,14 @@
     window.location.href = window.location.origin
   }
   onMount(async () => {
-    let login = get(LOGIN)
-    if (login && login.success) redirect()
+    if ($LOGIN && $LOGIN.success) redirect()
 
-    let code = get(page).query.code
-    let state = get(page).query.state
-    let scope_query = get(page).query.scope
+    let code = $page.query.get('code')
+    let state = $page.query.get('state')
+    let scope_query = $page.query.get('scope')
 
     success = await LOGIN.oauth_callback(code, state, scope_query)
+    // await new Promise(resolve => setTimeout(resolve, 30000))
     await LOGIN.reset_ustate()
 
     if (!success) {
@@ -41,7 +39,6 @@
   })
 
   $: if (seconds <= 0) redirect()
-
 </script>
 
 <div class="callback">
@@ -51,7 +48,8 @@
   {:else if !success}
     <h3 class="failed">
       ERROR: Authentication failed. Will redirect to home page in <span class="seconds"
-        >{seconds >= 0 ? seconds : 0}</span>
+        >{seconds >= 0 ? seconds : 0}</span
+      >
       seconds
       <span class="spinner"><Spinner color={'rgba(0,0,0,0.8)'} /></span>
     </h3>
@@ -91,5 +89,4 @@
     top: 8px;
     padding-left: 5px;
   }
-
 </style>
