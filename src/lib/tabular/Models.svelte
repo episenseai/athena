@@ -370,7 +370,7 @@
     margin: auto;
     top: -4px;
     position: relative;
-    color: rgba(var(--blue-rgb), 0.95);
+    color: var(--text-lighter);
   }
 
 </style>

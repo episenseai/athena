@@ -1,4 +1,6 @@
 <script>
+  import { snack } from '$lib/base/snack'
+
   let files
   let file
   let div
@@ -28,11 +30,21 @@
       Select
       {file ? 'another' : 'a'}
       File
-      <input type="file" bind:files accept="text/csv, .csv" />
+      <input
+        type="file"
+        bind:files
+        accept="text/csv, .csv"
+        on:click|preventDefault|stopPropagation={async () =>
+          await snack('info', 'This feature is disabled')}
+      />
     </label>
     {#if file}<span>✔</span>{/if}
   </div>
-  {#if file}<button class="upload">↑ Upload {file.name}</button>{/if}
+  {#if file}<button
+      class="upload"
+      on:click|preventDefault|stopPropagation={async () =>
+        await snack('info', 'This feature is disabled')}>↑ Upload {file.name}</button
+    >{/if}
 </main>
 
 <style>
