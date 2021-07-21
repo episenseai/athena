@@ -56,7 +56,8 @@
         <tr>
           {#if i === 0}
             <th rowspan={model.classes.length} class="pClass headers"
-              ><span>MODEL PREDICTION</span></th>
+              ><span>MODEL PREDICTION</span></th
+            >
           {/if}
           <th class="headers">{model.classes[i]}</th>
           {#each row as col, j (j)}

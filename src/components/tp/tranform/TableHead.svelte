@@ -51,7 +51,8 @@
     {#each headers as { name, column, ascend, info }, i (column)}
       <th>
         <span class="help" use:tooltip={{ sample: [info], heading: name, translateX: '0px' }}
-          >{name}</span>
+          >{name}</span
+        >
         <span
           class="sort"
           class:currentSort={currentSort === column}
@@ -60,7 +61,8 @@
             handleTransformSort(column, ascend)
             headers[i].ascend = !ascend
           }}
-          title={ascend ? 'Revesrse sort column: ' + name : 'Sort column: ' + name}>
+          title={ascend ? 'Revesrse sort column: ' + name : 'Sort column: ' + name}
+        >
           &nbsp;{ascend ? '▲' : '▼'}
         </span>
       </th>

@@ -8,7 +8,8 @@
     },
     column: {
       head: `${hPrefix} COLUMN NAME`,
-      desc: 'Common name to describe the data in the column. It comes from the Header in the CSV file.',
+      desc:
+        'Common name to describe the data in the column. It comes from the Header in the CSV file.',
     },
     datatype: {
       head: `${hPrefix} DATA TYPE`,

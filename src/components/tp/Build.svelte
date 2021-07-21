@@ -84,7 +84,8 @@
           {#each $GET_DATA.data.samplingMethods as method}
             <button
               on:click|stopPropagation={() => ($GET_DATA.data.sampleUsing = method)}
-              class:sample={$GET_DATA.data.sampleUsing === method}>
+              class:sample={$GET_DATA.data.sampleUsing === method}
+            >
               {method}
             </button>
           {/each}
@@ -97,7 +98,8 @@
           {#each $GET_DATA.data.splitMethods as method}
             <button
               on:click|stopPropagation={() => ($GET_DATA.data.splitUsing = method)}
-              class:split={$GET_DATA.data.splitUsing === method}>
+              class:split={$GET_DATA.data.splitUsing === method}
+            >
               {method}
             </button>
           {/each}
@@ -168,7 +170,8 @@
         <span
           >Selected Metric: {$GET_DATA.data.optimizeUsing
             ? $GET_DATA.data.optimizeUsing
-            : 'None'}</span>
+            : 'None'}</span
+        >
       </div>
       <h3>Data split Visualization</h3>
       <CVLayout {...$GET_DATA.data.cv} />

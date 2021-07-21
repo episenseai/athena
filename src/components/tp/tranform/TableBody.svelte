@@ -34,7 +34,8 @@
     <tr
       on:click|stopPropagation={() => plotme(id)}
       title={'Click to view Data Plots of - ' + name}
-      class:plotlyTarget={id === plotID}>
+      class:plotlyTarget={id === plotID}
+    >
       <td>
         {id}
         {#if id === $GET_DATA.data.target}<span class="tag-target">TARGET</span>{/if}
@@ -54,7 +55,8 @@
           min="0.0"
           max="1.0"
           step="0.1"
-          on:input={verifyWeight} />
+          on:input={verifyWeight}
+        />
         <!-->span class="weight">{ weight }</!-->
       </td>
       <td>{type === 'Category' ? stats.unique : ''}</td>

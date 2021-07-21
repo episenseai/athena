@@ -18,7 +18,8 @@
     on:drop|stopPropagation|preventDefault={(e) => {
       dragExit()
       if (e.dataTransfer.files[0].type.match('^text/csv')) files = e.dataTransfer.files
-    }}>
+    }}
+  >
     <p>Drag and Drop {file ? 'another' : 'a'} File</p>
   </div>
   <h4>or</h4>

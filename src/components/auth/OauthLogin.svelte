@@ -14,11 +14,13 @@
   <button
     {disabled}
     on:click|preventDefault|stopPropagation={() => handle_login('github')}
-    class="login">Login with Github</button>
+    class="login">Login with Github</button
+  >
   <button
     {disabled}
     on:click|preventDefault|stopPropagation={() => handle_login('google')}
-    class="login">Login with Google</button>
+    class="login">Login with Google</button
+  >
 </div>
 
 <style>

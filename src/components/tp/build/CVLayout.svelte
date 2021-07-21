@@ -55,7 +55,8 @@
             y={yCalc(i) + barHeight / 2}
             text-anchor="middle"
             dominant-baseline="middle"
-            fill={strokeColor}>
+            fill={strokeColor}
+          >
             ------
           </text>
         {/if}
@@ -67,25 +68,29 @@
             y={yCalc(i)}
             width={valWidth}
             height={barHeight}
-            fill={valColor} />
+            fill={valColor}
+          />
           <rect
             x={xOffset + offset + valWidth}
             y={yCalc(i)}
             width={trainValWidth - offset - valWidth <= 0 ? 0 : trainValWidth - offset - valWidth}
             height={barHeight}
-            fill={trainColor} />
+            fill={trainColor}
+          />
           <rect
             x={xOffset + trainValWidth}
             y={yCalc(i)}
             width={holdoutWidth}
             height={barHeight}
-            fill={holdoutColor} />
+            fill={holdoutColor}
+          />
           <text
             x={xOffset + barWidth + 6}
             y={yCalc(i) + barHeight / 2}
             width="24"
             stroke-width="0"
-            dominant-baseline="middle">
+            dominant-baseline="middle"
+          >
             {i + 1}
             <tspan y={yCalc(i) + barHeight / 2 - 8}>
               {i === 0 ? 'st' : i === 1 ? 'nd' : i === 2 ? 'rd' : 'th'}

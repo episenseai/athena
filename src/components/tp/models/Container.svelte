@@ -103,7 +103,8 @@
       class:active-tab={tab.name === $activeTabs[uid]}
       class:notdone={modelStatus !== 'DONE'}
       class="noselect"
-      on:click|stopPropagation={async () => await tabupdate(tab)}>
+      on:click|stopPropagation={async () => await tabupdate(tab)}
+    >
       {tab.name}
     </span>
   {/each}
@@ -112,7 +113,8 @@
   this={$activeTabs[uid]
     ? tabs.find((el) => el.name === $activeTabs[uid]).component
     : tabs[0].component}
-  {id} />
+  {id}
+/>
 
 <style>
   .tabs {

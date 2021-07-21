@@ -1,6 +1,3 @@
-import localForage from 'localforage'
-import { writable, get } from 'svelte/store'
-
 import {
   TAB_CREATE_PROJECTS_SERVICE,
   TAB_PROJECTS_LIST_SERVICE,
@@ -21,6 +18,8 @@ import modelsInfo from '../../routes/tabular/models/_mock/models.js'
 import { LOGIN } from '../auth/store'
 import { snack } from '../base/store/snack'
 import { models, reset_model_stores } from './models/store'
+import localForage from 'localforage'
+import { writable, get } from 'svelte/store'
 
 export const GET_DATA = writable({})
 // {

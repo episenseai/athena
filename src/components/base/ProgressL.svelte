@@ -15,7 +15,8 @@
     <div
       class="subline"
       class:inc={!$_progress}
-      style={$_progress ? `width: ${$_progress}%` : ''} />
+      style={$_progress ? `width: ${$_progress}%` : ''}
+    />
     <div class:subline={!$_progress} class:dec={!$_progress} />
   </div>
 </div>

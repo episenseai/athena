@@ -9,14 +9,16 @@
     class="summary"
     class:right={!expand}
     class:down={expand}
-    on:click={() => (expand = !expand)}>
+    on:click={() => (expand = !expand)}
+  >
     <slot name="summary">Summary</slot>
   </div>
   {#if expand}
     <div
       class="expand"
       in:fly={{ y: 10, duration: 200, easing: quadIn }}
-      out:fly={{ y: -10, duration: 150, easing: quadOut, delay: 50 }}>
+      out:fly={{ y: -10, duration: 150, easing: quadOut, delay: 50 }}
+    >
       <slot>
         <!-- optional fallback -->
       </slot>

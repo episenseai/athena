@@ -20,7 +20,8 @@
   class:pink={color === 'pink'}
   class:purple={color === 'purple'}
   class:blue={color === 'blue'}
-  class:teal={color === 'teal'}>
+  class:teal={color === 'teal'}
+>
   {#if color === 'maroon'}
     <button on:click={() => (open = !open)} btn-maroon>
       <span class="txt">{selectedName ? selectedName : 'Select'}</span>
@@ -58,7 +59,8 @@
     <div
       class="items"
       in:fly={{ y: 10, duration: 200, easing: quadIn }}
-      out:fly={{ y: -10, duration: 100, easing: quadOut, delay: 50 }}>
+      out:fly={{ y: -10, duration: 100, easing: quadOut, delay: 50 }}
+    >
       {#each items as item (item.value)}
         <div
           class="item"
@@ -66,7 +68,8 @@
           on:click={() => {
             selected = item.value
             open = false
-          }}>
+          }}
+        >
           <div class="name">
             {@html item.name}
           </div>

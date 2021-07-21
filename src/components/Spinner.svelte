@@ -14,7 +14,8 @@
   width={size}
   style="animation-duration:{speed}ms;"
   class="svelte-spinner"
-  viewbox="0 0 32 32">
+  viewbox="0 0 32 32"
+>
   <circle
     role="presentation"
     cx="16"
@@ -24,7 +25,8 @@
     fill="none"
     stroke-width={thickness}
     stroke-dasharray="{dash},100"
-    stroke-linecap="round" />
+    stroke-linecap="round"
+  />
 </svg>
 
 <style>

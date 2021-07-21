@@ -76,14 +76,16 @@
         class:active-stage={stage.name === $PROJECT.current_stage.split(':')[0]}
         class:previous-stage={seq.indexOf($PROJECT.current_stage) >
           seq.indexOf(`${stage.name}:GET`)}
-        on:click|stopPropagation={handle_revert(stage)}>
+        on:click|stopPropagation={handle_revert(stage)}
+      >
         {stage.name}
       </span>
     {/each}
   </div>
   <svelte:component
     this={stages.find((el) => el.name === $PROJECT.current_stage.split(':')[0]).component}
-    on:postdata={handleMessage} />
+    on:postdata={handleMessage}
+  />
 {/if}
 
 <!-- 

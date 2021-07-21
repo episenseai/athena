@@ -84,7 +84,8 @@
             }
           }
           disabled = false
-        }}>
+        }}
+      >
         <label for="projectname">Project Name</label>
         <input required type="text" id="projectname" minlength="4" maxlength="20" />
         <label for="projectdesc">Description (optional)</label>
@@ -110,7 +111,8 @@
               await PROJECT.switch_proj(selectedproj)
             } else await snack('warning', 'Please select a project to continue...')
             disabled = false
-          }}>
+          }}
+        >
           Continue with the selected Project
           <span class="logo-global">→</span>
         </button>

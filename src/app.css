@@ -1,32 +1,34 @@
 @font-face {
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: local("Inter Regular"), local("Inter-Regular"), url("/fonts/Inter-Regular.ttf") format("truetype");
+  src: local('Inter Regular'), local('Inter-Regular'),
+    url('/fonts/Inter-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-display: swap;
   font-weight: 500;
-  src: local("Inter Medium"), local("Inter-Medium"), url("/fonts/Inter-Medium.ttf") format("truetype");
+  src: local('Inter Medium'), local('Inter-Medium'),
+    url('/fonts/Inter-Medium.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "Material Icons";
+  font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("/fonts/MaterialIcons-Regular.eot"); /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"),
-    url("fonts/MaterialIcons-Regular.woff2") format("woff2"),
-    url("fonts/MaterialIcons-Regular.woff") format("woff"),
-    url("fonts/MaterialIcons-Regular.ttf") format("truetype");
+  src: url('/fonts/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: local('Material Icons'), local('MaterialIcons-Regular'),
+    url('fonts/MaterialIcons-Regular.woff2') format('woff2'),
+    url('fonts/MaterialIcons-Regular.woff') format('woff'),
+    url('fonts/MaterialIcons-Regular.ttf') format('truetype');
 }
 
 .material-icons {
-  font-family: "Material Icons";
+  font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 24px; /* Preferred icon size */
@@ -47,7 +49,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: "liga";
+  font-feature-settings: 'liga';
 }
 
 :root {
@@ -132,8 +134,8 @@
 
 body {
   margin: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans,
-    Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-medium);
@@ -188,7 +190,7 @@ a:hover {
 pre,
 code,
 .monospaced {
-  font-family: "Noto Sans Mono", Menlo, Consolas, Andale Mono, Ubuntu Mono, monospace;
+  font-family: 'Noto Sans Mono', Menlo, Consolas, Andale Mono, Ubuntu Mono, monospace;
   font-size: 14px;
   color: #d63200;
   white-space: pre;
@@ -205,10 +207,10 @@ code,
   font-variant-ligatures: contextual;
   padding: 1px;
   border-radius: 2px;
-  font-feature-settings: "liga" on, "calt";
-  -webkit-font-feature-settings: "liga" on, "calt";
-  -ms-font-feature-settings: "liga" on, "calt";
-  -moz-font-feature-settings: "liga" on, "calt";
+  font-feature-settings: 'liga' on, 'calt';
+  -webkit-font-feature-settings: 'liga' on, 'calt';
+  -ms-font-feature-settings: 'liga' on, 'calt';
+  -moz-font-feature-settings: 'liga' on, 'calt';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -273,8 +275,8 @@ button:hover,
 /* use btn-disabled class to style a disabled button*/
 button:disabled,
 button[disabled],
-input[type="button"]:disabled,
-input[type="button"]:disabled:hover,
+input[type='button']:disabled,
+input[type='button']:disabled:hover,
 .btn-disabled,
 .btn-disabled:hover {
   background-color: #efefef;
@@ -394,7 +396,7 @@ tbody tr:hover:nth-child(n + 1) {
 
 .toggle:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 14px;
   width: 14px;
   left: 0px;
@@ -417,16 +419,16 @@ input:checked + .toggle:before {
   transform: translateX(18px);
 }
 
-input[type="range"] {
+input[type='range'] {
   height: 21px;
   -webkit-appearance: none;
   margin: 10px 0;
   width: 100%;
 }
-input[type="range"]:focus {
+input[type='range']:focus {
   outline: none;
 }
-input[type="range"]::-webkit-slider-runnable-track {
+input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
@@ -435,7 +437,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   border-radius: 1px;
   border: 0px solid #f3f3f8;
 }
-input[type="range"]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   box-shadow: 0px 0px 2px #84b6eb;
   border: 0px solid #0093dd;
   height: 13px;
@@ -446,10 +448,10 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -4.5px;
 }
-input[type="range"]:focus::-webkit-slider-runnable-track {
+input[type='range']:focus::-webkit-slider-runnable-track {
   background: #cbe9ff;
 }
-input[type="range"]::-moz-range-track {
+input[type='range']::-moz-range-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
@@ -458,7 +460,7 @@ input[type="range"]::-moz-range-track {
   border-radius: 1px;
   border: 0px solid #f3f3f8;
 }
-input[type="range"]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   box-shadow: 0px 0px 2px #84b6eb;
   border: 0px solid #0093dd;
   height: 13px;
@@ -467,7 +469,7 @@ input[type="range"]::-moz-range-thumb {
   background: #84b6eb;
   cursor: pointer;
 }
-input[type="range"]::-ms-track {
+input[type='range']::-ms-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
@@ -475,19 +477,19 @@ input[type="range"]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
-input[type="range"]::-ms-fill-lower {
+input[type='range']::-ms-fill-lower {
   background: #cbe9ff;
   border: 0px solid #f3f3f8;
   border-radius: 2px;
   box-shadow: 0px 0px 0px #000000;
 }
-input[type="range"]::-ms-fill-upper {
+input[type='range']::-ms-fill-upper {
   background: #cbe9ff;
   border: 0px solid #f3f3f8;
   border-radius: 2px;
   box-shadow: 0px 0px 0px #000000;
 }
-input[type="range"]::-ms-thumb {
+input[type='range']::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 2px #84b6eb;
   border: 0px solid #0093dd;
@@ -497,14 +499,14 @@ input[type="range"]::-ms-thumb {
   background: #84b6eb;
   cursor: pointer;
 }
-input[type="range"]:focus::-ms-fill-lower {
+input[type='range']:focus::-ms-fill-lower {
   background: #cbe9ff;
 }
-input[type="range"]:focus::-ms-fill-upper {
+input[type='range']:focus::-ms-fill-upper {
   background: #cbe9ff;
 }
 
-input[type="file"] {
+input[type='file'] {
   border: 0;
   clip: rect(0, 0, 0, 0);
   height: 1px;

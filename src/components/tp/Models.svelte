@@ -171,7 +171,8 @@
               m_ids[id] = val
               return m_ids
             })
-          }}>
+          }}
+        >
           <h3 class="name" class:right={!$activeModels[id]} class:down={$activeModels[id]}>
             {name}
             <div>
@@ -189,7 +190,8 @@
                 <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1
-                    15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                    15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                  />
                 </svg>
               {/if}
             </div>
@@ -198,10 +200,12 @@
         </div>
         {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
           <button class="request request-rerun-btn" on:click|stopPropagation={rerun_model(id)}
-            >Rerun</button>
+            >Rerun</button
+          >
         {:else}
           <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
-            >Cancel</button>
+            >Cancel</button
+          >
         {/if}
         <p class="status noselect">
           {#if status === 'DONE'}

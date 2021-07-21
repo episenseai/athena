@@ -158,7 +158,8 @@
             bind:files={uploadfiles}
             bind:this={file_node}
             accept="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip,
-            .zip" />
+            .zip"
+          />
         </label>
         {#if uploadfiles}<span>✔</span>{/if}
       </div>

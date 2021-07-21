@@ -122,7 +122,8 @@
               </label>
             </td>
             <td use:tooltip={{ sample, translateX: '-60px', heading: name }}
-              >{smapleColumn(sample)}</td>
+              >{smapleColumn(sample)}</td
+            >
           </tr>
         {/each}
       </tbody>

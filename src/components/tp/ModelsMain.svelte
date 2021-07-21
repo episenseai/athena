@@ -43,7 +43,8 @@
 {#if false}
   <Details>
     <button
-      on:click={async () => await PROJECT.get_model_by_id('24ee24ed-6174-4a79-bf53-215d6fbcf680')}>
+      on:click={async () => await PROJECT.get_model_by_id('24ee24ed-6174-4a79-bf53-215d6fbcf680')}
+    >
       Get models data
     </button>
     <h4 slot="summary">get model by id</h4>
