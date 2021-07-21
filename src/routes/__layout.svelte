@@ -1,11 +1,11 @@
 <script>
   import '../app.css'
-  import Snack from '../components/base/Snack.svelte'
-  import Nav from '../components/Nav.svelte'
-  import OauthLogin from '../components/auth/OauthLogin.svelte'
+  import Snack from '$lib/base/Snack.svelte'
+  import Nav from '$lib/Nav.svelte'
+  import OauthLogin from '$lib/auth/OauthLogin.svelte'
   import AuthLogo from './AuthLogo.svelte'
-  import { LOGIN } from '../components/auth/store.js'
-  import { PROJECT } from '../components/tp/store'
+  import { LOGIN } from '$lib/auth/store.js'
+  import { PROJECT } from '$lib/tabular/store'
   import { onMount } from 'svelte'
   import { page } from '$app/stores'
 

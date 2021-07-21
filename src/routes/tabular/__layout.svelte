@@ -1,8 +1,8 @@
 <script>
-  import Nav from '../../components/Nav.svelte'
-  import Snack from '../../components/base/Snack.svelte'
+  import Nav from '$lib/Nav.svelte'
+  import Snack from '$lib/base/Snack.svelte'
   import { onMount } from 'svelte'
-  import { PROJECT } from '../../components/tp/store'
+  import { PROJECT } from '$lib/tabular/store'
   export let segment
 
   onMount(async () => {

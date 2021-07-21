@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import { snack } from '../../components/base/store/snack'
+  import { snack } from '$lib/base/snack'
   import CVLayout from './build/CVLayout.svelte'
   import { GET_DATA, POST_DATA, PROJECT } from './store.js'
   import PipeWait from './PipeWait.svelte'

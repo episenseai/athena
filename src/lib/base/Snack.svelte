@@ -1,5 +1,5 @@
 <script>
-  import { snacklist } from './store/snack'
+  import { snacklist } from '$lib/base/snack'
   import { fly } from 'svelte/transition'
 </script>
 

@@ -8,7 +8,7 @@
   import MultiConfusionMatrix from './MultiConfusionMatrix.svelte'
   import { activeTabs, modelType, models } from './store.js'
   import { get } from 'svelte/store'
-  import { snack } from '../../base/store/snack'
+  import { snack } from '../../base/snack'
   import GridResults from './GridResults.svelte'
 
   export let id

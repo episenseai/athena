@@ -10,6 +10,7 @@
     "dev": "svelte-kit dev",
     "build": "svelte-kit build --verbose",
     "preview": "svelte-kit preview",
+    "serve": "node build",
     "format": "prettier --check --plugin-search-dir=. './**/*.{js,svelte,md,html,css,json}'",
     "format:fix": "prettier --write --plugin-search-dir=. './**/*.{js,svelte,md,html,css,json}'",
     "lint": "eslint  --ignore-path .gitignore './**/*.{js,svelte}'",

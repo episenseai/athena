@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import { snack } from '../../components/base/store/snack'
+  import { snack } from '$lib/base/snack'
   import TableHead from './tranform/TableHead.svelte'
   import Plotly from './tranform/Plotly.svelte'
   import TableBody from './tranform/TableBody.svelte'

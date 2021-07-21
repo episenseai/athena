@@ -6,7 +6,7 @@
   import Transform from './Transform.svelte'
   import Build from './Build.svelte'
   import { get } from 'svelte/store'
-  import { snack } from '../base/store/snack'
+  import { snack } from '../base/snack'
   import FinalConfig from './FinalConfig.svelte'
   // stages of the tabular data processing pipeline
   const stages = [

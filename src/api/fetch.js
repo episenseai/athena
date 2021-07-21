@@ -1,5 +1,5 @@
-import { LOGIN } from '../components/auth/store'
-import { snack } from '../components/base/store/snack'
+import { LOGIN } from '$lib/auth/store'
+import { snack } from '$lib/base/snack'
 import { get } from 'svelte/store'
 
 function get_auth_header() {

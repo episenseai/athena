@@ -1,5 +1,5 @@
+import { snack } from '$lib/base/snack'
 import { OAUTH2_LOGIN_SERVICE, OAUTH2_AUTH_CALLBACK_SERVICE } from '../../api/endpoints'
-import { snack } from '../base/store/snack'
 import localForage from 'localforage'
 import { writable } from 'svelte/store'
 

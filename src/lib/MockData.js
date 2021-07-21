@@ -1,4 +1,4 @@
-import { GET_DATA } from './tp/store'
+import { GET_DATA } from '$lib/tabular/store'
 
 export async function getStageData(stage) {
   const res = await fetch(`https://localhost:3000/tabular/pipeline.json?stage=${stage}`)

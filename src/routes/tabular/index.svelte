@@ -1,11 +1,11 @@
 <script>
-  import Menu from '../../components/base/Menu.svelte'
-  import PipeMain from '../../components/tp/PipeMain.svelte'
-  import ModelsMain from '../../components/tp/ModelsMain.svelte'
-  import { PROJECT, SWITCH_PROJECT, GET_DATA, POST_DATA } from '../../components/tp/store'
+  import Menu from '$lib/base/Menu.svelte'
+  import PipeMain from '$lib/tabular/PipeMain.svelte'
+  import ModelsMain from '$lib/tabular/ModelsMain.svelte'
+  import { PROJECT, SWITCH_PROJECT, GET_DATA, POST_DATA } from '$lib/tabular/store'
   import { onMount } from 'svelte'
-  import { snack } from '../../components/base/store/snack'
-  import Details from '../../components/base/Details.svelte'
+  import { snack } from '$lib/base/snack'
+  import Details from '$lib/base/Details.svelte'
   // file select menu
   let open = false
   let selectedproj

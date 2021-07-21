@@ -3,7 +3,7 @@
   import Menu from '../base/Menu.svelte'
   import { fetch_upload_POST, fetch_json_GET } from '../../api/fetch'
   import { FILE_UPLOAD_SERVICE, FILE_LIST_SERVICE } from '../../api/endpoints'
-  import { snack } from '../../components/base/store/snack'
+  import { snack } from '$lib/base/snack'
   import { GET_DATA, POST_DATA, PROJECT } from './store.js'
   import { LOGIN } from '../auth/store'
   import { onMount, createEventDispatcher } from 'svelte'

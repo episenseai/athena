@@ -1,3 +1,5 @@
+import { LOGIN } from '$lib/auth/store'
+import { snack } from '$lib/base/snack'
 import {
   TAB_CREATE_PROJECTS_SERVICE,
   TAB_PROJECTS_LIST_SERVICE,
@@ -15,8 +17,6 @@ import {
 } from '../../api/endpoints'
 import { fetch_json_POST, fetch_json_GET } from '../../api/fetch'
 import modelsInfo from '../../routes/tabular/models/_mock/models.js'
-import { LOGIN } from '../auth/store'
-import { snack } from '../base/store/snack'
 import { models, reset_model_stores } from './models/store'
 import localForage from 'localforage'
 import { writable, get } from 'svelte/store'

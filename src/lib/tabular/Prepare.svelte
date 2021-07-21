@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import { snack } from '../../components/base/store/snack'
+  import { snack } from '$lib/base/snack'
   import { tooltip } from '../SampleTooltip.svelte'
   import HeaderInfo from './prepare/HeaderInfo.svelte'
   import { GET_DATA, POST_DATA, PROJECT } from './store'

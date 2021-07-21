@@ -1,11 +1,10 @@
 <script>
-  import Container from './models/Container.svelte'
-  import { models, modelType, activeModels, optimizeUsing } from './models/store.js'
+  import Container from '$lib/tabular/models/Container.svelte'
+  import { models, modelType, activeModels, optimizeUsing } from '$lib/tabular/models/store'
   import { get } from 'svelte/store'
-  // import { GET_DATA } from './store.js'
   import Spinner from '../Spinner.svelte'
   import Jumper from '../Jumper.svelte'
-  import { PROJECT } from '../../components/tp/store'
+  import { PROJECT } from '$lib/tabular/store'
 
   $: if ($models) {
     console.log(get(models))

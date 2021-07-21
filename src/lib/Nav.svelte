@@ -1,8 +1,8 @@
 <script>
-  import { LOGIN } from './auth/store.js'
-  import { PROJECT, SWITCH_PROJECT } from './tp/store'
+  import { LOGIN } from '$lib/auth/store.js'
+  import { PROJECT, SWITCH_PROJECT } from '$lib/tabular/store'
   export let segment
-  import { snack } from '../components/base/store/snack'
+  import { snack } from '$lib/base/snack'
   // tabular or home
   export let level
   import { get } from 'svelte/store'
