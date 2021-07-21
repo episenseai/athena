@@ -6,10 +6,6 @@
   import Jumper from '../Jumper.svelte'
   import { PROJECT } from '$lib/tabular/store'
 
-  $: if ($models) {
-    console.log(get(models))
-  }
-
   // for development purpose only
   //onMount(() => ($activeModel = $models[0].id))
   async function cancel_model(id) {
@@ -18,7 +14,6 @@
     if (i !== -1) {
       let m = get(models)[i]
       if (m.status === 'WAIT' || m.status === 'RUNNING' || m.status === 'TRYCANCEL') {
-        console.log(m.status)
         await PROJECT.get_model_by_id(id)
       }
     }
@@ -64,36 +59,6 @@
     }
     return rand_list
   }
-  /* function changed_hyperparameters(id) {
-    if (id === '6bb167c7-fd88-4fc1-8cc9-5005b463a6b4') {
-      return decisiontreeclf_hyperparams()
-    } else if (id === '24ee24ed-6174-4a79-bf53-215d6fbcf680') {
-      return adaboostclf_hyperparams()
-    }
-  } */
-
-  /* function decisiontreeclf_hyperparams() {
-    // console.log(JSON.stringify(get(GET_DATA)))
-    return {
-      criterion: ['gini', 'entropy'],
-      splitter: ['best', 'random'],
-      max_features: [
-        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
-        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
-      ],
-      max_leaf_nodes: [
-        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
-        getRandomIntInclusive(5, get(GET_DATA).data.includedFeatures),
-      ],
-    }
-  }
-  function adaboostclf_hyperparams() {
-    // console.log(JSON.stringify(get(GET_DATA)))
-    return {
-      n_estimators: [50, getRandomIntInclusive(0, 50), getRandomIntInclusive(50, 100)],
-      learning_rate: [1, getRandomFloatInclusive(0, 1), getRandomFloatInclusive(1, 3)],
-    }
-  } */
 
   function randomhyperparams_generator(id) {
     const random_hyperparams = {}
@@ -134,7 +99,6 @@
         }
       }
     }
-    console.log(random_hyperparams)
     return random_hyperparams
   }
 

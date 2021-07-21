@@ -75,10 +75,7 @@ export async function fetch_json_POST(url, data, service_name) {
     }
   } catch (e) {
     console.log(e)
-    await snack(
-      'error',
-      `something fatal happened during ${service_name} Serivce request. Check console for details.`,
-    )
+    await snack('error', `something fatal happened during ${service_name} Serivce request`)
     return false
   }
 }
@@ -148,10 +145,7 @@ export async function fetch_json_GET(url, service_name) {
     }
   } catch (e) {
     console.log(e)
-    await snack(
-      'error',
-      `something fatal happened during ${service_name} Serivce request. Check console for details.`,
-    )
+    await snack('error', `something fatal happened during ${service_name} Serivce request`)
     return false
   }
 }
@@ -225,10 +219,7 @@ export async function fetch_upload_POST(url, formData) {
     }
   } catch (e) {
     console.log(e)
-    await snack(
-      'error',
-      `something fatal happened while uploading (${filename}). Check console for details.`,
-    )
+    await snack('error', `something fatal happened while uploading (${filename})`)
     return false
   }
 }

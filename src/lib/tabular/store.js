@@ -52,7 +52,7 @@ function project_store() {
   }
 
   // write the auth state to the local storage and returns the item written
-  const write_proj = async (current_proj_id, erro_msg) => {
+  const write_proj = async (current_proj_id, erro_msg = '') => {
     const proj_id = await localForage
       .setItem(PROJ_ID_KEY, current_proj_id)
       .then(() => localForage.getItem(PROJ_ID_KEY))
@@ -64,7 +64,7 @@ function project_store() {
   }
 
   // reads the auth state from the local storage
-  const read_proj = async (erro_msg) => {
+  const read_proj = async (erro_msg = '') => {
     const proj_id = await localForage
       .getItem(PROJ_ID_KEY)
       .catch((err) => console.log(erro_msg, err))
@@ -228,7 +228,6 @@ function project_store() {
         await PROJECT.sse_close()
         const token = await PROJECT.get_token()
         if (!token) {
-          console.log('Could not get SSE token')
           return false
         }
         //console.log(token)
@@ -248,15 +247,12 @@ function project_store() {
               PROJECT.sse_close()
             }
 
-            //console.log('1', pipe_state)
-            //console.log('2', get(PROJECT))
             //console.log(es instanceof EventSource, es.constructor.name)
             if (get(PROJECT).current_stage.split(':')[1] !== 'GET') {
               if (
                 pipe_state.pipe_status !== get(PROJECT).pipe_status ||
                 pipe_state.current_stage !== get(PROJECT).current_stage
               ) {
-                //console.log('setting pipe')
                 set(pipe_state)
               }
             }
@@ -352,7 +348,6 @@ function project_store() {
         await PROJECT.sse_models_close()
         const token = await PROJECT.get_token()
         if (!token) {
-          console.log('Could not get SSE token')
           return false
         }
         //console.log(token)

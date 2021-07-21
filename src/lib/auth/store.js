@@ -178,7 +178,6 @@ function login_store() {
             await snack('error', 'Authorization failed')
             return false
           }
-          console.log('ustate invalid')
           return false
         }
         if (response && response.status === 401) {

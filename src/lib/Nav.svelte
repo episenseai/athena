@@ -72,7 +72,6 @@
         <li>
           <button
             on:click|stopPropagation={async () => {
-              console.log(get(SWITCH_PROJECT))
               if (get(SWITCH_PROJECT) === true) {
                 await snack(
                   'warning',

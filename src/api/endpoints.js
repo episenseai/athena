@@ -19,7 +19,6 @@ export const OAUTH2_AUTH_CALLBACK_SERVICE = (code, state, scope = undefined) => 
   if (scope && Object.prototype.toString.call(code) === '[object String]') {
     url = `${url}&scope=${scope}`
   }
-  console.log(encodeURI(url))
   return encodeURI(url)
 }
 

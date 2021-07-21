@@ -5,7 +5,7 @@
   $: if (files) file = files[0]
 
   const dragExit = () => div.classList.add('enter')
-  // $: if (div) console.log(div)
+
 </script>
 
 <main>
@@ -84,4 +84,5 @@
     background-color: var(--light10);
     padding: 7px;
   }
+
 </style>

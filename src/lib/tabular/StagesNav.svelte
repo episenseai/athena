@@ -29,8 +29,6 @@
     const to_stage = `${stage.name}:GET`
     const from_idx = seq.indexOf(from_stage)
     const to_idx = seq.indexOf(to_stage)
-    console.log('current_stage ', from_stage, from_idx)
-    console.log('revert_stage ', to_stage, to_idx)
     if (from_idx < 0 || to_idx < 0) {
       await snack('error', 'Invalid stage name provided from reversal')
     } else if (from_idx === to_idx) {
