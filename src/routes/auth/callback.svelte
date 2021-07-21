@@ -1,9 +1,7 @@
 <script>
   import ProgressL from '$lib/base/ProgressL.svelte'
   import Spinner from '$lib/Spinner.svelte'
-  import { snack } from '$lib/base/snack'
   import { onMount } from 'svelte'
-  import { get } from 'svelte/store'
   import { LOGIN } from '$lib/auth/store'
   import { page } from '$app/stores'
 
