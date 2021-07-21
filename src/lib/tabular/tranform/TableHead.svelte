@@ -44,6 +44,7 @@
       $GET_DATA.data.features = comparable.concat(notComparable)
     }
   }
+
 </script>
 
 <thead>
@@ -87,9 +88,9 @@
   .help {
     cursor: help;
     font-family: Inter;
-    font-size: 11.5px;
+    font-size: 12.5px;
     line-height: 3em;
-    text-transform: uppercase;
+    text-transform: capitalize;
     max-width: none;
     overflow-wrap: break-word;
   }
@@ -105,6 +106,7 @@
     color: var(--text-dark);
   }
   thead {
-    background-color: rgb(255, 248, 220);
+    background-color: #f3f3f3;
   }
+
 </style>

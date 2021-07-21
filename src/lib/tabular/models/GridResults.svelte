@@ -9,8 +9,10 @@
 </script>
 
 {#if $models && model && model.grid_results}
-  <pre>{JSON.stringify(model.possible_model_params)}</pre>
-
+  <!--
+    <pre>{JSON.stringify(model.possible_model_params)}</pre>
+    <pre>{JSON.stringify(changed_hparams_test)}</pre>
+  -->
   <div class="container modelinfo">
     <h2>
       The best score for this model is
@@ -118,7 +120,6 @@
         </tbody>
       {/if}
     </table>
-    <pre>{JSON.stringify(changed_hparams_test)}</pre>
   </div>
 {/if}
 
@@ -135,7 +136,7 @@
     grid-auto-rows: minmax(40px, auto);
   }
   :global(.container.modelinfo) :global(h2) {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   table {
     width: 100%;
@@ -160,7 +161,7 @@
   }
   h2 {
     text-align: center;
-    text-decoration: underline;
+    color: var(--text-light);
   }
   .best-score {
     color: var(--green);

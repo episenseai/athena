@@ -27,6 +27,7 @@
     plotID = $GET_DATA.data.target
     dispatch($GET_DATA.data.target)
   })
+
 </script>
 
 <tbody>
@@ -57,7 +58,6 @@
           step="0.1"
           on:input={verifyWeight}
         />
-        <!-->span class="weight">{ weight }</!-->
       </td>
       <td>{type === 'Category' ? stats.unique : ''}</td>
       <td>{stats.missing}</td>
@@ -76,6 +76,7 @@
     padding: 2px 0 2px 10px;
     border: 1px solid var(--light12);
     width: 52px;
+    border-radius: 4px;
   }
   td:nth-child(2),
   td:nth-child(4) {
@@ -90,4 +91,5 @@
   .plotlyTarget {
     background-color: var(--light5);
   }
+
 </style>
