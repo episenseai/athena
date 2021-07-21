@@ -36,7 +36,7 @@
     text-align: left;
     margin: 0px auto 10px;
     max-width: 600px;
-    border: var(--medium-border);
+    border: var(--light-border);
     padding: 1.5em 1.5em 0.75em;
     border-radius: 5px;
   }
@@ -56,13 +56,13 @@
   .tabular p {
     padding: 10px 0;
     font-size: 15px;
+    color: var(--text-light);
   }
   .tabular a {
     padding-top: 2px;
     padding-bottom: 2px;
   }
   .btn {
-    border-color: rgba(var(--pink-rgb), 1);
     min-width: 100px;
   }
   .apps {

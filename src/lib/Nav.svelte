@@ -207,7 +207,7 @@
   }
   .cproj {
     margin-right: 10px;
-    border-bottom: var(--dark-border);
+    border-bottom: var(--light-border);
     padding: 0.2em 0.6em 0.2em 0.6em;
   }
   .username div {

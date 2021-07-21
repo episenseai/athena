@@ -110,12 +110,20 @@
     }
   }
 
+  const datestr = (timestamp) => {
+    try {
+      return new Date(Date.parse(timestamp))
+    } catch (err) {
+      return timestamp
+    }
+  }
+
   async function get_uploads() {
     const response = await fetch_json_GET(FILE_LIST_SERVICE(get(LOGIN).userid), 'GET UPLOADS')
     items = response.json.data.map((p) => ({
       value: p.filepath,
       name: p.filename,
-      desc: p.timestamp,
+      desc: datestr(p.timestamp),
     }))
   }
   let getting_uploads = true
@@ -207,7 +215,7 @@
     <div>
       <h4>Select a previously uploaded file from the list.</h4>
       <div class="filemenu">
-        <Menu bind:open bind:selected {items} width="350" color="maroon" />
+        <Menu bind:open bind:selected {items} width="400" color="blue" />
       </div>
 
       <p class="note">
@@ -236,7 +244,7 @@
   }
   .import-stage {
     margin: 60px auto 0;
-    width: 820px;
+    width: 900px;
     display: flex;
     justify-content: space-around;
   }

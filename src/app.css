@@ -256,7 +256,7 @@ button,
   text-decoration: none;
   padding: 5px 15px;
   background-color: #fff;
-  border: 1px solid rgba(97, 125, 144, 0.3);
+  border: 1px solid var(--pink);
   color: var(--text-medium);
   font-size: 13px;
   letter-spacing: 0.03em;
@@ -271,7 +271,7 @@ button,
 button:hover,
 .btn:hover {
   background-color: #f0f0f0;
-  border-color: var(--blue);
+  border-color: var(--lobster);
 }
 
 /* use btn-disabled class to style a disabled button*/

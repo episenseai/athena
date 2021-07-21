@@ -13,13 +13,21 @@
   let items = []
   let disabled = false
 
+  const datestr = (timestamp) => {
+    try {
+      return new Date(Date.parse(timestamp))
+    } catch (err) {
+      return timestamp
+    }
+  }
+
   async function list_projects() {
     const data = await PROJECT.list_all()
     if (data) {
       items = data.map((p) => ({
         value: p.projectid,
         name: `${p.projectname}`,
-        desc: `${p.timestamp}`,
+        desc: `${datestr(p.timestamp)}`,
       }))
     }
   }
@@ -94,7 +102,7 @@
     <div>
       <h4>Continue with an existing Pipeline</h4>
       <div class="projectmenu">
-        <Menu bind:open bind:selected={selectedproj} {items} width="350" color="maroon" />
+        <Menu bind:open bind:selected={selectedproj} {items} width="400" color="pink" />
       </div>
       <div class="selectproj">
         <button
@@ -108,7 +116,7 @@
           }}
         >
           Continue with the selected Pipeline
-          <span class="logo-global">→</span>
+          <span class="logo-global">&rarr;</span>
         </button>
       </div>
     </div>
@@ -116,7 +124,7 @@
   {#if $SWITCH_PROJECT && $PROJECT.id && $PROJECT.current_stage}
     <div class="switch">
       <button {disabled} on:click={() => ($SWITCH_PROJECT = false)}>
-        <span class="logo-global">←</span>
+        <span class="logo-global">&larr;</span>
         Go back to the running Project
       </button>
     </div>
@@ -144,12 +152,9 @@
 {/if}
 
 <style>
-  button {
-    border: var(--dark-border);
-  }
   .projects {
     margin: 16px auto 0;
-    width: 860px;
+    width: 900px;
     display: flex;
     justify-content: space-around;
   }
