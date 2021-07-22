@@ -163,7 +163,6 @@ function login_store() {
               picture: token.picture || '',
               expires,
             })
-            console.log(auth_state)
 
             if (auth_state) {
               // set the authentication info in svelte 'LOGIN' store
