@@ -7,38 +7,44 @@ FROM node-base AS node-pnpm
 
 WORKDIR /build
 
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml ./
 
 RUN set -x && \
         rm -rf node_modules && \
-        npm install -g pnpm@v6.7 && \
-        pnpm install && pwd && ls -Aoh
+        npm install -g pnpm && \
+        pnpm install
 
 
 FROM node-pnpm as node-build
 
 WORKDIR /app
 
+ARG HOST=0.0.0.0
+ARG PORT=3000
+
 RUN --mount=target=.,rw set -x && \
         cp -R /build/node_modules node_modules && \
-        pnpm build && \
+        pnpm build --verbose && \
         mkdir -p /target && \
-        cp -R __sapper__ /target && ls -Aoh /target/__sapper__ && \
+        cp -R build /target && \
+        cp -R .svelte-kit /target && \
+        cp package.json /target && \
         rm -rf node_modules && \
         pnpm install --prod && \
-        cp -R node_modules /target/node_modules
+        cp -R node_modules /target/node_modules && ls -Aoh /target
 
 
 FROM node-base AS athena
 
 COPY --from=node-build /target /app/
+COPY package*.json ./
 
-COPY ./static ./static
-
+# Always run at default port. Ignore environment
+# hades and titan are expected at default ports 3002 and 3001 respectively
 EXPOSE 3000
 
 USER node
 
 # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md
 
-CMD ["node", "__sapper__/build"]
+CMD ["node", "build"]

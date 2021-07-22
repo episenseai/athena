@@ -159,10 +159,11 @@ function login_store() {
               access_token: token.access_token,
               username: token.full_name || '',
               userid: token.userid,
-              refresh_token: token.refresh_token || '',
+              refresh_token: token.refresh_token || undefined,
               picture: token.picture || '',
               expires,
             })
+            console.log(auth_state)
 
             if (auth_state) {
               // set the authentication info in svelte 'LOGIN' store

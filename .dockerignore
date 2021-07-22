@@ -4,10 +4,10 @@ Dockerfile
 
 **/.DS_Store
 node_modules/
-src/node_modules/@sapper/
+build/
+.svelte-kit/
 .pnpm-debug.log
 cypress/screenshots/
-__sapper__/
 .vscode
 .code-workspace
 .vim
