@@ -38,39 +38,23 @@ export async function fetch_json_POST(url, data, service_name) {
     // parse json reponse
     const json = await response.json()
 
-    // console.log(service_name, response)
-
     // good response
     if (response.status === 200 || response.status === 201) return { json }
 
-    // unhadled error
-    if (response.status === 500) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Unhandled server error occured while handling ${service_name} request`,
-      )
-      return false
-    }
-
     // malformed request
     if (response.status === 400) {
-      await snack(
-        'error',
-        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`,
-      )
+      await snack('error', 'Request error')
       return false
     }
 
     // unauthorized request
     if (response.status === 401) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Unauthorized ${service_name} request. Wrong or expired credentials.`,
-      )
+      await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      return false
+    }
+
+    if (response.status === 500) {
+      await snack('error', 'An error occured')
       return false
     }
   } catch (e) {
@@ -107,40 +91,23 @@ export async function fetch_json_GET(url, service_name) {
     // parse json reponse
     const json = await response.json()
 
-    // for debugging
-    // console.log(service_name, response)
-
     // good response
     if (response.status === 200 || response.status === 201) return { json }
 
-    // unhadled error
-    if (response.status === 500) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Unhandled server error occured while handling ${service_name} request`,
-      )
-      return false
-    }
-
     // malformed request
     if (response.status === 400) {
-      await snack(
-        'error',
-        json.info ? json.info : `HTTP error: ${response.status}; Malformed ${service_name} request`,
-      )
+      await snack('error', 'Request error')
       return false
     }
 
     // unauthorized request
     if (response.status === 401) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Unauthorized ${service_name} request. Wrong or expired credentials.`,
-      )
+      await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      return false
+    }
+
+    if (response.status === 500) {
+      await snack('error', 'An error occured')
       return false
     }
   } catch (e) {
@@ -174,47 +141,26 @@ export async function fetch_upload_POST(url, formData) {
 
     if (!response || !response.status) return false
 
-    // for debugging
-    // console.log('FILE UPLOAD', response)
-
     // parse json reponse
     const json = await response.json()
-    // for debugging
-    // console.log('FILE UPLOAD', json)
 
     // good response
     if (response.status === 200 || response.status === 201) return { json }
 
-    // unhadled error
-    if (response.status === 500) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Unhandled server error while uploading file (${filename})`,
-      )
-      return false
-    }
-
     // malformed request
     if (response.status === 400) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Malformed FILE UPLOAD request (${filename})`,
-      )
+      await snack('error', 'Request error: file upload')
       return false
     }
 
     // unauthorized request
     if (response.status === 401) {
-      await snack(
-        'error',
-        json.info
-          ? json.info
-          : `HTTP error: ${response.status}; Unauthorized FILE UPLOAD request (${filename}). Wrong or expired credentials.`,
-      )
+      await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      return false
+    }
+
+    if (response.status === 500) {
+      await snack('error', 'An error occured: file upload')
       return false
     }
   } catch (e) {
