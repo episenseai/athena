@@ -13,7 +13,7 @@
   // handles sorting of the columns
   function handleTransformSort(column, ascend) {
     // sort numbers and booleans
-    if (['id', 'weight', 'include'].includes(column)) {
+    if (['id', 'weight', 'include'].find((col) => col === column)) {
       $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) =>
         sortOrder(f1[column] - f2[column], ascend),
       )
@@ -21,7 +21,7 @@
     }
 
     // sort string
-    if (['name', 'type', 'origin'].includes(column)) {
+    if (['name', 'type', 'origin'].find((col) => col === column)) {
       $GET_DATA.data.features = $GET_DATA.data.features.sort((f1, f2) =>
         sortOrder(f1[column].localeCompare(f2[column]), ascend),
       )
@@ -31,7 +31,9 @@
     // sort numbers in the "stats" which can have undefined values
     // undefined values are pushed to the end of the stack
     if (
-      ['min', 'mean', 'median', 'max', 'std', 'correlation', 'unique', 'missing'].includes(column)
+      ['min', 'mean', 'median', 'max', 'std', 'correlation', 'unique', 'missing'].find(
+        (col) => col === column,
+      )
     ) {
       // get features for which the property is a sortable number
       let comparable = $GET_DATA.data.features.filter((f) => isNumber(f.stats[column]))
@@ -44,7 +46,6 @@
       $GET_DATA.data.features = comparable.concat(notComparable)
     }
   }
-
 </script>
 
 <thead>
@@ -108,5 +109,4 @@
   thead {
     background-color: #f3f3f3;
   }
-
 </style>

@@ -5,9 +5,10 @@
   import Spinner from '../Spinner.svelte'
   import Jumper from '../Jumper.svelte'
   import { PROJECT } from '$lib/tabular/store'
+  import { is_empty } from '$lib/utils'
+  import { snack } from '$lib/base/snack'
 
-  // for development purpose only
-  //onMount(() => ($activeModel = $models[0].id))
+  // Issue a cancel request for the build job of the model
   async function cancel_model(id) {
     await PROJECT.cancel_model(id)
     let i = get(models).findIndex((el) => el.id === id)
@@ -18,96 +19,48 @@
       }
     }
   }
-  async function rerun_model(id) {
+
+  // Rebuild the model with the user provided hyperparameters
+  async function hyper_build(id) {
+    let model = get(models).find((el) => el.id === id)
+
+    if (is_empty(model) || !model.status) {
+      await snack('error', 'Invalid model')
+      return
+    }
+
+    if (!['DONE', 'ERROR'].find((el) => el === model.status)) {
+      await snack('error', `Model is in ${model.status} state. Could not rerun.`)
+      return
+    }
+
+    const hyperparams = {}
+    const possible_params = model.possible_model_params
+    for (const [name, param] of Object.entries(possible_params)) {
+      if (!param.choices || param.choices.length == 0) {
+        await snack('error', `Value missing for '${name}' hyperparameter`)
+        return
+      }
+      hyperparams[name] = param.choices
+    }
+
     let modelids = [id]
     let changed_hparams = {}
-    changed_hparams[id] = randomhyperparams_generator(id)
-
-    console.log(changed_hparams)
+    changed_hparams[id] = hyperparams
 
     let res = await PROJECT.model_build(modelids, changed_hparams)
     if (res) {
       models.update((ms) => {
         const new_ms = ms.map((m) => {
           if (m.id === id) {
-            // console.log('changed to running')
             m.status = 'RUNNING'
           }
           return m
         })
         return new_ms
       })
-      // console.log(get(models))
       await PROJECT.sse_models_update(true)
     }
-  }
-
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1) + min) //The maximum is inclusive and the minimum is inclusive
-  }
-  function getRandomFloatInclusive(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.random() * (max - min) + min //The maximum is inclusive and the minimum is inclusive
-  }
-  function getRandomListInclusive(list1) {
-    let rand_list = []
-    let i = 1
-    while (i <= 2) {
-      i += 1
-      rand_list.push(list1[getRandomIntInclusive(0, list1.length - 1)])
-    }
-    return rand_list
-  }
-
-  function randomhyperparams_generator(id) {
-    const random_hyperparams = {}
-    let model = get(models).find((el) => el.id === id)
-    if (model.possible_model_params) {
-      const possible_params = model.possible_model_params
-
-      for (const [key, value] of Object.entries(possible_params)) {
-        if (Math.random() >= 0.1) {
-          let tempArray = Object.keys(possible_params[key])
-
-          // 'possible_int': [min, max]
-          // user input <= list of values: min..=max
-          if (tempArray.includes('possible_int')) {
-            random_hyperparams[key] = [
-              possible_params[key].default,
-              getRandomIntInclusive(
-                possible_params[key].possible_int[0],
-                possible_params[key].possible_int[1],
-              ),
-            ]
-          }
-          // 'possible_float': [min,max]
-          // user input <= list of values: min..=max
-          else if (tempArray.includes('possible_float')) {
-            random_hyperparams[key] = [
-              possible_params[key].default,
-              getRandomFloatInclusive(
-                possible_params[key].possible_float[0],
-                possible_params[key].possible_float[1],
-              ),
-            ]
-          }
-          // 'possible_str': [str(enum)]
-          // user input <=  multiple choice [list of choices]
-          else if (tempArray.includes('possible_str')) {
-            random_hyperparams[key] = possible_params[key].possible_str
-          }
-          // 'possible_list': [int | float]
-          // user input <=  multiple choice [list of choices]
-          else if (tempArray.includes('possible_list')) {
-            random_hyperparams[key] = getRandomListInclusive(possible_params[key].possible_list)
-          }
-        }
-      }
-    }
-    return random_hyperparams
   }
 </script>
 
@@ -170,7 +123,7 @@
           <p>{desc}</p>
         </div>
         {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
-          <button class="request request-rerun-btn" on:click|stopPropagation={rerun_model(id)}
+          <button class="request request-rerun-btn" on:click|stopPropagation={hyper_build(id)}
             >Rerun</button
           >
         {:else}

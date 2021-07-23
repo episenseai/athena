@@ -153,7 +153,7 @@
   {/if}
 {:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'}
   <ModelsMain />
-{:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.pipe_status !== '1' && stages.includes($PROJECT.current_stage)}
+{:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.pipe_status !== '1' && stages.find((stage) => stage === $PROJECT.current_stage)}
   <PipeMain />
 {/if}
 
