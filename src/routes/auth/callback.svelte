@@ -24,36 +24,33 @@
     let state = $page.query.get('state')
     let scope_query = $page.query.get('scope')
 
-    success = await LOGIN.oauth_callback(code, state, scope_query)
-    // await new Promise(resolve => setTimeout(resolve, 30000))
+    let ret = await LOGIN.oauth_callback(code, state, scope_query)
+    let [result, new_user, redirect_url] = ret
+    success = result
+
     await LOGIN.reset_ustate()
 
-    if (!success) {
+    if (success) {
+      if (new_user) await PROJECT.reset_proj()
+      done = true
+      // authorization complete; redirect to the page before the start of login flow
+      window.location.href = redirect_url
+    } else {
       if (interval) clearInterval(interval)
       seconds = 5
       interval = setInterval(handleTick, 1000)
+      done = true
     }
-
-    done = true
   })
 
   $: if (seconds <= 0) redirect()
 </script>
 
-<svelte:window
-  on:loginok={async (e) => {
-    if (e.detail.new_user) {
-      await PROJECT.reset_proj()
-    }
-    window.location.href = e.detail.redirect
-  }}
-/>
-
 <div class="callback">
   {#if !done}
     <h3>Authentication in progress ...</h3>
     <ProgressL />
-  {:else if !success}
+  {:else if !success && done}
     <h3 class="failed">
       ERROR: Authentication failed. Will redirect to home page in <span class="seconds"
         >{seconds >= 0 ? seconds : 0}</span

@@ -173,24 +173,18 @@ function login_store() {
             if (auth_state) {
               // set the authentication info in svelte 'LOGIN' store
               set(auth_state)
-              const redirect = (await read_ustatekey()).redirect
+              const redirect_url = (await read_ustatekey()).redirect
               // reset 'ustatekey'
               await reset_ustate()
               await snack('success', 'Authorization successfull')
 
-              window.dispatchEvent(
-                new CustomEvent('loginok', {
-                  detail: { redirect, new_user: CURRENT_USER != token.userid },
-                }),
-              )
-              // authorization complete; redirect to the page before the start of login flow
-              // window.location.href = redirect
-              return true
+              // [success, new_user, redirect_url]
+              return [true, CURRENT_USER != token.userid, redirect_url]
             }
             await snack('error', 'Authorization failed')
-            return false
+            return [false, false, '']
           }
-          return false
+          return [false, false, '']
         }
         if (response && response.status === 401) {
           let error = await response
@@ -208,9 +202,9 @@ function login_store() {
             })
           await snack('error', error.detail)
         }
-        return false
+        return [false, false, '']
       }
-      return false
+      return [false, false, '']
     },
 
     // Oauth logout
