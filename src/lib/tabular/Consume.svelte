@@ -80,6 +80,7 @@
   let file_node
   let disabled = false
   async function upload() {
+    window.dispatchEvent(new Event('pgbaron'))
     disabled = true
     const formData = new FormData()
     formData.append('filename', uploadfiles[0].name)
@@ -108,6 +109,7 @@
       await snack('warning', response.json.info)
       // console.log(response.json.data)
     }
+    window.dispatchEvent(new Event('pgbaroff'))
   }
 
   const datestr = (timestamp) => {
@@ -141,7 +143,6 @@
   let open = false
   let selected
   let items = []
-
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
@@ -300,5 +301,4 @@
     margin-top: 20px;
     color: var(--text-lighter);
   }
-
 </style>

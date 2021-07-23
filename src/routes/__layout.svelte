@@ -1,6 +1,7 @@
 <script>
   import '../app.css'
   import Snack from '$lib/base/Snack.svelte'
+  import ProgressL from '$lib/base/ProgressL.svelte'
   import Nav from '$lib/Nav.svelte'
   import OauthLogin from '$lib/auth/OauthLogin.svelte'
   import AuthLogo from './AuthLogo.svelte'
@@ -12,6 +13,8 @@
   export let segment
   let render_main = false
 
+  let show_porgress = false
+
   onMount(async () => {
     // initalize the auth store from the local storage
     const from_saved = await LOGIN.init_auth()
@@ -20,8 +23,22 @@
   })
 </script>
 
+<svelte:window
+  on:pgbaron={() => {
+    show_porgress = true
+  }}
+  on:pgbaroff={() => {
+    show_porgress = false
+  }}
+/>
+
 {#if render_main}
   {#if $LOGIN.success && $LOGIN.access_token}
+    {#if show_porgress}
+      <div class="progress">
+        <ProgressL />
+      </div>
+    {/if}
     {#if segment !== 'tabular'}
       <Nav {segment} level="home" />
       <main class="outer-layout">
@@ -57,6 +74,10 @@
 <Snack />
 
 <style>
+  .progress {
+    position: sticky;
+    z-index: 1000;
+  }
   .auth {
     display: flex;
     justify-content: space-evenly;

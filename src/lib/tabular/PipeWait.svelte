@@ -8,7 +8,6 @@
     await PROJECT.sse_update()
     return async () => PROJECT.sse_close()
   })
-
 </script>
 
 <div class="container">
@@ -25,8 +24,7 @@
     <p>(If it is taking longer than usual try reloading the page)</p>
 
     <h4 class="note">
-      INFO: While the pipeline stage is building you can switch to another project or start a new
-      one.
+      While the pipeline stage is building you can switch to another project or start a new one.
     </h4>
   {:else if $PROJECT.pipe_status === '-1'}
     <Unfreeze />
@@ -55,13 +53,15 @@
     color: var(--text-lighter);
     font-size: 15px;
     text-align: center;
-    max-width: 450px;
+    max-width: 600px;
     display: inline-block;
+    border: var(--light-border);
+    border-radius: 5px;
+    padding: 10px 20px;
   }
   .emoji {
     font-size: 30px;
     top: 4px;
     position: relative;
   }
-
 </style>

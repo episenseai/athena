@@ -6,6 +6,7 @@
   import { onMount } from 'svelte'
   import { snack } from '$lib/base/snack'
   import Details from '$lib/base/Details.svelte'
+
   // file select menu
   let open = false
   let selectedproj
@@ -20,6 +21,18 @@
       return timestamp
     }
   }
+
+  const stages = [
+    'consume:GET',
+    'prepare:GET',
+    'transform:GET',
+    'build:GET',
+    'consume:POST',
+    'prepare:POST',
+    'transform:POST',
+    'build:POST',
+    'finalconfig:GET',
+  ]
 
   async function list_projects() {
     const data = await PROJECT.list_all()
@@ -36,7 +49,6 @@
     await list_projects()
     getting_list = false
   })
-
 </script>
 
 <svelte:head>
@@ -72,6 +84,7 @@
       <h4>Start a new Pipeline</h4>
       <form
         on:submit|preventDefault|stopPropagation={async (event) => {
+          window.dispatchEvent(new Event('pgbaron'))
           disabled = true
           const response = await PROJECT.new(
             event.target.projectname.value,
@@ -85,6 +98,7 @@
               selectedproj = items[0].value
             }
           }
+          window.dispatchEvent(new Event('pgbaroff'))
           disabled = false
         }}
       >
@@ -129,25 +143,9 @@
       </button>
     </div>
   {/if}
-{:else if !$SWITCH_PROJECT &&
-  $PROJECT.id &&
-  $PROJECT.current_stage === 'finalconfig:GET' &&
-  $PROJECT.pipe_status === '1'}
+{:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'}
   <ModelsMain />
-{:else if !$SWITCH_PROJECT &&
-  $PROJECT.id &&
-  $PROJECT.pipe_status !== '1' &&
-  [
-    'consume:GET',
-    'prepare:GET',
-    'transform:GET',
-    'build:GET',
-    'consume:POST',
-    'prepare:POST',
-    'transform:POST',
-    'build:POST',
-    'finalconfig:GET',
-  ].includes($PROJECT.current_stage)}
+{:else if !$SWITCH_PROJECT && $PROJECT.id && $PROJECT.pipe_status !== '1' && stages.includes($PROJECT.current_stage)}
   <PipeMain />
 {/if}
 
@@ -222,5 +220,4 @@
   button:hover {
     border-color: var(--blue);
   }
-
 </style>
