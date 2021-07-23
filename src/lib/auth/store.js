@@ -79,7 +79,7 @@ function login_store() {
   const reset_auth = async () => {
     await reset_ustate()
     await write_auth(clean_auth_state)
-    set({})
+    set(clean_auth_state)
   }
 
   const { subscribe, set } = writable(clean_auth_state)
@@ -102,9 +102,15 @@ function login_store() {
       const expires = new Date()
       expires.setMinutes(expires.getMinutes() + 5)
 
+      let redirect
+      if (window.location.pathname.startsWith('/auth/callback')) {
+        redirect = window.location.origin
+      } else {
+        redirect = window.location.href
+      }
       const ustatekey = {
         ustate,
-        redirect: window.location.href,
+        redirect,
         expires,
       }
 
