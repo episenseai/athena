@@ -49,7 +49,12 @@ export async function fetch_json_POST(url, data, service_name) {
 
     // unauthorized request
     if (response.status === 401) {
-      await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      if (await LOGIN.cred_expired(response.headers)) {
+        console.log('expired')
+        await LOGIN.oauth_relogin()
+      } else {
+        await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      }
       return false
     }
 
@@ -102,7 +107,12 @@ export async function fetch_json_GET(url, service_name) {
 
     // unauthorized request
     if (response.status === 401) {
-      await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      if (await LOGIN.cred_expired(response.headers)) {
+        console.log('expired')
+        await LOGIN.oauth_relogin()
+      } else {
+        await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      }
       return false
     }
 
@@ -155,7 +165,12 @@ export async function fetch_upload_POST(url, formData) {
 
     // unauthorized request
     if (response.status === 401) {
-      await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      if (await LOGIN.cred_expired(response.headers)) {
+        console.log('expired')
+        await LOGIN.oauth_relogin()
+      } else {
+        await snack('error', json.info ? json.info : `${response.status}: Unauthorized request.`)
+      }
       return false
     }
 

@@ -208,6 +208,13 @@ function login_store() {
       return true
     },
 
+    // relogin when the credential is expired
+    oauth_relogin: async () => {
+      await write_auth(clean_auth_state)
+      set(clean_auth_state)
+      return true
+    },
+
     init_auth: async () => {
       let load_state = await read_auth(
         'error reading auth state from local storage while initialization',
@@ -224,6 +231,8 @@ function login_store() {
       // console.log(load_state)
       return true
     },
+
+    cred_expired: async (headers) => headers.get('X-Expired-AccessToken') == 1,
   }
 }
 

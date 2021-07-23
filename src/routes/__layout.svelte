@@ -18,7 +18,6 @@
     if (!from_saved) await PROJECT.reset_proj()
     render_main = true
   })
-
 </script>
 
 {#if render_main}
@@ -45,8 +44,10 @@
       </main>
     {:else}
       <div class="error_msg">
-        <h4>[ERROR]: You are either logged out or the resource does not exist</h4>
-        <a class="btn" href="/">Go to login page</a>
+        <h4>Login / Relogin to continue...</h4>
+        <div class="auth">
+          <OauthLogin />
+        </div>
       </div>
     {/if}
   {/if}
@@ -88,14 +89,4 @@
     color: rgba(0, 0, 0, 0.7);
     font-weight: 700;
   }
-  .error_msg a {
-    display: block;
-    text-align: center;
-    width: 320px;
-    margin: auto;
-    margin-top: 20px;
-    color: rgba(var(--lobster-rgb), 1);
-    border-color: rgba(var(--lobster-rgb), 1);
-  }
-
 </style>
