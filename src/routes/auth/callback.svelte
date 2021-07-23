@@ -3,6 +3,7 @@
   import Spinner from '$lib/Spinner.svelte'
   import { onMount } from 'svelte'
   import { LOGIN } from '$lib/auth/store'
+  import { PROJECT } from '$lib/tabular/store'
   import { page } from '$app/stores'
 
   let done = false
@@ -38,6 +39,15 @@
 
   $: if (seconds <= 0) redirect()
 </script>
+
+<svelte:window
+  on:loginok={async (e) => {
+    if (e.detail.new_user) {
+      await PROJECT.reset_proj()
+    }
+    window.location.href = e.detail.redirect
+  }}
+/>
 
 <div class="callback">
   {#if !done}

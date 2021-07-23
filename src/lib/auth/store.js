@@ -177,8 +177,14 @@ function login_store() {
               // reset 'ustatekey'
               await reset_ustate()
               await snack('success', 'Authorization successfull')
+
+              window.dispatchEvent(
+                new CustomEvent('loginok', {
+                  detail: { redirect, new_user: CURRENT_USER != token.userid },
+                }),
+              )
               // authorization complete; redirect to the page before the start of login flow
-              window.location.href = redirect
+              // window.location.href = redirect
               return true
             }
             await snack('error', 'Authorization failed')
@@ -243,3 +249,5 @@ function login_store() {
 }
 
 export const LOGIN = login_store()
+
+let CURRENT_USER = '0'
