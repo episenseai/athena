@@ -2,6 +2,7 @@
   import Menu from '$lib/base/Menu.svelte'
   import PipeMain from '$lib/tabular/PipeMain.svelte'
   import ModelsMain from '$lib/tabular/ModelsMain.svelte'
+  import { models } from '$lib/tabular/models/store'
   import { PROJECT, SWITCH_PROJECT, GET_DATA, POST_DATA } from '$lib/tabular/store'
   import { onMount } from 'svelte'
   import { snack } from '$lib/base/snack'
@@ -73,6 +74,13 @@
     <pre
       style="overflow: scroll; max-height:600px; margin-bottom: 5px;">
       {JSON.stringify($POST_DATA, undefined, 2)}
+    </pre>
+  </Details>
+  <Details>
+    <h4 slot="summary">MODELS data</h4>
+    <pre
+      style="overflow: scroll; max-height:600px; margin-bottom: 5px;">
+      {JSON.stringify($models, undefined, 2)}
     </pre>
   </Details>
 {/if}

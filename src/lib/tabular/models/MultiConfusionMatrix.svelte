@@ -19,7 +19,7 @@
 </script>
 
 <div>
-  <table>
+  <table class="sigmetrics">
     <thead>
       <tr>
         <th colspan="2">SIGNIFICANT MODEL MTERICS (Multi-Class Classification)</th>
@@ -205,5 +205,22 @@
   }
   td {
     padding: 4px;
+  }
+
+  table.sigmetrics {
+    width: auto;
+    min-width: 800px;
+    max-width: 98%;
+    margin: 30px auto;
+    border-style: solid;
+    border-width: 0 1px 0 1px;
+    border-color: #eaecef;
+  }
+  .sigmetrics td:nth-child(1) {
+    color: var(--blue);
+    font-size: 13px;
+  }
+  .sigmetrics thead {
+    background-color: rgb(250, 248, 220);
   }
 </style>

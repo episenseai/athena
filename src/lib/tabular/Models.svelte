@@ -63,15 +63,15 @@
   function randomhyperparams_generator(id) {
     const random_hyperparams = {}
     let model = get(models).find((el) => el.id === id)
-    // console.log(JSON.stringify(model.possible_model_params))
     if (model.possible_model_params) {
       const possible_params = model.possible_model_params
-      // const possible_params_name = Object.keys(possible_params)
-      // console.log(JSON.stringify(possible_params))
+
       for (const [key, value] of Object.entries(possible_params)) {
         if (Math.random() >= 0.1) {
           let tempArray = Object.keys(possible_params[key])
 
+          // 'possible_int': [min, max]
+          // user input <= list of values: min..=max
           if (tempArray.includes('possible_int')) {
             random_hyperparams[key] = [
               possible_params[key].default,
@@ -81,7 +81,9 @@
               ),
             ]
           }
-          if (tempArray.includes('possible_float')) {
+          // 'possible_float': [min,max]
+          // user input <= list of values: min..=max
+          else if (tempArray.includes('possible_float')) {
             random_hyperparams[key] = [
               possible_params[key].default,
               getRandomFloatInclusive(
@@ -90,10 +92,14 @@
               ),
             ]
           }
-          if (tempArray.includes('possible_str')) {
+          // 'possible_str': [str(enum)]
+          // user input <=  multiple choice [list of choices]
+          else if (tempArray.includes('possible_str')) {
             random_hyperparams[key] = possible_params[key].possible_str
           }
-          if (tempArray.includes('possible_list')) {
+          // 'possible_list': [int | float]
+          // user input <=  multiple choice [list of choices]
+          else if (tempArray.includes('possible_list')) {
             random_hyperparams[key] = getRandomListInclusive(possible_params[key].possible_list)
           }
         }
@@ -101,7 +107,6 @@
     }
     return random_hyperparams
   }
-
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
@@ -262,8 +267,10 @@
   }
   .container {
     grid-column: 1 / 12;
-    padding: 10px 10px 50px;
+    padding: 10px 5px 50px;
     min-height: 300px;
+    width: 100%;
+    overflow-x: scroll;
   }
   .val,
   .status {
@@ -372,5 +379,4 @@
     position: relative;
     color: var(--text-lighter);
   }
-
 </style>

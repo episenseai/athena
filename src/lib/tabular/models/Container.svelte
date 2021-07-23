@@ -95,7 +95,6 @@
         return val
       })
   })
-
 </script>
 
 <div class="tabs">
@@ -152,5 +151,4 @@
   span.active-tab {
     background-color: #eeeeee;
   }
-
 </style>

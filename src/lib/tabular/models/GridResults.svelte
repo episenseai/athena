@@ -1,14 +1,13 @@
 <script>
-  // import { keys } from 'localforage'
   import { models } from './store'
+  import { is_empty } from '$lib/utils'
   export let id
 
   $: model = $models.find((el) => el.id === id)
   let changed_hparams_test = {}
-
 </script>
 
-{#if $models && model && model.grid_results}
+{#if !is_empty($models) && model && model.grid_results}
   <!--
     <pre>{JSON.stringify(model.possible_model_params)}</pre>
     <pre>{JSON.stringify(changed_hparams_test)}</pre>
@@ -52,6 +51,16 @@
         {/each}
       </tbody>
     </table>
+
+    <div class="hyperchange">
+      <h2>Adjust the model hyperparameters and rerun the model</h2>
+      {#if !is_empty(model)}
+        {#each Object.entries(model.possible_model_params) as [name, param] (name)}
+          <pre>{name}</pre>
+          <pre>{JSON.stringify(param)}</pre>
+        {/each}
+      {/if}
+    </div>
 
     <table>
       <thead>
@@ -124,11 +133,19 @@
 {/if}
 
 <style>
+  .hyperchange {
+    margin-top: 50px;
+    border-top: var(--light-border);
+  }
+  .hyperchange h2 {
+    padding-top: 20px;
+  }
   .container {
     width: 100%;
-    padding-left: 1em;
-    padding-right: 1em;
-    max-width: 800px;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+    min-width: 800px;
+    max-width: 99%;
     margin: auto;
     font-size: 13px;
     padding-top: 20px;
@@ -139,9 +156,11 @@
     margin-top: 10px;
   }
   table {
-    width: 100%;
-    margin: 30px auto;
-    border-style: solid;
+    width: auto;
+    min-width: 800px;
+    max-width: 98%;
+    margin-left: auto;
+    margin-right: auto;
     border-width: 0 1px 0 1px;
     border-color: #eaecef;
   }
@@ -166,5 +185,4 @@
   .best-score {
     color: var(--green);
   }
-
 </style>

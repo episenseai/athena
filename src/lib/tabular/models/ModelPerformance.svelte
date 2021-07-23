@@ -67,7 +67,6 @@
       responsive: true,
     })
   }
-
 </script>
 
 <table>
@@ -102,12 +101,27 @@
 
 <style>
   table {
-    width: 400px;
-    margin: 30px auto 15px;
+    width: auto;
+    min-width: 800px;
+    max-width: 98%;
+    margin: 30px auto;
+    border-style: solid;
+    border-width: 0 1px 0 1px;
+    border-color: #eaecef;
+  }
+  td {
+    padding: 6px;
+    font-size: 13px;
+  }
+  td:nth-child(1) {
+    color: var(--blue);
+    font-size: 13px;
+  }
+  thead {
+    background-color: rgb(250, 248, 220);
   }
   .rocplot {
     width: 750px;
     margin: auto;
   }
-
 </style>

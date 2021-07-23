@@ -346,7 +346,9 @@
     color: var(--text-medium);
   }
   table {
-    width: 400px;
+    width: auto;
+    min-width: 800px;
+    max-width: 98%;
     margin: 30px auto;
     border-style: solid;
     border-width: 0 1px 0 1px;
@@ -356,8 +358,11 @@
     padding: 6px;
     font-size: 13px;
   }
-  td:nth-child(2) {
-    color: #c05726;
+  td:nth-child(1) {
+    color: var(--blue);
     font-size: 13px;
+  }
+  thead {
+    background-color: rgb(250, 248, 220);
   }
 </style>
