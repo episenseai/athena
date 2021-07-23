@@ -272,7 +272,7 @@
   }
   .hyperchange td:nth-child(3) {
     min-width: 300px;
-    padding: 10px 20px;
+    padding: 6px 20px;
   }
   .hyperchange [type='text'] {
     height: 32px;
@@ -291,12 +291,12 @@
   }
   pre {
     background-color: transparent;
+    color: var(--pink);
   }
   .hyperchange label {
     font-size: 14px;
     padding: 3px 0;
-    font-weight: 500;
-    color: var(--text-light);
+    color: var(--text-dark);
     cursor: pointer;
   }
   .hyperchange td {
