@@ -23,6 +23,8 @@
     let changed_hparams = {}
     changed_hparams[id] = randomhyperparams_generator(id)
 
+    console.log(changed_hparams)
+
     let res = await PROJECT.model_build(modelids, changed_hparams)
     if (res) {
       models.update((ms) => {

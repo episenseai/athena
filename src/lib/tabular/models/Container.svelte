@@ -20,24 +20,24 @@
 
   // tabs for the models container pane
   const classificationTabs = [
-    { component: ModelInfo, name: 'MODEL INFO' },
-    { component: GridResults, name: 'GRID RESULTS' },
-    { component: ConfusionMatrix, name: 'CONFUSION MATRIX' },
-    { component: ROCCurve, name: 'AUC | ROC CURVE' },
-    { component: Predict, name: 'PREDICT' },
+    { component: ModelInfo, name: 'Description' },
+    { component: GridResults, name: 'Build Output' },
+    { component: ConfusionMatrix, name: 'Confusion Matrix' },
+    { component: ROCCurve, name: 'AUC | ROC Curve' },
+    { component: Predict, name: 'Prediction' },
   ]
   const nClassificationTabs = [
-    { component: ModelInfo, name: 'MODEL INFO' },
-    { component: GridResults, name: 'GRID RESULTS' },
-    { component: MultiConfusionMatrix, name: 'CONFUSION MATRIX' },
-    { component: ROCCurve, name: 'AUC | ROC CURVE' },
-    { component: Predict, name: 'PREDICT' },
+    { component: ModelInfo, name: 'Description' },
+    { component: GridResults, name: 'Build Output' },
+    { component: MultiConfusionMatrix, name: 'Confusion Matrix' },
+    { component: ROCCurve, name: 'AUC | ROC Curve' },
+    { component: Predict, name: 'Prediction' },
   ]
   const regressionTabs = [
-    { component: ModelInfo, name: 'MODEL INFO' },
-    { component: GridResults, name: 'GRID RESULTS' },
-    { component: ModelPerformance, name: 'MODEL PERFORMANCE' },
-    { component: Predict, name: 'PREDICT' },
+    { component: ModelInfo, name: 'Description' },
+    { component: GridResults, name: 'Build Output' },
+    { component: ModelPerformance, name: 'Performance' },
+    { component: Predict, name: 'Prediction' },
   ]
 
   /* const unfinishedModelTabs = [{ component: ModelInfo, name: 'MODEL INFO' }] */
@@ -131,7 +131,6 @@
     cursor: pointer;
     border: var(--dark-border);
     border-right: none;
-    text-transform: lowercase;
     font-weight: 500;
     background-color: #fff;
     border-color: var(--dark-border-color);

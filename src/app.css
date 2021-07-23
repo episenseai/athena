@@ -324,14 +324,14 @@ tbody tr:hover:nth-child(n + 1) {
   margin-left: 4px;
 }
 
-::-webkit-input-placeholder {
-  color: rgba(109, 137, 157, 0.5);
+::placeholder {
+  color: rgba(0, 0, 0, 0.6);
 }
 :-ms-input-placeholder {
-  color: rgba(109, 137, 157, 0.5);
+  color: rgba(0, 0, 0, 0.6);
 }
-::placeholder {
-  color: rgba(109, 137, 157, 0.5);
+::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
 }
 .switch {
   position: relative;
