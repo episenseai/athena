@@ -139,7 +139,7 @@
           {:else if status === 'RUNNING'}
             <span class="running">Running</span>
           {:else if status === 'TRYCANCEL'}
-            <span class="cancelled">Await Cancellation</span>
+            <span class="cancelled">Awaiting Cancellation</span>
           {:else if status === 'CANCELLED'}
             <span class="cancelled">Cancelled</span>
           {:else if status === 'ERROR'}<span class="error">Error</span>{/if}

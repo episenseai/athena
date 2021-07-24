@@ -113,83 +113,85 @@
             </tr>
           </thead>
           <tbody>
-            {#each Object.entries(model.possible_model_params) as [name, param] (name)}
-              <tr class="param">
-                <td>{name}</td>
-                <td>{param.default}</td>
-                <td class="input">
-                  <div>
-                    {#if 'possible_int' in param}
-                      <input
-                        type="text"
-                        placeholder="10, 0, 33"
-                        on:input={(e) => {
-                          let [passed, value, error_msg] = validate(
-                            e.target.value,
-                            'possible_int',
-                            { min: param['possible_int'][0], max: param['possible_int'][1] },
-                          )
-                          valid_input = passed
-                          if (!valid_input) {
-                            error_elem.textContent = `Diagnostics | ${error_msg}`
-                          } else {
-                            error_elem.textContent = diagnostic_msg
-                          }
-                          param.choices = value
-                        }}
-                      />
-                    {:else if 'possible_float' in param}
-                      <input
-                        type="text"
-                        placeholder="1.2, 0.8, 20"
-                        on:input={(e) => {
-                          let [passed, value, error_msg] = validate(
-                            e.target.value,
-                            'possible_float',
-                            { min: param['possible_float'][0], max: param['possible_float'][1] },
-                          )
-                          valid_input = passed
-                          if (!valid_input) {
-                            error_elem.textContent = `Diagnostics | ${error_msg}`
-                          } else {
-                            error_elem.textContent = diagnostic_msg
-                          }
-                          param.choices = value
-                        }}
-                      />
-                    {:else if 'possible_str' in param}
-                      {#each param['possible_str'] as choice}
-                        <label>
-                          <input type="checkbox" bind:group={param['choices']} value={choice} />
-                          {choice}
-                        </label>
-                      {/each}
-                    {:else if 'possible_list' in param}
-                      {#each param['possible_list'] as choice}
-                        <label>
-                          <input type="checkbox" bind:group={param['choices']} value={choice} />
-                          {choice}
-                        </label>
-                      {/each}
-                    {/if}
-                  </div>
-                </td>
+            {#key model.status}
+              {#each Object.entries(model.possible_model_params) as [name, param] (name)}
+                <tr class="param">
+                  <td>{name}</td>
+                  <td>{param.default}</td>
+                  <td class="input">
+                    <div>
+                      {#if 'possible_int' in param}
+                        <input
+                          type="text"
+                          placeholder="10, 0, 33"
+                          on:input={(e) => {
+                            let [passed, value, error_msg] = validate(
+                              e.target.value,
+                              'possible_int',
+                              { min: param['possible_int'][0], max: param['possible_int'][1] },
+                            )
+                            valid_input = passed
+                            if (!valid_input) {
+                              error_elem.textContent = `Diagnostics | ${error_msg}`
+                            } else {
+                              error_elem.textContent = diagnostic_msg
+                            }
+                            param.choices = value
+                          }}
+                        />
+                      {:else if 'possible_float' in param}
+                        <input
+                          type="text"
+                          placeholder="1.2, 0.8, 20"
+                          on:input={(e) => {
+                            let [passed, value, error_msg] = validate(
+                              e.target.value,
+                              'possible_float',
+                              { min: param['possible_float'][0], max: param['possible_float'][1] },
+                            )
+                            valid_input = passed
+                            if (!valid_input) {
+                              error_elem.textContent = `Diagnostics | ${error_msg}`
+                            } else {
+                              error_elem.textContent = diagnostic_msg
+                            }
+                            param.choices = value
+                          }}
+                        />
+                      {:else if 'possible_str' in param}
+                        {#each param['possible_str'] as choice}
+                          <label>
+                            <input type="checkbox" bind:group={param['choices']} value={choice} />
+                            {choice}
+                          </label>
+                        {/each}
+                      {:else if 'possible_list' in param}
+                        {#each param['possible_list'] as choice}
+                          <label>
+                            <input type="checkbox" bind:group={param['choices']} value={choice} />
+                            {choice}
+                          </label>
+                        {/each}
+                      {/if}
+                    </div>
+                  </td>
 
-                <td class="input">
-                  <div>
-                    {#if 'possible_int' in param}
-                      <pre>(integer) | min = {param["possible_int"][0]} | max = {param["possible_int"][1]}</pre>
-                    {:else if 'possible_float' in param}
-                      <pre>(float)&nbsp;&nbsp; | min = {param["possible_float"][0]} | max = {param["possible_float"][1]}</pre>
-                    {:else if 'possible_str' in param}
-                      <pre>(choices) | count = {param["possible_str"].length}</pre>
-                    {:else if 'possible_list' in param}
-                      <pre>(choices) | count = {param["possible_list"].length}</pre>
-                    {/if}
-                  </div>
-                </td>
-              </tr>
-            {/each}
+                  <td class="input">
+                    <div>
+                      {#if 'possible_int' in param}
+                        <pre>(integer) | min = {param["possible_int"][0]} | max = {param["possible_int"][1]}</pre>
+                      {:else if 'possible_float' in param}
+                        <pre>(float)&nbsp;&nbsp; | min = {param["possible_float"][0]} | max = {param["possible_float"][1]}</pre>
+                      {:else if 'possible_str' in param}
+                        <pre>(choices) | count = {param["possible_str"].length}</pre>
+                      {:else if 'possible_list' in param}
+                        <pre>(choices) | count = {param["possible_list"].length}</pre>
+                      {/if}
+                    </div>
+                  </td>
+                </tr>
+              {/each}
+            {/key}
           </tbody>
         </table>
       {/if}
