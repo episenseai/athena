@@ -369,10 +369,6 @@
   [type='text']:focus {
     border-color: #ffa27b;
   }
-  pre {
-    background-color: transparent;
-    color: var(--pink);
-  }
   .hyperchange label {
     font-size: 14px;
     padding: 3px 0;
