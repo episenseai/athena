@@ -21,7 +21,7 @@
   }
 
   // Rebuild the model with the user provided hyperparameters
-  async function hyper_build(id) {
+  async function rerun(id) {
     let model = get(models).find((el) => el.id === id)
 
     if (is_empty(model) || !model.status) {
@@ -29,26 +29,14 @@
       return
     }
 
-    if (!['DONE', 'ERROR'].find((el) => el === model.status)) {
+    if (!['DONE', 'ERROR', 'CANCELLED'].find((el) => el === model.status)) {
       await snack('error', `Model is in ${model.status} state. Could not rerun.`)
       return
     }
 
-    const hyperparams = {}
-    const possible_params = model.possible_model_params
-    for (const [name, param] of Object.entries(possible_params)) {
-      if (!param.choices || param.choices.length == 0) {
-        await snack('error', `Value missing for '${name}' hyperparameter`)
-        return
-      }
-      hyperparams[name] = param.choices
-    }
+    await snack('info', 'Building the model with default hyper-parameters.')
+    let res = await PROJECT.model_build([id])
 
-    let modelids = [id]
-    let changed_hparams = {}
-    changed_hparams[id] = hyperparams
-
-    let res = await PROJECT.model_build(modelids, changed_hparams)
     if (res) {
       models.update((ms) => {
         const new_ms = ms.map((m) => {
@@ -123,8 +111,8 @@
           <p>{desc}</p>
         </div>
         {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
-          <button class="request request-rerun-btn" on:click|stopPropagation={hyper_build(id)}
-            >Rerun</button
+          <button class="request request-rerun-btn" on:click|stopPropagation={rerun(id)}
+            >Default Rerun</button
           >
         {:else}
           <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
@@ -319,7 +307,7 @@
   }
 
   .request-cancel-btn {
-    width: 80px;
+    width: 120px;
     height: 30px;
     margin: auto;
     top: -4px;
@@ -327,7 +315,7 @@
     color: rgba(var(--reddish-rgb), 0.95);
   }
   .request-rerun-btn {
-    width: 80px;
+    width: 120px;
     height: 30px;
     margin: auto;
     top: -4px;

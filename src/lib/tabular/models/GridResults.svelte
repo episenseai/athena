@@ -1,6 +1,9 @@
 <script>
   import { models } from './store'
   import { is_empty } from '$lib/utils'
+  import { get } from 'svelte/store'
+  import { PROJECT } from '$lib/tabular/store'
+  import { snack } from '$lib/base/snack'
   export let id
 
   $: model = $models.find((el) => el.id === id)
@@ -52,6 +55,49 @@
   let error_elem
   let diagnostic_msg = 'Diagnostics | Values of hyperparameters are valid'
   let valid_input = true
+
+  // Rebuild the model with the user provided hyperparameters
+  async function hyper_build(id) {
+    let model = get(models).find((el) => el.id === id)
+
+    if (is_empty(model) || !model.status) {
+      await snack('error', 'Invalid model')
+      return
+    }
+
+    if (!['DONE', 'ERROR', 'CANCELLED'].find((el) => el === model.status)) {
+      await snack('error', `Model is in ${model.status} state. Could not rerun.`)
+      return
+    }
+
+    const hyperparams = {}
+    const possible_params = model.possible_model_params
+    for (const [name, param] of Object.entries(possible_params)) {
+      if (!param.choices || param.choices.length == 0) {
+        await snack('error', `Value missing for '${name}' hyperparameter`)
+        return
+      }
+      hyperparams[name] = param.choices
+    }
+
+    let modelids = [id]
+    let changed_hparams = {}
+    changed_hparams[id] = hyperparams
+
+    let res = await PROJECT.model_build(modelids, changed_hparams)
+    if (res) {
+      models.update((ms) => {
+        const new_ms = ms.map((m) => {
+          if (m.id === id) {
+            m.status = 'RUNNING'
+          }
+          return m
+        })
+        return new_ms
+      })
+      await PROJECT.sse_models_update(true)
+    }
+  }
 </script>
 
 {#if !is_empty($models) && model && model.grid_results}
@@ -102,6 +148,9 @@
     <div class="hyperchange">
       <h2>Adjust the model hyperparameters and rerun the model</h2>
       <p bind:this={error_elem} class:error={!valid_input}>{diagnostic_msg}</p>
+      <button class="rerun" on:click|stopPropagation={hyper_build(id)}
+        >Rebuild with hyper-parameters</button
+      >
       {#if !is_empty(model)}
         <table>
           <thead>
@@ -260,17 +309,22 @@
   td.input {
     text-align: left;
   }
+  .hyperchange table {
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
   .hyperchange p {
     font-size: 14px;
     color: green;
     text-align: center;
     padding: 5px 10px;
-    border: 1px solid green;
-    border-radius: 5px;
+    border-top: 1px solid green;
+    border-bottom: 1px solid green;
   }
   .hyperchange p.error {
     color: red;
-    border: 1px solid red;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
   }
   .hyperchange td:nth-child(3) {
     min-width: 300px;
@@ -303,5 +357,10 @@
   }
   .hyperchange td {
     min-width: 100px;
+  }
+  button.rerun {
+    margin: 20px auto 0;
+    display: block;
+    width: 300px;
   }
 </style>
