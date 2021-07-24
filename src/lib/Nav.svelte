@@ -8,7 +8,6 @@
 
   // tabular or home
   export let level
-
 </script>
 
 <nav class="noselect">
@@ -34,8 +33,14 @@
     <div class="">
       <ul>
         <li class="username">
-          <div />
-          {$LOGIN.username}
+          {#key $LOGIN}
+            {#if $LOGIN && $LOGIN.picture === undefined}
+              <div />
+            {:else}
+              <img src={$LOGIN.picture} alt="" />
+            {/if}
+            {$LOGIN.username}
+          {/key}
         </li>
       </ul>
     </div>
@@ -204,6 +209,8 @@
   }
   .username {
     font-weight: 500;
+    display: flex;
+    align-items: center;
   }
   .pname {
     color: var(--pink);
@@ -225,5 +232,10 @@
   .next-icon {
     color: var(--text-lighter);
   }
-
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 </style>
