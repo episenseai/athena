@@ -72,12 +72,19 @@
 
     const hyperparams = {}
     const possible_params = model.possible_model_params
+    let combinations = 1
     for (const [name, param] of Object.entries(possible_params)) {
       if (!param.choices || param.choices.length == 0) {
         await snack('error', `Value missing for '${name}' hyperparameter`)
         return
       }
       hyperparams[name] = param.choices
+      combinations = combinations * param.choices.length
+    }
+
+    if (combinations >= 16) {
+      await snack('error', `Too many paramter comabinations for the run: total = ${combinations}`)
+      return
     }
 
     let modelids = [id]
@@ -130,6 +137,14 @@
       </table>
     </div>
 
+    <h2>
+      Results for all parameter combinations
+      {#if model.grid_results.cvresult_list[0] && model.grid_results.cvresult_list[0].length}
+        <span class="best-score"
+          ><b>(total = {model.grid_results.cvresult_list[0].length - 1})</b></span
+        >
+      {/if}
+    </h2>
     <div class="tb-container">
       <table>
         <thead>
@@ -172,7 +187,7 @@
               {#each Object.entries(model.possible_model_params) as [name, param] (name)}
                 <tr class="param">
                   <td>{name}</td>
-                  <td>{param.default}</td>
+                  <td class="def">{param.default}</td>
                   <td class="input">
                     <div>
                       {#if 'possible_int' in param}
@@ -277,11 +292,12 @@
   .hyperchange {
     margin-top: 40px;
   }
-  .hyperchange h2 {
+  h2 {
     padding-top: 20px;
     border-bottom: var(--light-border);
     width: 800px;
-    margin: 0 auto 20px;
+    margin: 0 auto 0;
+    text-align: center;
   }
   .container {
     width: 100%;
@@ -309,6 +325,7 @@
     margin: 30px auto 0;
     border-width: 0 1px 0 1px;
     border-color: #eaecef;
+    margin-bottom: 30px;
   }
   td {
     padding: 6px;
@@ -324,10 +341,7 @@
   thead {
     background-color: rgb(250, 248, 220);
   }
-  h2 {
-    text-align: center;
-    color: var(--text-light);
-  }
+
   .best-score {
     color: var(--green);
   }
@@ -356,6 +370,7 @@
     padding: 5px 10px;
     border-top: 1px solid green;
     border-bottom: 1px solid green;
+    margin-top: 20px;
   }
   .hyperchange p.error {
     color: red;
@@ -383,9 +398,12 @@
   }
   .hyperchange label {
     font-size: 14px;
-    padding: 3px 0;
+    padding: 2px 0;
     color: var(--text-dark);
     cursor: pointer;
+  }
+  td.def {
+    font-size: 14px;
   }
   .hyperchange td {
     min-width: 100px;
