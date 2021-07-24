@@ -62,8 +62,6 @@
       name: feature.name,
     }
   }
-  // check if the value is a finite number and not a NaN
-  const isNumber = (x) => typeof x === 'number' && !isNaN(x) && isFinite(x)
 
   //get data
   onMount(async () => {
@@ -74,7 +72,6 @@
       }
     }
   })
-
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
@@ -91,8 +88,8 @@
     </div>
     <div class="table-container">
       <table>
-        <TableHead {isNumber} />
-        <TableBody {isNumber} on:plotly={(e) => plotlyDraw(e.detail.plotID)} />
+        <TableHead />
+        <TableBody on:plotly={(e) => plotlyDraw(e.detail.plotID)} />
       </table>
     </div>
   </div>
@@ -118,5 +115,4 @@
     width: max-content;
     min-width: 100%;
   }
-
 </style>

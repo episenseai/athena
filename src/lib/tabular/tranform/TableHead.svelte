@@ -2,10 +2,9 @@
   import { tooltip } from '../../SampleTooltip.svelte'
   import { GET_DATA } from '../store'
   import { headers } from './headers.js'
+  import { isNumber } from '$lib/utils'
 
   let currentSort = 'id'
-
-  export let isNumber
 
   // change the sort order based on ascend
   const sortOrder = (output, ascend) => (output === 0 ? 0 : ascend ? output : -output)

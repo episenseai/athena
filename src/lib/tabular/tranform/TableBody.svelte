@@ -1,8 +1,7 @@
 <script>
   import { GET_DATA } from '../store'
   import { onMount } from 'svelte'
-
-  export let isNumber
+  import { isNumber } from '$lib/utils'
 
   // weight assigned should be between 0 and 1    (246, 248, 250)
   const verifyWeight = ({ target }) => {
@@ -27,7 +26,6 @@
     plotID = $GET_DATA.data.target
     dispatch($GET_DATA.data.target)
   })
-
 </script>
 
 <tbody>
@@ -91,5 +89,4 @@
   .plotlyTarget {
     background-color: var(--light5);
   }
-
 </style>

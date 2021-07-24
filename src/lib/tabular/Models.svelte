@@ -7,6 +7,7 @@
   import { PROJECT } from '$lib/tabular/store'
   import { is_empty } from '$lib/utils'
   import { snack } from '$lib/base/snack'
+  import { isNumber } from '$lib/utils'
 
   // Issue a cancel request for the build job of the model
   async function cancel_model(id) {
@@ -58,111 +59,142 @@
     open = false
   }
   $: console.log($models)
+
+  let ascend = false
+
+  // change the sort order based on ascend
+  const sortOrder = (output, ascend) => (output === 0 ? 0 : ascend ? output : -output)
+
+  const get_metrics_val = (m) => {
+    if (!m || !m.metrics || !m.metrics.val) return undefined
+    return m.metrics.val
+  }
+
+  function sortby_metrics() {
+    let ms = get(models)
+    if (ms.length == 0) return
+
+    // get features for which the property is a sortable number
+    let comparable = ms.filter((m) => isNumber(get_metrics_val(m)))
+    // rest of the non sortable features
+    let notComparable = ms.filter((m) => !isNumber(get_metrics_val(m)))
+    // sort the features
+    comparable.sort((m1, m2) => sortOrder(get_metrics_val(m1) - get_metrics_val(m2), ascend))
+    // concat the sorted and unsortable features
+
+    models.set(comparable.concat(notComparable))
+    // console.log(m.map((m) => m.metrics.val))
+    ascend = !ascend
+  }
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
-  <header>
-    <div class="lsmod info">
-      <h4 class="noselect">
-        {$modelType === 'regressor'
-          ? 'Regressor Models'
-          : $modelType === 'classifier'
-          ? 'Classifier Models'
-          : 'Multi Classifier Models'}: ({$models.length} models)
-      </h4>
-      <button
-        class:right={!open}
-        class:down={open}
-        on:click={() => {
-          let x = get(activeModels)
-          Object.keys(x).forEach((key, _) => {
-            x[key] = false
-          })
-          $activeModels = x
-        }}><span>Collapse all</span></button
-      >
-    </div>
-    <h4 class="request noselect">Request</h4>
-    <h4 class="status noselect">Status</h4>
-    <h4 class="val noselect">{$optimizeUsing} (metric)</h4>
-    <div class="empty" />
-  </header>
-  <main>
-    {#each $models as { name, desc, id, metrics, status, classes } (id)}
-      <section class:active={$activeModels[id]}>
-        <div
-          class="info"
-          title={$activeModels[id]
-            ? 'Click to hide the details'
-            : 'Click to show the details of:  ' + name}
-          on:click|preventDefault|stopPropagation={() => {
-            let val = true
-            if (get(activeModels)[id]) {
-              val = false
-            }
-            activeModels.update((m_ids) => {
-              m_ids[id] = val
-              return m_ids
+  {#key ascend}
+    <header>
+      <div class="lsmod info">
+        <h4 class="noselect">
+          {$modelType === 'regressor'
+            ? 'Regressor Models'
+            : $modelType === 'classifier'
+            ? 'Classifier Models'
+            : 'Multi Classifier Models'}: ({$models.length} models)
+        </h4>
+        <button
+          class:right={!open}
+          class:down={open}
+          on:click={() => {
+            let x = get(activeModels)
+            Object.keys(x).forEach((key, _) => {
+              x[key] = false
             })
-          }}
+            $activeModels = x
+          }}><span>Collapse all</span></button
         >
-          <h3 class="name" class:right={!$activeModels[id]} class:down={$activeModels[id]}>
-            {name}
-            <div>
-              {#if status === 'RUNNING'}
-                <Spinner speed={600} color={'rgb(232, 62, 140)'} />
-              {:else if status === 'DONE'}
-                <div class="done">✔</div>
-              {:else if status === 'WAIT'}
-                <Jumper width={'24px'} height={'16px'} background={'rgb(107, 81, 216)'} />
-              {:else if status === 'TRYCANCEL'}
-                <div class="cancelled">x??</div>
-              {:else if status === 'CANCELLED'}
-                <div class="cancelled">x</div>
-              {:else if status === 'ERROR'}
-                <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1
+      </div>
+      <h4 class="request noselect">Request</h4>
+      <h4 class="status noselect">Status</h4>
+      <h4 class="val noselect">
+        {$optimizeUsing} <button class="sort" on:click={() => sortby_metrics()}>sort</button>
+      </h4>
+      <div class="empty" />
+    </header>
+    <main>
+      {#each $models as { name, desc, id, metrics, status, classes } (id)}
+        <section class:active={$activeModels[id]}>
+          <div
+            class="info"
+            title={$activeModels[id]
+              ? 'Click to hide the details'
+              : 'Click to show the details of:  ' + name}
+            on:click|preventDefault|stopPropagation={() => {
+              let val = true
+              if (get(activeModels)[id]) {
+                val = false
+              }
+              activeModels.update((m_ids) => {
+                m_ids[id] = val
+                return m_ids
+              })
+            }}
+          >
+            <h3 class="name" class:right={!$activeModels[id]} class:down={$activeModels[id]}>
+              {name}
+              <div>
+                {#if status === 'RUNNING'}
+                  <Spinner speed={600} color={'rgb(232, 62, 140)'} />
+                {:else if status === 'DONE'}
+                  <div class="done">✔</div>
+                {:else if status === 'WAIT'}
+                  <Jumper width={'24px'} height={'16px'} background={'rgb(107, 81, 216)'} />
+                {:else if status === 'TRYCANCEL'}
+                  <div class="cancelled">x??</div>
+                {:else if status === 'CANCELLED'}
+                  <div class="cancelled">x</div>
+                {:else if status === 'ERROR'}
+                  <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1
                     15h-2v-2h2v2zm0-4h-2V7h2v6z"
-                  />
-                </svg>
-              {/if}
-            </div>
-          </h3>
-          <p>{desc}</p>
-        </div>
-        {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
-          <button class="request request-rerun-btn" on:click|stopPropagation={rerun(id)}
-            >Default Rerun</button
-          >
-        {:else}
-          <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
-            >Cancel</button
-          >
-        {/if}
-        <p class="status noselect">
-          {#if status === 'DONE'}
-            <span class="done">Done</span>
-          {:else if status === 'WAIT'}
-            <span class="waiting">Waiting</span>
-          {:else if status === 'RUNNING'}
-            <span class="running">Running</span>
-          {:else if status === 'TRYCANCEL'}
-            <span class="cancelled">Awaiting Cancellation</span>
-          {:else if status === 'CANCELLED'}
-            <span class="cancelled">Cancelled</span>
-          {:else if status === 'ERROR'}<span class="error">Error</span>{/if}
-        </p>
-        <p class="val">{metrics && metrics.val ? metrics.val.toFixed(5) : ''}</p>
-        <div class="empty" />
-        {#if $activeModels[id]}
-          <div class="container">
-            <Container {id} />
+                    />
+                  </svg>
+                {/if}
+              </div>
+            </h3>
+            <p>{desc}</p>
           </div>
-        {/if}
-      </section>
-    {/each}
-  </main>
+          {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
+            <button class="request request-rerun-btn" on:click|stopPropagation={rerun(id)}
+              >Default Rerun</button
+            >
+          {:else}
+            <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
+              >Cancel</button
+            >
+          {/if}
+          <p class="status noselect">
+            {#if status === 'DONE'}
+              <span class="done">Done</span>
+            {:else if status === 'WAIT'}
+              <span class="waiting">Waiting</span>
+            {:else if status === 'RUNNING'}
+              <span class="running">Running</span>
+            {:else if status === 'TRYCANCEL'}
+              <span class="cancelled">Awaiting Cancellation</span>
+            {:else if status === 'CANCELLED'}
+              <span class="cancelled">Cancelled</span>
+            {:else if status === 'ERROR'}<span class="error">Error</span>{/if}
+          </p>
+          <p class="val">{metrics && metrics.val ? metrics.val.toFixed(5) : ''}</p>
+          <div class="empty" />
+          {#if $activeModels[id]}
+            <div class="container">
+              <Container {id} />
+            </div>
+          {/if}
+        </section>
+      {/each}
+    </main>
+  {/key}
 {/if}
 
 <style>
@@ -358,5 +390,12 @@
   .info > button {
     margin-left: 10px;
     border: var(--medium-border);
+  }
+  button.sort {
+    border: var(--medium-border);
+  }
+  button:hover.sort,
+  .info > button:hover {
+    border-color: var(--lobster);
   }
 </style>
