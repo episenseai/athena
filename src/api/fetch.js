@@ -26,10 +26,7 @@ export async function fetch_json_POST(url, data, service_name) {
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
-      await snack(
-        'error',
-        'Either your lost your internet connectivity or episense ai server is down.',
-      )
+      await snack('error', 'Connection error')
       return false
     })
 
@@ -83,10 +80,7 @@ export async function fetch_json_GET(url, service_name) {
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
-      await snack(
-        'error',
-        'Either your lost your internet connectivity or episense ai server is down.',
-      )
+      await snack('error', 'Connection error')
       return false
     })
 
@@ -140,10 +134,7 @@ export async function fetch_upload_POST(url, formData) {
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
-      await snack(
-        'error',
-        'Either your lost your internet connectivity or episense ai server is down.',
-      )
+      await snack('error', 'Connection error')
       return false
     })
 
