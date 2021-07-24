@@ -8,8 +8,10 @@
     <span>{$PROJECT.current_stage.split(':')[0].toUpperCase()}</span>
     stage.
   </h3>
+  <!--
   <pre>ErrorType: {$PROJECT.error_type}</pre>
   <pre>ErrorStack: {$PROJECT.error_stack}</pre>
+  -->
   <p>
     If you want to try again or go back to the previous stage, please unfreeze the pipe by clicking
     the button below.
@@ -38,9 +40,11 @@
     margin-top: 5px;
     margin-bottom: 30px;
   }
+  /*
   pre {
     text-align: left;
     margin-bottom: 20px;
     font-size: 12px;
   }
+  */
 </style>
