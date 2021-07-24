@@ -158,6 +158,7 @@
               <th>Parameters</th>
               <th>Default</th>
               <th>Supply params for run</th>
+              <th>Type</th>
               <th>Info</th>
             </tr>
           </thead>
@@ -225,16 +226,35 @@
                     </div>
                   </td>
 
-                  <td class="input">
+                  <td class="extra">
                     <div>
                       {#if 'possible_int' in param}
-                        <pre>(integer) | min = {param["possible_int"][0]} | max = {param["possible_int"][1]}</pre>
+                        <span>integer</span>
                       {:else if 'possible_float' in param}
-                        <pre>(float)&nbsp;&nbsp; | min = {param["possible_float"][0]} | max = {param["possible_float"][1]}</pre>
+                        <span>float</span>
                       {:else if 'possible_str' in param}
-                        <pre>(choices) | count = {param["possible_str"].length}</pre>
+                        <span>choices</span>
                       {:else if 'possible_list' in param}
-                        <pre>(choices) | count = {param["possible_list"].length}</pre>
+                        <span>choices</span>
+                      {/if}
+                    </div>
+                  </td>
+                  <td class="extra">
+                    <div>
+                      {#if 'possible_int' in param}
+                        <span
+                          >min = {param['possible_int'][0]}, max = {param['possible_int'][1]}</span
+                        >
+                      {:else if 'possible_float' in param}
+                        <span
+                          >min = {param['possible_float'][0]}, max = {param[
+                            'possible_float'
+                          ][1]}</span
+                        >
+                      {:else if 'possible_str' in param}
+                        <span>count = {param['possible_str'].length}</span>
+                      {:else if 'possible_list' in param}
+                        <span>count = {param['possible_list'].length}</span>
                       {/if}
                     </div>
                   </td>
@@ -309,9 +329,13 @@
   td.input {
     text-align: left;
   }
+  td.extra span {
+    color: var(--pink);
+  }
   .hyperchange table {
     margin-top: 20px;
     margin-bottom: 50px;
+    min-width: 900px;
   }
   .hyperchange p {
     font-size: 14px;
