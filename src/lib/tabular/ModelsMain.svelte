@@ -29,8 +29,6 @@
       modelType.set(response.json.data.modelType)
       optimizeUsing.set(response.json.data.optimizeUsing)
     }
-    // console.log('All models data.....')
-    // console.log(response.json.data)
   }
 
   onMount(async () => {
@@ -40,7 +38,7 @@
   })
 </script>
 
-{#if false}
+<!--
   <Details>
     <button
       on:click={async () => await PROJECT.get_model_by_id('24ee24ed-6174-4a79-bf53-215d6fbcf680')}
@@ -62,7 +60,8 @@
       {JSON.stringify($models, undefined, 2)}
     </pre>
   </Details>
-{/if}
+-->
+
 {#if $PROJECT.id && $PROJECT.current_stage === 'finalconfig:GET' && $PROJECT.pipe_status === '1'}
   <Models />
 {/if}

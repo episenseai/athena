@@ -50,23 +50,44 @@
       await PROJECT.sse_models_update(true)
     }
   }
+
+  let open = false
+  $: if (Object.keys($activeModels).find((id) => $activeModels[id] == true)) {
+    open = true
+  } else {
+    open = false
+  }
+  $: console.log($models)
 </script>
 
 {#if $PROJECT.current_stage && $modelType && $models && $models.length > 0}
-  <main>
-    <header>
-      <h4 class="info noselect">
+  <header>
+    <div class="lsmod info">
+      <h4 class="noselect">
         {$modelType === 'regressor'
           ? 'Regressor Models'
           : $modelType === 'classifier'
           ? 'Classifier Models'
-          : 'Multi Classifier Models'}
+          : 'Multi Classifier Models'}: ({$models.length} models)
       </h4>
-      <h4 class="request noselect">Request</h4>
-      <h4 class="status noselect">Status</h4>
-      <h4 class="val noselect">{$optimizeUsing} (metric)</h4>
-      <div class="empty" />
-    </header>
+      <button
+        class:right={!open}
+        class:down={open}
+        on:click={() => {
+          let x = get(activeModels)
+          Object.keys(x).forEach((key, _) => {
+            x[key] = false
+          })
+          $activeModels = x
+        }}><span>Collapse all</span></button
+      >
+    </div>
+    <h4 class="request noselect">Request</h4>
+    <h4 class="status noselect">Status</h4>
+    <h4 class="val noselect">{$optimizeUsing} (metric)</h4>
+    <div class="empty" />
+  </header>
+  <main>
     {#each $models as { name, desc, id, metrics, status, classes } (id)}
       <section class:active={$activeModels[id]}>
         <div
@@ -147,6 +168,8 @@
 <style>
   main {
     padding-bottom: 40px;
+    padding-top: 50px;
+    margin-top: 0;
   }
   header,
   section {
@@ -161,7 +184,9 @@
     margin: 0 0;
     padding: 5px 0;
     background: #eeeeee;
-    border-radius: 8px 8px 0 0;
+    position: fixed;
+    width: 99%;
+    z-index: 200;
   }
   section {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -183,10 +208,12 @@
   section.active h3.name {
     color: rgba(var(--reddish-rgb), 0.96);
   }
+
   .info {
     grid-column: 1 / 7;
     padding-left: 10px;
     cursor: pointer;
+    align-self: center;
   }
   header .info {
     cursor: default;
@@ -263,7 +290,7 @@
   .error {
     color: var(--reddish);
   }
-  h4.info,
+  .info > h4,
   h4.val,
   h4.status {
     color: var(--text-medium);
@@ -286,7 +313,8 @@
     vertical-align: text-top;
     fill: rgba(var(--reddish-rgb), 0.7);
   }
-  .name::before {
+  .name::before,
+  .info > button > span::before {
     content: '';
     border: solid rgba(var(--lobster-rgb), 0.76);
     border-width: 0 3px 3px 0;
@@ -297,11 +325,13 @@
     margin-bottom: 1px;
     transition: all 150ms;
   }
-  .name.right::before {
+  .name.right::before,
+  .info > button.right > span::before {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
-  .name.down::before {
+  .name.down::before,
+  .info > button.down > span::before {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
@@ -321,5 +351,12 @@
     top: -4px;
     position: relative;
     color: var(--text-lighter);
+  }
+  .info > h4 {
+    display: inline-block;
+  }
+  .info > button {
+    margin-left: 10px;
+    border: var(--medium-border);
   }
 </style>

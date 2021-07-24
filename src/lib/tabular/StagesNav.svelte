@@ -39,7 +39,6 @@
       await PROJECT.revert(from_stage, to_stage)
     }
   }
-
 </script>
 
 <div>
@@ -56,7 +55,7 @@
 
 <style>
   div {
-    padding: 0;
+    padding: 10px 0 0;
     text-align: center;
     margin-bottom: 0;
   }
@@ -132,5 +131,4 @@
   :global(button:hover.nextstage-btn) {
     border-color: var(--dark-border-color);
   }
-
 </style>
