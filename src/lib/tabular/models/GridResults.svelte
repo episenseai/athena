@@ -289,9 +289,6 @@
 {/if}
 
 <style>
-  .hyperchange {
-    margin-top: 40px;
-  }
   h2 {
     padding-top: 20px;
     border-bottom: var(--light-border);
@@ -325,7 +322,7 @@
     margin: 30px auto 0;
     border-width: 0 1px 0 1px;
     border-color: #eaecef;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   td {
     padding: 6px;
