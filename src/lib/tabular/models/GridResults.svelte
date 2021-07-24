@@ -110,40 +110,45 @@
       The best score for this model is
       <span class="best-score"><b>{model.grid_results.best_score}.</b></span>
     </h2>
-    <table>
-      <thead>
-        <tr>
-          <th>parameters</th>
-          <th>best setting</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each model.grid_results.best_params as param}
-          <tr class="param">
-            <td>{JSON.stringify(param[0], undefined, 2)}</td>
-            <td>{JSON.stringify(param[1], undefined, 2)}</td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
 
-    <table>
-      <thead>
-        <tr>
-          <th>parameters</th>
-          <th colspan="100%">all ran settings</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each model.grid_results.cvresult_list as element, i}
-          <tr class={model.grid_results.best_params.length >= i + 1 ? 'param' : ''}>
-            {#each element as elem}
-              <td class={elem === model.grid_results.best_score ? 'best-score' : ''}>{elem}</td>
-            {/each}
+    <div class="tb-container">
+      <table>
+        <thead>
+          <tr>
+            <th>parameters</th>
+            <th>best setting</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each model.grid_results.best_params as param}
+            <tr class="param">
+              <td>{JSON.stringify(param[0], undefined, 2)}</td>
+              <td>{JSON.stringify(param[1], undefined, 2)}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tb-container">
+      <table>
+        <thead>
+          <tr>
+            <th>parameters</th>
+            <th colspan="100%">all ran settings</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each model.grid_results.cvresult_list as element, i}
+            <tr class={model.grid_results.best_params.length >= i + 1 ? 'param' : ''}>
+              {#each element as elem}
+                <td class={elem === model.grid_results.best_score ? 'best-score' : ''}>{elem}</td>
+              {/each}
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
 
     <div class="hyperchange">
       <h2>Adjust the model hyperparameters and rerun the model</h2>
@@ -289,9 +294,13 @@
     padding-top: 20px;
     grid-template-columns: repeat(16, 1fr);
     grid-auto-rows: minmax(40px, auto);
+    overflow: hidden;
   }
   :global(.container.modelinfo) :global(h2) {
     margin-top: 10px;
+  }
+  .tb-container {
+    overflow: scroll;
   }
   table {
     width: auto;
@@ -331,6 +340,9 @@
   }
   td.extra span {
     color: var(--pink);
+  }
+  .hyperchange {
+    overflow: scroll;
   }
   .hyperchange table {
     margin-top: 20px;
