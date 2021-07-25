@@ -1,7 +1,6 @@
 <script>
   import { snacklist } from '$lib/base/snack'
-  import { fly } from 'svelte/transition'
-
+  import { slide } from 'svelte/transition'
 </script>
 
 <div class="snack-container">
@@ -12,8 +11,7 @@
       class:warning={type === 'warning'}
       class:error={type === 'error'}
       class:success={type === 'success'}
-      in:fly={{ x: 200, duration: 300 }}
-      out:fly={{ x: 200, duration: 300 }}
+      transition:slide|local
     >
       <div class="type-icon">
         <span>
@@ -64,15 +62,15 @@
   }
   .snack-box {
     position: relative;
-    width: 340px;
+    width: 250px;
     padding: 0.5em 1.5em 0.5em 0.5em;
-    background: rgba(235, 235, 235, 0.65);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
-    margin-bottom: 14px;
+    margin-bottom: 20px;
     color: #000;
     line-height: 17px;
+    background-color: rgba(235, 235, 235, 0.6);
   }
   .icon {
     width: 0.94em;
@@ -84,8 +82,9 @@
     vertical-align: text-top;
   }
   .msg {
-    color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 0.8);
     font-size: 14px;
+    font-weight: 500;
     line-height: 18px;
   }
   button {
@@ -144,5 +143,4 @@
   .error button:hover {
     border: 1px solid rgba(188, 64, 64, 1);
   }
-
 </style>
