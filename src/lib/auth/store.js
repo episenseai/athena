@@ -14,7 +14,6 @@ function login_store() {
     username: undefined,
     userid: undefined,
     expires: undefined,
-    picture: undefined,
   }
 
   // write the `ustatekey` to the local storage and returns the item written
@@ -160,16 +159,6 @@ function login_store() {
             const expires = new Date()
             expires.setSeconds(expires.getSeconds() + token.expires_in)
 
-            let picture = token.picture
-            try {
-              if (token.picture && token.picture !== '') {
-                picture = new URL(token.picture)
-              } else {
-                picture = undefined
-              }
-            } catch (_) {
-              //
-            }
             // try setting auth_state into local storage
             const auth_state = await write_auth({
               success: true,
@@ -177,7 +166,7 @@ function login_store() {
               username: token.full_name || '',
               userid: token.userid,
               refresh_token: token.refresh_token || undefined,
-              picture: picture,
+              picture: token.picture || '',
               expires,
             })
 
