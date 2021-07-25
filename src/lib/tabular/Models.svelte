@@ -164,7 +164,7 @@
           </div>
           {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
             <button class="request request-rerun-btn" on:click|stopPropagation={rerun(id)}
-              >Default Rerun</button
+              >Default Rebuild</button
             >
           {:else}
             <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
@@ -377,8 +377,10 @@
     color: rgba(var(--reddish-rgb), 0.95);
   }
   .request-rerun-btn {
-    width: 120px;
+    width: 126px;
     height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin: auto;
     top: -4px;
     position: relative;
