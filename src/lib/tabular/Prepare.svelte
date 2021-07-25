@@ -78,24 +78,34 @@
       <thead>
         <tr>
           <th>
-            id
-            <HeaderInfo about={'id'} />
+            <span>
+              id
+              <HeaderInfo about={'id'} />
+            </span>
           </th>
           <th>
-            column
-            <HeaderInfo about={'column'} />
+            <span>
+              column
+              <HeaderInfo about={'column'} />
+            </span>
           </th>
           <th>
-            data type
-            <HeaderInfo about={'datatype'} />
+            <span>
+              data type
+              <HeaderInfo about={'datatype'} />
+            </span>
           </th>
           <th>
-            imputable
-            <HeaderInfo about={'imputable'} />
+            <span>
+              imputable
+              <HeaderInfo about={'imputable'} />
+            </span>
           </th>
           <th>
-            sample values
-            <HeaderInfo about={'samplevalues'} />
+            <span>
+              sample values
+              <HeaderInfo about={'samplevalues'} />
+            </span>
           </th>
         </tr>
       </thead>
@@ -178,7 +188,10 @@
     margin-top: 10px;
   }
   thead tr:nth-child(1) th {
-    padding: 0 5px;
+    padding: 5px 5px;
+  }
+  th {
+    line-height: 1.6em;
   }
 
   th:last-child,

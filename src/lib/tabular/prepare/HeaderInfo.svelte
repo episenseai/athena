@@ -36,11 +36,10 @@
   let heading = info[about].head
 </script>
 
-<div use:tooltip={{ sample, heading, translateX }}>INFO</div>
+<span use:tooltip={{ sample, heading, translateX }}>INFO</span>
 
 <style>
-  div {
-    display: inline-block;
+  span {
     text-align: center;
     line-height: 1.3;
     color: var(--text-dark);
@@ -54,7 +53,7 @@
     cursor: help;
     margin-left: 2px;
   }
-  div:hover {
+  span:hover {
     border-color: var(--text-lighter-light-blue);
     color: var(--light-blue);
     background-color: #fff;
