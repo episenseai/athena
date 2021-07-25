@@ -212,7 +212,7 @@
   }
   header {
     grid-auto-rows: minmax(36px, auto);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: var(--medium-border);
     margin: 0 0;
     padding: 5px 0;
     background: #eeeeee;
@@ -221,7 +221,7 @@
     z-index: 200;
   }
   section {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: var(--light-border);
     padding: 10px 0 0;
   }
   section:hover {
