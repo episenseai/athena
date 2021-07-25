@@ -1,5 +1,5 @@
-import { writable } from 'svelte/store'
 import { v4 as uuidv4 } from '@lukeed/uuid'
+import { writable } from 'svelte/store'
 
 const snacklist = writable([])
 

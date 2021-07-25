@@ -1,8 +1,8 @@
 import { snack } from '$lib/base/snack'
 import { OAUTH2_LOGIN_SERVICE, OAUTH2_AUTH_CALLBACK_SERVICE } from '../../api/endpoints'
+import { v4 as uuidv4 } from '@lukeed/uuid'
 import localForage from 'localforage'
 import { writable } from 'svelte/store'
-import { v4 as uuidv4 } from '@lukeed/uuid'
 
 function login_store() {
   const USTATE_KEY = 'ustatekey'

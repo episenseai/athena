@@ -25,7 +25,6 @@
     const data = { ...event.detail, data: get(POST_DATA) }
     PROJECT.post_pipe(data)
   }
-
 </script>
 
 <svelte:head>

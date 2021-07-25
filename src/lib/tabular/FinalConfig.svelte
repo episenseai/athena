@@ -13,12 +13,9 @@
   async function handleBuild() {
     await PROJECT.model_build()
   }
-
 </script>
 
-{#if $PROJECT &&
-  $PROJECT.current_stage === 'finalconfig:GET' &&
-  $GET_DATA.stage === 'finalconfig:GET'}
+{#if $PROJECT && $PROJECT.current_stage === 'finalconfig:GET' && $GET_DATA.stage === 'finalconfig:GET'}
   <div class="container">
     <h3>
       All the pipeline stages for
@@ -85,5 +82,4 @@
     font-size: 14px;
     color: var(--green);
   }
-
 </style>

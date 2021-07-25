@@ -4,7 +4,6 @@
   export let id
 
   $: model = $models.find((el) => el.id === id)
-
 </script>
 
 <div class="container modelinfo">
@@ -33,5 +32,4 @@
     max-width: 660px;
     margin: auto;
   }
-
 </style>

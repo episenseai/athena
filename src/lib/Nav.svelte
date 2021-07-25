@@ -8,7 +8,6 @@
 
   // tabular or home
   export let level
-
 </script>
 
 <nav class="noselect">
@@ -225,5 +224,4 @@
   .next-icon {
     color: var(--text-lighter);
   }
-
 </style>

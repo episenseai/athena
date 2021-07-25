@@ -8,7 +8,6 @@
   export let width
   export let color // maroon, violet, green, pink, blue, teal, purple
   $: selectedName = selected ? items[items.findIndex((el) => el.value === selected)].name : ''
-
 </script>
 
 <svelte:window on:click={() => (open = false)} />
@@ -274,5 +273,4 @@
   .purple .name {
     color: rgba(var(--btn-purple-rgb), 0.9);
   }
-
 </style>

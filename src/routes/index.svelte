@@ -1,6 +1,5 @@
 <script>
   // empty
-
 </script>
 
 <svelte:head>
@@ -68,5 +67,4 @@
   .apps {
     padding-top: 30px;
   }
-
 </style>

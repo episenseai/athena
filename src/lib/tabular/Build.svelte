@@ -56,7 +56,6 @@
       }
     }
   })
-
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
@@ -268,5 +267,4 @@
   .tvh p {
     font-family: Inter;
   }
-
 </style>

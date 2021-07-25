@@ -6,7 +6,6 @@
     .map((line) => line.split(','))
   $: rows = tableData.length - 1
   $: cols = tableData[0].length
-
 </script>
 
 <div class="csv-table">
@@ -57,5 +56,4 @@
     height: 46px;
     font-weight: 700;
   }
-
 </style>

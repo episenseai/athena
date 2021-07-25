@@ -7,7 +7,6 @@
   $: if (files) file = files[0]
 
   const dragExit = () => div.classList.add('enter')
-
 </script>
 
 <main>
@@ -96,5 +95,4 @@
     background-color: var(--light10);
     padding: 7px;
   }
-
 </style>
