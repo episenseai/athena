@@ -65,7 +65,6 @@
 
     return `${x.length === 0 ? '' : x.slice(0, 2).join(' , ').slice(0, 40)} ...`
   }
-
 </script>
 
 <button on:click={prepare_post} class="nextstage-btn">
@@ -180,10 +179,6 @@
   }
   thead tr:nth-child(1) th {
     padding: 0 5px;
-    min-width: 85px;
-  }
-  th {
-    max-width: 120px;
   }
 
   th:last-child,
@@ -214,5 +209,4 @@
   thead {
     background-color: #eeeeee;
   }
-
 </style>
