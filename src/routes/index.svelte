@@ -8,6 +8,10 @@
 
 <div class="container">
   <h1 class="welcome">Application suite for data analytics</h1>
+  <h2>
+    You are currently viewing the demo version of the application. Some of the features are only
+    avaliable in full version of the application.
+  </h2>
   <div class="apps">
     <div class="tabular">
       <h2>tabular</h2>
@@ -34,7 +38,7 @@
   .tabular {
     text-align: left;
     margin: 0px auto 10px;
-    max-width: 600px;
+    max-width: 550px;
     border: var(--light-border);
     padding: 1.5em 1.5em 0.75em;
     border-radius: 5px;
@@ -66,5 +70,11 @@
   }
   .apps {
     padding-top: 30px;
+  }
+  h2 {
+    color: brown;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 0;
   }
 </style>
