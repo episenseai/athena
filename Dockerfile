@@ -21,6 +21,7 @@ WORKDIR /app
 
 ARG HOST=0.0.0.0
 ARG PORT=3000
+ARG ENV=production
 
 RUN --mount=target=.,rw set -x && \
         cp -R /build/node_modules node_modules && \
