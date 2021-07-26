@@ -21,21 +21,21 @@
   // tabs for the models container pane
   const classificationTabs = [
     { component: ModelInfo, name: 'Description' },
-    { component: GridResults, name: 'Build Output' },
+    { component: GridResults, name: 'Hyper-parameters' },
     { component: ConfusionMatrix, name: 'Confusion Matrix' },
     { component: ROCCurve, name: 'AUC | ROC Curve' },
     { component: Predict, name: 'Prediction' },
   ]
   const nClassificationTabs = [
     { component: ModelInfo, name: 'Description' },
-    { component: GridResults, name: 'Build Output' },
+    { component: GridResults, name: 'Hyper-parameters' },
     { component: MultiConfusionMatrix, name: 'Confusion Matrix' },
     { component: ROCCurve, name: 'AUC | ROC Curve' },
     { component: Predict, name: 'Prediction' },
   ]
   const regressionTabs = [
     { component: ModelInfo, name: 'Description' },
-    { component: GridResults, name: 'Build Output' },
+    { component: GridResults, name: 'Hyper-parameters' },
     { component: ModelPerformance, name: 'Performance' },
     { component: Predict, name: 'Prediction' },
   ]
