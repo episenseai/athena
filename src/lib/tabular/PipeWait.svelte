@@ -33,7 +33,7 @@
 
 <style>
   .container {
-    width: 700px;
+    width: 800px;
     margin: 80px auto 10px;
     text-align: center;
   }

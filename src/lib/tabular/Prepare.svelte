@@ -20,6 +20,10 @@
 
   //  POST data
   async function prepare_post() {
+    if (get(PROJECT).pipe_status === '-1') {
+      await snack('error', 'Reset the pipeline error to start working on the pipeline again.')
+      return
+    }
     if (get(PROJECT).current_stage !== 'prepare:GET') {
       await snack(
         'warning',
@@ -114,7 +118,6 @@
           <tr class:selectedTarget={id === $GET_DATA.data.target}>
             <td>
               {id}
-              {#if id === $GET_DATA.data.target}<span class="tag-target">TARGET</span>{/if}
             </td>
             <td>{name}</td>
             <td>
@@ -190,6 +193,9 @@
   thead tr:nth-child(1) th {
     padding: 5px 5px;
   }
+  thead tr th:nth-child(4) {
+    max-width: 84px;
+  }
   th {
     line-height: 1.6em;
   }
@@ -221,5 +227,8 @@
   }
   thead {
     background-color: #eeeeee;
+  }
+  .selectedTarget {
+    background-color: var(--bright-green);
   }
 </style>

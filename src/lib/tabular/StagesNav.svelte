@@ -25,6 +25,10 @@
   ]
 
   const handle_revert = (stage) => async () => {
+    if (get(PROJECT).pipe_status === '-1') {
+      await snack('error', 'Reset the pipeline error to start working on the pipeline again.')
+      return
+    }
     const from_stage = get(PROJECT).current_stage
     const to_stage = `${stage.name}:GET`
     const from_idx = seq.indexOf(from_stage)

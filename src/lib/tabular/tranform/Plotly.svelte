@@ -51,7 +51,6 @@
     },
     showlegend: false,
     bargap: 0.02,
-    width: 630,
     height: 380,
     margin: { t: 50, b: 40, l: 60, r: 20, pad: 5 },
   }
@@ -117,6 +116,12 @@
   .plots {
     display: flex;
     margin-bottom: 10px;
-    justify-content: space-evenly;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: scroll;
+  }
+  .plots > div {
+    width: 50%;
   }
 </style>

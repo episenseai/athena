@@ -10,6 +10,10 @@
 
   //  POST data
   async function prepare_post() {
+    if (get(PROJECT).pipe_status === '-1') {
+      await snack('error', 'Reset the pipeline error to start working on the pipeline again.')
+      return
+    }
     if (get(PROJECT).current_stage !== 'build:GET') {
       await snack(
         'warning',

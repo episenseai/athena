@@ -13,31 +13,18 @@
       class:success={type === 'success'}
       transition:slide|local
     >
-      <div class="type-icon">
-        <span>
-          <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-            {#if type === 'info'}
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1
-                15h-2v-2h2v2zm0-4h-2V7h2v6z"
-              />
-            {:else if type === 'warning'}
-              <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
-            {:else if type === 'error'}
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1
-                15h-2v-2h2v2zm0-4h-2V7h2v6z"
-              />
-            {:else if type === 'success'}
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10
-                14.17l7.59-7.59L19 8l-9 9z"
-              />
-            {/if}
-          </svg>
-        </span>
-      </div>
-      <span class="msg">{msg}</span>
+      <span class="type">
+        {#if type === 'info'}
+          <span>INFO:</span>
+        {:else if type === 'warning'}
+          <span>WARN</span>
+        {:else if type === 'error'}
+          <span>ERROR</span>
+        {:else if type === 'success'}
+          <span>OK</span>
+        {/if}
+      </span>
+      <span class="msg">: {msg}</span>
       <button on:click={() => timeOutFunc()}>
         <span>
           <svg class="icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
@@ -63,11 +50,11 @@
   .snack-box {
     position: relative;
     width: 250px;
-    padding: 0.5em 1.5em 0.5em 0.5em;
+    padding: 10px 5px;
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #000;
     line-height: 17px;
     background-color: rgba(235, 235, 235, 0.6);
@@ -82,8 +69,8 @@
     vertical-align: text-top;
   }
   .msg {
-    color: rgba(0, 0, 0, 0.8);
-    font-size: 14px;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 13px;
     font-weight: 500;
     line-height: 18px;
   }
@@ -99,48 +86,23 @@
     border-radius: 50%;
   }
   button:hover {
-    border-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.85);
+    background-color: #eeeeee;
   }
-  .type-icon {
-    position: absolute;
-    padding: 4px;
-    right: 0;
-    top: 3px;
+  .type {
+    font-size: 12px;
+    font-weight: 500;
   }
-
-  .snack-box.info {
-    border-color: rgba(49, 114, 221, 0.4);
+  .info .type {
+    color: blue;
   }
-  .snack-box.warning {
-    border-color: rgba(114, 47, 55, 0.4);
+  .warning .type {
+    color: brown;
   }
-  .info .icon {
-    fill: rgb(49, 114, 231);
+  .success .type {
+    color: green;
   }
-  .warning .icon {
-    fill: rgb(114, 47, 55);
-  }
-  .info button:hover {
-    border: 1px solid rgba(49, 114, 221, 1);
-  }
-
-  .snack-box.success {
-    border-color: rgba(1, 143, 105, 0.4);
-  }
-  .success .icon {
-    fill: rgb(1, 143, 105);
-  }
-  .success button:hover {
-    border: 1px solid rgba(1, 143, 105, 1);
-  }
-
-  .snack-box.error {
-    border-color: rgba(188, 64, 64, 0.4);
-  }
-  .error .icon {
-    fill: rgb(188, 64, 64);
-  }
-  .error button:hover {
-    border: 1px solid rgba(188, 64, 64, 1);
+  .error .type {
+    color: red;
   }
 </style>

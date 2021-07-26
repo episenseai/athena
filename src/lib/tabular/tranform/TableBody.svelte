@@ -87,6 +87,9 @@
   }
 
   .plotlyTarget {
-    background-color: var(--light5);
+    background-color: var(--bright-green);
+  }
+  tbody tr:hover:nth-child(n + 1) {
+    background-color: var(--bright-green);
   }
 </style>
