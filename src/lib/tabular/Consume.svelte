@@ -44,8 +44,8 @@
 
   let files
   let file
-  // max file size limit 1GB = 1073741824 bytes
-  let maxFileSze = 1024 * 1024 * 2000 // 100MB
+  // max file size limit 50 MiB
+  let maxFileSze = 1024 * 1024 * 50
   let maxfileSizeReached = false
 
   // convert raw bytes to human readable format
@@ -57,7 +57,7 @@
 
   /* let buffersize = 1048576 * 5 // 1 MB * 5 = 5 */
   let start = 0
-  let end = 1024 * 30 // 50KB
+  let end = 1024 * 30 // 30KB
 
   let content = ''
 
