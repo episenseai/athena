@@ -1,5 +1,6 @@
 <script>
   import model_info from './model_info'
+  import { dev } from '$app/env'
   import { models } from './store'
   export let id
 
@@ -8,9 +9,11 @@
 
 <div class="container modelinfo">
   {@html model_info[model.id]}
-  {#if true && $models && model.status === 'ERROR'}
-    <h3 style="margin-top: 30px;">Only shown while debugging...</h3>
-    <pre>{model.ERROR}</pre>
+  {#if $models && model.status === 'ERROR'}
+    <h3>An error occured while building the model</h3>
+    {#if dev}
+      <pre>{model.ERROR}</pre>
+    {/if}
   {/if}
 </div>
 
@@ -31,5 +34,13 @@
     font-size: 13px;
     max-width: 660px;
     margin: auto;
+  }
+  h3 {
+    margin: 20px 0;
+    color: red;
+  }
+  pre {
+    padding: 15px 5px;
+    overflow: scroll;
   }
 </style>
