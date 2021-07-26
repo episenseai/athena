@@ -86,34 +86,38 @@
   async function upload() {
     window.dispatchEvent(new Event('pgbaron'))
     disabled = true
-    const formData = new FormData()
-    formData.append('filename', uploadfiles[0].name)
-    formData.append('file', uploadfiles[0])
-    await snack('info', `Trying to upload (${uploadfiles[0].name}) for processing...`)
-    const response = await fetch_upload_POST(
-      FILE_UPLOAD_SERVICE(get(LOGIN).userid),
-      formData,
-      'FILE UPLOAD',
-    )
-    disabled = false
-    // server error
-    if (!response) return
-
-    if (response.json.success) {
-      // account created
-      await snack('success', response.json.info)
-      // eslint-disable-next-line
-      uploadfiles = null
-      file_node.value = null
-      await get_uploads()
-      if (items.length > 0) selected = items[0].value
-      //console.log(response.json.data)
-    } else {
-      // error in upload
-      await snack('warning', response.json.info)
-      // console.log(response.json.data)
+    try {
+      const formData = new FormData()
+      formData.append('filename', uploadfiles[0].name)
+      formData.append('file', uploadfiles[0])
+      await snack('info', `Trying to upload (${uploadfiles[0].name}) for processing...`)
+      const response = await fetch_upload_POST(
+        FILE_UPLOAD_SERVICE(get(LOGIN).userid),
+        formData,
+        'FILE UPLOAD',
+      )
+      // server error
+      if (!response) {
+        await snack('error', 'Could not upload file')
+      } else if (response.json.success) {
+        // account created
+        await snack('success', response.json.info)
+        // eslint-disable-next-line
+        uploadfiles = null
+        file_node.value = null
+        await get_uploads()
+        if (items.length > 0) selected = items[0].value
+        //console.log(response.json.data)
+      } else {
+        // error in upload
+        await snack('warning', response.json.info)
+        // console.log(response.json.data)
+      }
+    } catch (_) {
+      //
     }
     window.dispatchEvent(new Event('pgbaroff'))
+    disabled = false
   }
 
   const datestr = (timestamp) => {
@@ -224,7 +228,8 @@
       </div>
 
       <p class="note">
-        INFO: Try reloding the page if the uploaded file does not appear in the list.
+        INFO: After a successfull upload the file should appear on the list. Try reloading the page
+        if it doesn't.
       </p>
     </div>
   </div>
@@ -303,6 +308,6 @@
   }
   .note {
     margin-top: 20px;
-    color: var(--text-lighter);
+    color: var(--blue);
   }
 </style>

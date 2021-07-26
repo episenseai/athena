@@ -75,8 +75,11 @@
 
 <style>
   .progress {
-    position: sticky;
-    z-index: 1000;
+    position: fixed;
+    z-index: 3000;
+    top: 0;
+    left: 0px;
+    width: 100%;
   }
   .auth {
     display: flex;

@@ -1,8 +1,9 @@
 {
+  "manifest_version": 2,
   "background_color": "#ffffff",
   "theme_color": "#333333",
-  "name": "episense ai",
-  "short_name": "episense",
+  "name": "EpisenseAI",
+  "short_name": "EpisenseAI",
   "display": "minimal-ui",
   "start_url": "/",
   "icons": [

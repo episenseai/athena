@@ -11,6 +11,8 @@
   })
 </script>
 
+<svelte:head><title>Tabluar: EpisenseAI</title></svelte:head>
+
 <Nav {segment} level="tabular" />
 <main>
   <slot />

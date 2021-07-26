@@ -94,17 +94,21 @@
         on:submit|preventDefault|stopPropagation={async (event) => {
           window.dispatchEvent(new Event('pgbaron'))
           disabled = true
-          const response = await PROJECT.new(
-            event.target.projectname.value,
-            event.target.projectdesc.value,
-          )
-          if (response) {
-            await list_projects()
-            event.target.projectname.value = ''
-            event.target.projectdesc.value = ''
-            if (items.length > 0) {
-              selectedproj = items[0].value
+          try {
+            const response = await PROJECT.new(
+              event.target.projectname.value,
+              event.target.projectdesc.value,
+            )
+            if (response) {
+              await list_projects()
+              event.target.projectname.value = ''
+              event.target.projectdesc.value = ''
+              if (items.length > 0) {
+                selectedproj = items[0].value
+              }
             }
+          } catch (_) {
+            //
           }
           window.dispatchEvent(new Event('pgbaroff'))
           disabled = false
@@ -119,6 +123,7 @@
           Create and select a new Pipeline
           <span class="logo-global">+</span>
         </button>
+        <h5>INFO: Any new pipeline you create should appear in the list on the right</h5>
       </form>
     </div>
     <div>
@@ -227,5 +232,10 @@
   }
   button:hover {
     border-color: var(--blue);
+  }
+  h5 {
+    padding-top: 20px;
+    color: var(--blue);
+    font-size: 12px;
   }
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>Home - episense ai</title>
+  <title>EpisenseAI apps</title>
 </svelte:head>
 
 <div class="container">
@@ -45,7 +45,8 @@
   }
   .tabular h2 {
     color: rgba(var(--lobster-rgb), 1);
-    margin-bottom: 10px;
+    padding: 10px 0;
+    margin: 0;
   }
   .tabular h2::before {
     content: '❏';
@@ -72,9 +73,13 @@
     padding-top: 30px;
   }
   h2 {
-    color: brown;
+    color: var(--blue);
     max-width: 700px;
     margin: 0 auto;
     padding: 20px 0;
+    font-size: 16px;
+  }
+  h1 {
+    color: var(--text-light);
   }
 </style>
