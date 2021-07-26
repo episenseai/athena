@@ -38,12 +38,14 @@
   }
   table {
     width: 100%;
+    font-size: 12px;
   }
   thead tr:nth-child(1) th {
     padding: 0 6px;
   }
   td {
     padding: 4px;
+    font-size: 12px;
   }
   thead {
     overflow-y: auto;

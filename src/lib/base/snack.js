@@ -13,7 +13,7 @@ async function snack(type, msg) {
     remove(uuid)
   }
   // console.log(timeOutFunc)
-  snacklist.update((val) => [{ uuid, type, msg, timeOutFunc }, ...val])
+  snacklist.update((val) => [...val, { uuid, type, msg, timeOutFunc }])
 }
 
 async function remove(uuid) {

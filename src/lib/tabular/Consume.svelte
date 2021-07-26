@@ -105,6 +105,8 @@
         // eslint-disable-next-line
         uploadfiles = null
         file_node.value = null
+        files = undefined
+        file = undefined
         await get_uploads()
         if (items.length > 0) selected = items[0].value
         //console.log(response.json.data)

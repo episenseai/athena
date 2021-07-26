@@ -67,7 +67,7 @@
   function smapleColumn(sample) {
     let x = sample.filter((elt) => elt !== '')
 
-    return `${x.length === 0 ? '' : x.slice(0, 2).join(' , ').slice(0, 40)} ...`
+    return `${x.length === 0 ? '' : x.slice(0, Math.min(8, x.length)).join(', ').slice(0, 40)} ...`
   }
 </script>
 
@@ -133,7 +133,7 @@
                 <span class="toggle" />
               </label>
             </td>
-            <td use:tooltip={{ sample, translateX: '-60px', heading: name }}
+            <td class="samplevals" use:tooltip={{ sample, translateX: '-60px', heading: name }}
               >{smapleColumn(sample)}</td
             >
           </tr>
@@ -179,7 +179,7 @@
     margin-top: 24px;
   }
   aside {
-    margin-left: 50px;
+    margin-left: 20px;
     flex: 1 350px;
   }
   td {

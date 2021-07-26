@@ -45,7 +45,7 @@
   }
 </script>
 
-<div>
+<div class="noselect">
   {#each stages as stage (stage.name)}
     <span
       class:active-stage={stage.name === $PROJECT.current_stage.split(':')[0]}
