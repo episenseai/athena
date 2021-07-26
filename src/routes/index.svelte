@@ -73,7 +73,7 @@
     padding-top: 30px;
   }
   h2 {
-    color: var(--blue);
+    color: var(--reddish);
     max-width: 700px;
     margin: 0 auto;
     padding: 20px 0;

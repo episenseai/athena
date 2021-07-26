@@ -235,7 +235,7 @@
   }
   h5 {
     padding-top: 20px;
-    color: var(--blue);
+    color: var(--reddish);
     font-size: 12px;
   }
 </style>

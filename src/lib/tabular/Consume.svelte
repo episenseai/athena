@@ -308,6 +308,6 @@
   }
   .note {
     margin-top: 20px;
-    color: var(--blue);
+    color: var(--reddish);
   }
 </style>
