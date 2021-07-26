@@ -58,7 +58,6 @@
   } else {
     open = false
   }
-  $: console.log($models)
 
   let ascend = false
 
