@@ -109,11 +109,22 @@
             $activeModels = x
           }}><span>Collapse all</span></button
         >
+        <button
+          class:right={!open}
+          class:down={open}
+          on:click={() => {
+            let x = get(activeModels)
+            Object.keys(x).forEach((key, _) => {
+              x[key] = true
+            })
+            $activeModels = x
+          }}><span>Open all</span></button
+        >
       </div>
       <h4 class="request noselect">Request</h4>
       <h4 class="status noselect">Status</h4>
       <h4 class="val noselect">
-        {$optimizeUsing} <button class="sort" on:click={() => sortby_metrics()}>sort</button>
+        {$optimizeUsing} <button class="sort" on:click={() => sortby_metrics()}>Sort</button>
       </h4>
       <div class="empty" />
     </header>
@@ -394,6 +405,9 @@
   }
   button.sort {
     border: var(--medium-border);
+    padding: 3px 15px;
+    font-size: 13px;
+    width: 80px;
   }
   button:hover.sort,
   .info > button:hover {
