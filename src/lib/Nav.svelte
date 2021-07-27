@@ -29,6 +29,14 @@
       {/if}
     </ul>
   </div>
+  {#if level === 'home'}
+    <ul>
+      <li class="demo">
+        <span> (Demo version) </span>
+      </li>
+    </ul>
+  {/if}
+
   {#if level === 'tabular'}
     <div>
       <ul>
@@ -233,5 +241,10 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
+  }
+  .demo {
+    color: var(--green);
+    font-weight: 500;
+    font-size: 14px;
   }
 </style>

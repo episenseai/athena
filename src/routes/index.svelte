@@ -7,11 +7,7 @@
 </svelte:head>
 
 <div class="container">
-  <h1 class="welcome">Application suite for data analytics</h1>
-  <h2>
-    You are currently viewing the demo version of the application. Some of the features are only
-    avaliable in full version of the application.
-  </h2>
+  <h1 class="welcome">EpisenseAI data analytics app</h1>
   <div class="apps">
     <div class="tabular">
       <h2>tabular</h2>
@@ -19,6 +15,7 @@
       <a href="tabular" class="btn"> Go <span>&rarr;</span> </a>
     </div>
   </div>
+  <h2>INFO: Some of the features are only avaliable in full version of the application.</h2>
 </div>
 
 <style>
@@ -29,7 +26,7 @@
   }
   .welcome {
     padding-top: 50px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     max-width: 500px;
     margin: 0 auto 20px;
     border-bottom: var(--light-border);
@@ -73,10 +70,10 @@
     padding-top: 30px;
   }
   h2 {
-    color: var(--reddish);
+    color: var(--text-lighter);
     max-width: 700px;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 15px 0;
     font-size: 16px;
   }
   h1 {
