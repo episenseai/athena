@@ -75,11 +75,10 @@
     let combinations = 1
     for (const [name, param] of Object.entries(possible_params)) {
       if (!param.choices || param.choices.length == 0) {
-        await snack('error', `Value missing for '${name}' hyperparameter`)
-        return
+      } else {
+        hyperparams[name] = param.choices
+        combinations = combinations * param.choices.length
       }
-      hyperparams[name] = param.choices
-      combinations = combinations * param.choices.length
     }
 
     if (combinations >= 16) {
