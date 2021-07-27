@@ -50,7 +50,7 @@ async function fetchAndCache(request) {
   }
 }
 
-const ignored_paths = ['/tabular', '/titan/backend', '/oauth', '/auth/callback']
+const ignored_paths = ['/tabular', '/titan/backend', '/hades/backend', '/oauth', '/auth/callback']
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || event.request.headers.has('range')) return
