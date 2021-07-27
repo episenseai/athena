@@ -64,7 +64,7 @@
     <ul>
       {#if level === 'tabular'}
         {#if $PROJECT.name && $PROJECT.current_stage}
-          <li class="cproj"><span class="pname">{$PROJECT.name}</span></li>
+          <li class="cproj">(<span class="pname">{$PROJECT.name}</span>)</li>
         {/if}
         <li>
           <button
@@ -217,8 +217,7 @@
     color: var(--pink);
   }
   .cproj {
-    margin-right: 10px;
-    border-bottom: var(--light-border);
+    margin-right: 5px;
     padding: 0.2em 0.6em 0.2em 0.6em;
   }
   div.defpic {
