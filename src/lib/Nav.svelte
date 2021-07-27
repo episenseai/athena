@@ -29,16 +29,6 @@
       {/if}
     </ul>
   </div>
-  {#if level === 'home'}
-    <div class="">
-      <ul>
-        <li class="username">
-          <div />
-          {$LOGIN.username}
-        </li>
-      </ul>
-    </div>
-  {/if}
   {#if level === 'tabular'}
     <div>
       <ul>
@@ -81,12 +71,17 @@
               $SWITCH_PROJECT = true // eslint-disable-line
             }}
           >
-            <span class="logo-global">&#x23CE;</span>
+            <span class="logo-global">&#8635;</span>
             Switch Project
           </button>
         </li>
       {/if}
-      <li>
+      <li class="loggedin">
+        {#if level === 'home'}
+          <span class="username">
+            {$LOGIN.username}
+          </span>
+        {/if}
         <button
           on:click|stopPropagation={async () => {
             const response = await LOGIN.oauth_logout()
@@ -99,6 +94,11 @@
           Logout
           <span class="logo-global">&#x23FB;</span>
         </button>
+        {#if $LOGIN.picture}
+          <img src={$LOGIN.picture} alt="" />
+        {:else}
+          <div class="defpic" />
+        {/if}
       </li>
     </ul>
   </div>
@@ -203,6 +203,7 @@
   }
   .username {
     font-weight: 500;
+    margin-right: 10px;
   }
   .pname {
     color: var(--pink);
@@ -212,7 +213,7 @@
     border-bottom: var(--light-border);
     padding: 0.2em 0.6em 0.2em 0.6em;
   }
-  .username div {
+  div.defpic {
     background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTAwIDUwMCIgaWQ9IkxheWVyXzEiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxnPjxwYXRoIGQ9Ik0yNTAsMjkxLjZjLTUyLjgsMC05NS44LTQzLTk1LjgtOTUuOHM0My05NS44LDk1LjgtOTUuOHM5NS44LDQzLDk1LjgsOTUuOFMzMDIuOCwyOTEuNiwyNTAsMjkxLjZ6IE0yNTAsMTI3LjMgICAgYy0zNy43LDAtNjguNCwzMC43LTY4LjQsNjguNHMzMC43LDY4LjQsNjguNCw2OC40czY4LjQtMzAuNyw2OC40LTY4LjRTMjg3LjcsMTI3LjMsMjUwLDEyNy4zeiIvPjwvZz48Zz48cGF0aCBkPSJNMzg2LjksNDAxLjFoLTI3LjRjMC02MC40LTQ5LjEtMTA5LjUtMTA5LjUtMTA5LjVzLTEwOS41LDQ5LjEtMTA5LjUsMTA5LjVoLTI3LjRjMC03NS41LDYxLjQtMTM2LjksMTM2LjktMTM2LjkgICAgUzM4Ni45LDMyNS42LDM4Ni45LDQwMS4xeiIvPjwvZz48L2c+PC9zdmc+');
     display: inline-block;
     display: inline-block;
@@ -223,5 +224,14 @@
   }
   .next-icon {
     color: var(--text-lighter);
+  }
+  li.loggedin {
+    display: flex;
+    align-items: center;
+  }
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
   }
 </style>

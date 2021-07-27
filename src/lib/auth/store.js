@@ -159,6 +159,12 @@ function login_store() {
             const expires = new Date()
             expires.setSeconds(expires.getSeconds() + token.expires_in)
 
+            let picture
+            if (token.picture && token.picture !== '') {
+              picture = token.picture
+            } else {
+              picture = undefined
+            }
             // try setting auth_state into local storage
             const auth_state = await write_auth({
               success: true,
@@ -166,7 +172,7 @@ function login_store() {
               username: token.full_name || '',
               userid: token.userid,
               refresh_token: token.refresh_token || undefined,
-              picture: token.picture || '',
+              picture,
               expires,
             })
 

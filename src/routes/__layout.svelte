@@ -33,7 +33,7 @@
 />
 
 {#if render_main}
-  {#if $LOGIN.success && $LOGIN.access_token}
+  {#if $LOGIN.success && $LOGIN.access_token && $page.path !== '/auth/callback'}
     {#if show_porgress}
       <div class="progress">
         <ProgressL />
@@ -49,7 +49,7 @@
         <slot />
       </main>
     {/if}
-  {:else}
+  {:else if !($LOGIN.success || $LOGIN.access_token)}
     <a href="/"><AuthLogo /></a>
     {#if $page.path === '/'}
       <div class="auth">
