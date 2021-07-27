@@ -265,7 +265,7 @@ function project_store() {
         es.onerror = async (_) => {
           await snack(
             'error',
-            'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.',
+            'An error occurred while checking the progress models. You may have to refresh to check the progress.',
           )
           PROJECT.sse_close()
         }
@@ -437,7 +437,7 @@ function project_store() {
         es_models.onerror = async (_) => {
           await snack(
             'error',
-            'An error oaccured while checking the progress models; probably due to network issue. You may have to refresh to check the progress.',
+            'An error occurred while checking the progress models. You may have to refresh to check the progress.',
           )
           PROJECT.sse_models_close()
         }
@@ -490,7 +490,7 @@ function project_store() {
         } else if (new_model.status === 'ERROR') {
           await snack(
             'error',
-            `Error occured while building ${new_model.name} model for the ${
+            `Error occurred while building ${new_model.name} model for the ${
               get(PROJECT).name
             } project`,
           )

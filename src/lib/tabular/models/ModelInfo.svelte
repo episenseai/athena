@@ -10,7 +10,7 @@
 <div class="container modelinfo">
   {@html model_info[model.id]}
   {#if $models && model.status === 'ERROR'}
-    <h3>An error occured while building the model</h3>
+    <h3>An error occurred while building the model</h3>
     {#if dev}
       <pre>{model.ERROR}</pre>
     {/if}
