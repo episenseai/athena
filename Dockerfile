@@ -22,9 +22,12 @@ WORKDIR /app
 ARG HOST=0.0.0.0
 ARG PORT=3000
 ARG ENV=production
+ARG LOCAL_PROD
 
 RUN --mount=target=.,rw set -x && \
         cp -R /build/node_modules node_modules && \
+        if test $LOCAL_PROD -eq 1; then rm .env.production; else rm .env; fi && \
+        ls -Aoh && \
         pnpm build --verbose && \
         mkdir -p /target && \
         cp -R build /target && \

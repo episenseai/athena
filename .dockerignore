@@ -1,7 +1,6 @@
 .git
 .gitignore
 Dockerfile
-.env
 
 **/.DS_Store
 node_modules/
