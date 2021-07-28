@@ -5,7 +5,7 @@
 
   async function handle_login(provider) {
     disabled = true
-    LOGIN.oauth_login(provider)
+    await LOGIN.oauth_login(provider)
     disabled = false
   }
 
@@ -15,13 +15,13 @@
 <div class="auth-block">
   <button
     {disabled}
-    on:click|preventDefault|stopPropagation={() => handle_login('github')}
+    on:click|preventDefault|stopPropagation={async () => await handle_login('github')}
     class="login"
     ><span><GithubLogo /></span>&nbsp;&nbsp;<span class="txt">Login with Github</span></button
   >
   <button
     {disabled}
-    on:click|preventDefault|stopPropagation={() => handle_login('google')}
+    on:click|preventDefault|stopPropagation={async () => await handle_login('google')}
     class="login"
     ><span><GoogleLogo /></span>&nbsp;&nbsp;<span class="txt">Login with Google</span></button
   >

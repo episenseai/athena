@@ -6,7 +6,7 @@
 
   onMount(async () => {
     await PROJECT.sse_update()
-    return async () => PROJECT.sse_close()
+    return async () => await PROJECT.sse_close()
   })
 </script>
 

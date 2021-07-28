@@ -236,7 +236,7 @@ function project_store() {
         })
         es.addEventListener(
           'message',
-          (e) => {
+          async (e) => {
             // base64 decode
             const decoded = window.atob(e.data)
             // json parse the string after decoding
@@ -244,7 +244,7 @@ function project_store() {
             //SSE.set(decoded)
 
             if (pipe_state.id !== get(PROJECT).id) {
-              PROJECT.sse_close()
+              await PROJECT.sse_close()
             }
 
             //console.log(es instanceof EventSource, es.constructor.name)
@@ -257,7 +257,7 @@ function project_store() {
               }
             }
             if (get(PROJECT).pipe_status === '1') {
-              PROJECT.sse_close()
+              await PROJECT.sse_close()
             }
           },
           false,
@@ -267,7 +267,7 @@ function project_store() {
             'error',
             'An error occurred while checking the progress models. You may have to refresh to check the progress.',
           )
-          PROJECT.sse_close()
+          await PROJECT.sse_close()
         }
       } catch (e) {
         console.log('event source exception: ', e)
@@ -359,7 +359,7 @@ function project_store() {
         )
         es_models.addEventListener(
           'message',
-          (e) => {
+          async (e) => {
             // base64 decode
             const decoded = window.atob(e.data)
             // json parse the string after decoding
@@ -422,14 +422,14 @@ function project_store() {
                     el.status === 'WAIT' || el.status === 'RUNNING' || el.status === 'TRYCANCEL',
                 ) === -1
               ) {
-                PROJECT.sse_models_close()
+                await PROJECT.sse_models_close()
                 snack('info', `All the models completed for the ${get(PROJECT).name} project`).then(
                   (val) => val,
                 )
                 // console.log('All models finished. closing sse')
               }
             } else {
-              PROJECT.sse_models_close()
+              await PROJECT.sse_models_close()
             }
           },
           false,
@@ -439,7 +439,7 @@ function project_store() {
             'error',
             'An error occurred while checking the progress models. You may have to refresh to check the progress.',
           )
-          PROJECT.sse_models_close()
+          await PROJECT.sse_models_close()
         }
       } catch (e) {
         console.log('event source exception: ', e)

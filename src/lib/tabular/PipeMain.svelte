@@ -23,7 +23,7 @@
       return
     }
     const data = { ...event.detail, data: get(POST_DATA) }
-    PROJECT.post_pipe(data)
+    await PROJECT.post_pipe(data)
   }
 </script>
 
