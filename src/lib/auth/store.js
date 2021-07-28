@@ -1,8 +1,17 @@
 import { snack } from '$lib/base/snack'
-import { OAUTH2_LOGIN_SERVICE, OAUTH2_AUTH_CALLBACK_SERVICE } from '../../api/endpoints'
+import {
+  OAUTH2_BACKEND,
+  OAUTH2_LOGIN_SERVICE,
+  OAUTH2_AUTH_CALLBACK_SERVICE,
+} from '../../api/endpoints'
 import { v4 as uuidv4 } from '@lukeed/uuid'
 import localForage from 'localforage'
 import { writable } from 'svelte/store'
+
+const cors = () => {
+  if (new URL(OAUTH2_BACKEND).origin === window.location.origin) return 'same-origin'
+  else return 'cors'
+}
 
 function login_store() {
   const USTATE_KEY = 'ustatekey'
@@ -138,7 +147,7 @@ function login_store() {
         // call auth backend to verify
         const response = await fetch(OAUTH2_AUTH_CALLBACK_SERVICE(code, state, scope), {
           method: 'GET',
-          mode: 'cors',
+          mode: cors(),
           cache: 'no-cache',
           redirect: 'error',
         }).catch(async (_) => {

@@ -1,6 +1,7 @@
 import { LOGIN } from '$lib/auth/store'
 import { snack } from '$lib/base/snack'
 import { get } from 'svelte/store'
+import { BACKEND } from './endpoints'
 
 function get_auth_header() {
   const login_store = get(LOGIN)
@@ -8,6 +9,11 @@ function get_auth_header() {
     return { Authorization: `Bearer ${login_store.access_token}` }
   }
   return {}
+}
+
+const cors = () => {
+  if (new URL(BACKEND).origin === window.location.origin) return 'same-origin'
+  else return 'cors'
 }
 
 export async function fetch_json_POST(url, data, service_name) {
@@ -22,7 +28,7 @@ export async function fetch_json_POST(url, data, service_name) {
       },
       body: JSON.stringify(data),
       // cross origin request headers
-      mode: 'cors',
+      mode: cors(),
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
@@ -76,7 +82,7 @@ export async function fetch_json_GET(url, service_name) {
         ...get_auth_header(),
       },
       // cross origin request headers
-      mode: 'cors',
+      mode: cors(),
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
@@ -130,7 +136,7 @@ export async function fetch_upload_POST(url, formData) {
       },
       body: formData,
       // cross origin request headers
-      mode: 'cors',
+      mode: cors(),
       // never cache request or response
       cache: 'no-store',
     }).catch(async (_) => {
