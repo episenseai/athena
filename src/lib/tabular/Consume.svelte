@@ -230,7 +230,7 @@
       </div>
 
       <p class="note">
-        INFO: After a successfull upload the file should appear on the list. Try reloading the page
+        INFO: The file applears in the list after successfull upload. Try reloading the page
         if it doesn't.
       </p>
     </div>

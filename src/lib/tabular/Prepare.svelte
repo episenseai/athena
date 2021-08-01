@@ -144,7 +144,7 @@
     <aside>
       <h2>Model Target</h2>
       <p>
-        Off all the columns in the input data, select the one which you want the model to predict.
+        Select the target variable that you want to predict.
       </p>
       <ul>
         <li>
