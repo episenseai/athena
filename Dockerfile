@@ -9,6 +9,7 @@ WORKDIR /build
 
 COPY package.json pnpm-lock.yaml ./
 
+# hadolint ignore=DL3016
 RUN set -x && \
         rm -rf node_modules && \
         npm install -g pnpm && \
