@@ -45,6 +45,7 @@ COPY package*.json ./
 
 # Always run at default port. Ignore environment
 # hades and titan are expected at default ports 3002 and 3001 respectively
+ENV PORT=3000
 EXPOSE 3000
 
 USER node
