@@ -10,7 +10,7 @@
   let success = false
 
   let interval
-  let seconds = 5
+  let seconds = 10
   const handleTick = () => (seconds -= 1)
 
   const redirect = () => {
@@ -37,7 +37,7 @@
       window.location.href = redirect_url
     } else {
       if (interval) clearInterval(interval)
-      seconds = 5
+      seconds = 10
       interval = setInterval(handleTick, 1000)
       done = true
     }
