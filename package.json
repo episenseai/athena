@@ -18,17 +18,17 @@
   },
   "dependencies": {
     "@lukeed/uuid": "^2.0.0",
-    "localforage": "^1.9.0"
+    "localforage": "^1.10.0"
   },
   "devDependencies": {
-    "@sveltejs/adapter-node": "^1.0.0-next.35",
+    "@sveltejs/adapter-node": "^1.0.0-next.45",
     "@sveltejs/kit": "next",
-    "@trivago/prettier-plugin-sort-imports": "^2.0.2",
-    "eslint": "^7.31.0",
+    "@trivago/prettier-plugin-sort-imports": "^2.0.4",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.0",
     "prettier": "^2.3.2",
-    "prettier-plugin-svelte": "^2.3.1",
-    "svelte": "^3.40.1"
+    "prettier-plugin-svelte": "^2.4.0",
+    "svelte": "^3.42.4"
   }
 }
