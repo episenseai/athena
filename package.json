@@ -14,7 +14,8 @@
     "format": "prettier --check --plugin-search-dir=. './**/*.{js,svelte,md,html,css,json}'",
     "format:fix": "prettier --write --plugin-search-dir=. './**/*.{js,svelte,md,html,css,json}'",
     "lint": "eslint --ignore-path .eslintignore './**/*.{js,svelte}'",
-    "lint:fix": "eslint --ignore-path .eslintignore --fix './**/*.{js,svelte}'"
+    "lint:fix": "eslint --ignore-path .eslintignore --fix './**/*.{js,svelte}'",
+    "docker-build": "docker build -t athena:latest --target athena --build-arg LOCAL_PROD=1 ."
   },
   "dependencies": {
     "@lukeed/uuid": "^2.0.0",
