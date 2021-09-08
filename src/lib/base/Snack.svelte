@@ -8,20 +8,23 @@
     <div
       class="snack-box"
       class:info={type === 'info'}
-      class:warning={type === 'warning'}
+      class:warning={type === 'warning' || type === 'warn'}
       class:error={type === 'error'}
       class:success={type === 'success'}
+      class:quota={type === 'quota'}
       transition:slide|local
     >
       <span class="type">
         {#if type === 'info'}
           <span>INFO:</span>
-        {:else if type === 'warning'}
+        {:else if type === 'warning' || type === 'warn'}
           <span>WARN</span>
         {:else if type === 'error'}
           <span>ERROR</span>
         {:else if type === 'success'}
           <span>OK</span>
+        {:else if type === 'quota'}
+          <span>QUOTA</span>
         {/if}
       </span>
       <span class="msg">: {msg}</span>
@@ -104,5 +107,8 @@
   }
   .error .type {
     color: red;
+  }
+  .quota .type {
+    color: magenta;
   }
 </style>

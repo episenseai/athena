@@ -167,8 +167,10 @@
     <div class="hyperchange">
       <h2>Adjust the model hyperparameters and rerun the model</h2>
       <p bind:this={error_elem} class:error={!valid_input}>{diagnostic_msg}</p>
-      <button class="rerun" on:click|stopPropagation={hyper_build(id)}
-        >Rebuild with hyper-parameters</button
+      <button
+        class="rerun"
+        on:click|stopPropagation={hyper_build(id)}
+        title="Build with user configured hyper-parameters">Rebuild with hyper-parameters</button
       >
       {#if !is_empty(model)}
         <table>

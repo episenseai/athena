@@ -11,7 +11,7 @@
   })
 
   async function handleBuild() {
-    await PROJECT.model_build()
+    await PROJECT.model_build([], {}, true)
   }
 </script>
 

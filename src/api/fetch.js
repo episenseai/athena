@@ -44,9 +44,14 @@ export async function fetch_json_POST(url, data, service_name) {
     // good response
     if (response.status === 200 || response.status === 201) return { json }
 
+    if (json.quota_error) {
+      await snack('quota', json.info ? json.info : 'Request error')
+      return false
+    }
+
     // malformed request
     if (response.status === 400) {
-      await snack('error', 'Request error')
+      await snack('error', json.info ? json.info : `${response.status}: 'Request error'`)
       return false
     }
 
@@ -98,9 +103,14 @@ export async function fetch_json_GET(url, service_name) {
     // good response
     if (response.status === 200 || response.status === 201) return { json }
 
+    if (json.quota_error) {
+      await snack('error', 'Request error')
+      return false
+    }
+
     // malformed request
     if (response.status === 400) {
-      await snack('error', 'Request error')
+      await snack('error', json.info ? json.info : `${response.status}: 'Request error'`)
       return false
     }
 

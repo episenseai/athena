@@ -81,6 +81,10 @@
         await snack('warning', `Model is scheduled to be cancelled. No data`)
         return false
       }
+      if (modelStatus === 'INIT') {
+        await snack('warning', `Model never ran. No data`)
+        return false
+      }
     }
     activeTabs.update((val) => {
       val[uid] = tab.name

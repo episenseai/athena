@@ -30,7 +30,7 @@
       return
     }
 
-    if (!['DONE', 'ERROR', 'CANCELLED'].find((el) => el === model.status)) {
+    if (!['DONE', 'ERROR', 'CANCELLED', 'INIT'].find((el) => el === model.status)) {
       await snack('error', `Model is in ${model.status} state. Could not rerun.`)
       return
     }
@@ -154,6 +154,8 @@
                   <Spinner speed={600} color={'rgb(232, 62, 140)'} />
                 {:else if status === 'DONE'}
                   <div class="done">✔</div>
+                {:else if status === 'INIT'}
+                  <div class="init">~</div>
                 {:else if status === 'WAIT'}
                   <Jumper width={'24px'} height={'16px'} background={'rgb(107, 81, 216)'} />
                 {:else if status === 'TRYCANCEL'}
@@ -172,9 +174,13 @@
             </h3>
             <p>{desc}</p>
           </div>
-          {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED'}
-            <button class="request request-rerun-btn" on:click|stopPropagation={rerun(id)}
-              >Default Rebuild</button
+
+          {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED' || status === 'INIT'}
+            <button
+              class="request request-rerun-btn"
+              on:click|stopPropagation={rerun(id)}
+              title="Model build with default hyperparameters"
+              >{status === 'INIT' ? 'Build' : 'Rebuild'}</button
             >
           {:else}
             <button class="request request-cancel-btn" on:click|stopPropagation={cancel_model(id)}
@@ -186,6 +192,8 @@
               <span class="done">Done</span>
             {:else if status === 'WAIT'}
               <span class="waiting">Waiting</span>
+            {:else if status === 'INIT'}
+              <span class="init">Initialized</span>
             {:else if status === 'RUNNING'}
               <span class="running">Running</span>
             {:else if status === 'TRYCANCEL'}
@@ -222,10 +230,10 @@
   }
   header {
     grid-auto-rows: minmax(36px, auto);
-    border-bottom: var(--medium-border);
+    border-bottom: var(--light-border);
     margin: 0 0;
     padding: 5px 0;
-    background: #eeeeee;
+    background: #e5f5c2;
     position: fixed;
     width: 99%;
     z-index: 200;
@@ -332,6 +340,9 @@
   .error {
     color: var(--reddish);
   }
+  .init {
+    color: orangered;
+  }
   .info > h4,
   h4.val,
   h4.status {
@@ -385,9 +396,10 @@
     top: -4px;
     position: relative;
     color: rgba(var(--reddish-rgb), 0.95);
+    border-color: rgba(0, 0, 0, 0.4);
   }
   .request-rerun-btn {
-    width: 126px;
+    width: 100px;
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
@@ -395,6 +407,11 @@
     top: -4px;
     position: relative;
     color: var(--text-lighter);
+    border-color: rgba(0, 0, 0, 0.4);
+  }
+  button:hover.request-rerun-btn,
+  button:hover.request-cancel-btn {
+    border-color: var(--lobster);
   }
   .info > h4 {
     display: inline-block;
