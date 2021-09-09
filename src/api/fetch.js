@@ -1,7 +1,7 @@
 import { LOGIN } from '$lib/auth/store'
 import { snack } from '$lib/base/snack'
-import { get } from 'svelte/store'
 import { BACKEND } from './endpoints'
+import { get } from 'svelte/store'
 
 function get_auth_header() {
   const login_store = get(LOGIN)

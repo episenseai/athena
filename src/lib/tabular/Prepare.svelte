@@ -143,9 +143,7 @@
 
     <aside>
       <h2>Model Target</h2>
-      <p>
-        Select the target variable that you want to predict.
-      </p>
+      <p>Select the target variable that you want to predict.</p>
       <ul>
         <li>
           For

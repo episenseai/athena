@@ -147,7 +147,11 @@
               })
             }}
           >
-            <h3 class="name" class:right={!$activeModels[id]} class:down={$activeModels[id]}>
+            <h3
+              class="noselect name"
+              class:right={!$activeModels[id]}
+              class:down={$activeModels[id]}
+            >
               {name}
               <div>
                 {#if status === 'RUNNING'}
@@ -172,7 +176,7 @@
                 {/if}
               </div>
             </h3>
-            <p>{desc}</p>
+            <p class="noselect">{desc}</p>
           </div>
 
           {#if status === 'DONE' || status === 'ERROR' || status === 'CANCELLED' || status === 'INIT'}
