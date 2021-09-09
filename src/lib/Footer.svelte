@@ -4,7 +4,7 @@
       <div class="inner">
         <div class="message">
           <h4>
-            Some of the features are only avaliable in Full version of the product. Conatct us for
+            Some of the features are only avaliable in Full version of the product. Contact us for
             more information about our product and services.
           </h4>
         </div>
