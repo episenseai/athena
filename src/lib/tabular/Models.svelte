@@ -151,7 +151,7 @@
               {name}
               <div>
                 {#if status === 'RUNNING'}
-                  <Spinner speed={600} color={'rgb(232, 62, 140)'} />
+                  <Spinner speed={600} color={'rgb(10, 132, 255)'} />
                 {:else if status === 'DONE'}
                   <div class="done">✔</div>
                 {:else if status === 'INIT'}
@@ -235,7 +235,7 @@
     padding: 5px 0;
     background: #e5f5c2;
     position: fixed;
-    width: 99%;
+    width: 100%;
     z-index: 200;
   }
   section {
@@ -335,7 +335,7 @@
     color: var(--lobster);
   }
   .running {
-    color: var(--pink);
+    color: var(--blue);
   }
   .error {
     color: var(--reddish);

@@ -302,7 +302,7 @@
     padding-left: 0.1em;
     padding-right: 0.1em;
     min-width: 800px;
-    max-width: 99%;
+    max-width: 100%;
     margin: auto;
     font-size: 13px;
     padding-top: 20px;

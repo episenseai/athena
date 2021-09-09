@@ -9,6 +9,7 @@
   import { PROJECT } from '$lib/tabular/store'
   import { onMount } from 'svelte'
   import { page } from '$app/stores'
+  import Footer from '$lib/Footer.svelte'
 
   export let segment
   let render_main = false
@@ -67,6 +68,7 @@
         </div>
       </div>
     {/if}
+    <Footer />
   {/if}
 {/if}
 
@@ -94,7 +96,7 @@
     position: relative;
   }
   main.outer-layout {
-    padding: 3em 0.5em 0;
+    padding: 3em 0 0;
   }
   :global(.side-pages) {
     width: 660px;

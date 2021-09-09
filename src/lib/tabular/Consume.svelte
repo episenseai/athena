@@ -229,10 +229,7 @@
         <Menu bind:open bind:selected {items} width="400" color="blue" />
       </div>
 
-      <p class="note">
-        INFO: The file applears in the list after successfull upload. Try reloading the page
-        if it doesn't.
-      </p>
+      <p class="note">If the uploads does not appear in the list try reloading the page...</p>
     </div>
   </div>
   {#if file && content}
@@ -310,6 +307,6 @@
   }
   .note {
     margin-top: 20px;
-    color: var(--reddish);
+    color: var(--text-light);
   }
 </style>

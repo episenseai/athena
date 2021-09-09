@@ -123,7 +123,6 @@
           Create and select a new Pipeline
           <span class="logo-global">+</span>
         </button>
-        <h5>INFO: Any new pipeline you create should appear in the list on the right</h5>
       </form>
     </div>
     <div>
@@ -145,6 +144,7 @@
           Continue with the selected Pipeline
           <span class="logo-global">&rarr;</span>
         </button>
+        <h5>If the created pipeline does not appear on the list, please refresh the page...</h5>
       </div>
     </div>
   </div>
@@ -235,7 +235,8 @@
   }
   h5 {
     padding-top: 20px;
-    color: var(--reddish);
-    font-size: 12px;
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 400;
   }
 </style>
