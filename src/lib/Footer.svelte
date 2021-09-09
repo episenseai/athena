@@ -42,11 +42,9 @@
     position: relative;
     bottom: 0;
     width: 100%;
-    min-height: 250px;
-    background: rgb(252, 251, 250);
     margin-top: 250px;
     padding: 0 0 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
   h5 {
     text-align: center;
