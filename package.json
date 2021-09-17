@@ -13,8 +13,6 @@
     "serve": "node build",
     "format": "prettier --check --plugin-search-dir=. './**/*.{js,svelte,md,html,css,json}'",
     "format:fix": "prettier --write --plugin-search-dir=. './**/*.{js,svelte,md,html,css,json}'",
-    "lint": "eslint --ignore-path .eslintignore './**/*.{js,svelte}'",
-    "lint:fix": "eslint --ignore-path .eslintignore --fix './**/*.{js,svelte}'",
     "docker-build": "DOCKER_BUILDKIT=1 BUILDKIT_PROGRESS=${BUILDKIT_PROGRESS:-plain} docker build -t athena:latest --target athena --build-arg LOCAL_PROD=1 ."
   },
   "dependencies": {
@@ -25,9 +23,6 @@
     "@sveltejs/adapter-node": "^1.0.0-next.45",
     "@sveltejs/kit": "next",
     "@trivago/prettier-plugin-sort-imports": "^2.0.4",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-svelte3": "^3.2.0",
     "prettier": "^2.3.2",
     "prettier-plugin-svelte": "^2.4.0",
     "svelte": "^3.42.4"
