@@ -36,7 +36,7 @@ export async function fetch_json_POST(url, data, service_name) {
       return false
     })
 
-    if (!response || !response.status) return false
+    if (!response || typeof response === 'boolean' || !response.status) return false
 
     // parse json reponse
     const json = await response.json()
@@ -95,7 +95,7 @@ export async function fetch_json_GET(url, service_name) {
       return false
     })
 
-    if (!response || !response.status) return false
+    if (!response || typeof response === 'boolean' || !response.status) return false
 
     // parse json reponse
     const json = await response.json()
@@ -154,7 +154,7 @@ export async function fetch_upload_POST(url, formData) {
       return false
     })
 
-    if (!response || !response.status) return false
+    if (!response || typeof response === 'boolean' || !response.status) return false
 
     // parse json reponse
     const json = await response.json()
