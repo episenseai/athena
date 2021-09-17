@@ -1,6 +1,0 @@
-node_modules
-static
-/.svelte-kit
-/build
-/package
-./src/lib/env.js
