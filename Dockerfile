@@ -3,21 +3,17 @@ FROM node:16-buster-slim AS node-base
 WORKDIR /app
 
 
-FROM node-base AS node-pnpm
+FROM node-base AS node-npm
 
 WORKDIR /build
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json package-lock.json ./
 
 # hadolint ignore=DL3016
-RUN set -x && \
-        rm -rf node_modules && \
-        npm install -g pnpm && \
-        pnpm add -g pnpm && \
-        pnpm install
+RUN set -x && rm -rf node_modules && npm install
 
 
-FROM node-pnpm as node-build
+FROM node-npm as node-build
 
 WORKDIR /app
 
@@ -28,14 +24,14 @@ ARG LOCAL_PROD
 
 RUN --mount=target=.,rw set -x && \
         cp -R /build/node_modules node_modules && \
-        if test $LOCAL_PROD -eq 1; then rm .env.production; else rm .env; fi && \
-        pnpm build --verbose && \
+        if [ ! -z "$LOCAL_PROD" ] && [ "$LOCAL_PROD" -eq 1 ]; then rm .env.production; else rm .env; fi && \
+        npm run build && \
         mkdir -p /target && \
         cp -R build /target && \
         cp -R .svelte-kit /target && \
         cp package.json /target && \
         rm -rf node_modules && \
-        pnpm install --prod && \
+        npm install --production && \
         cp -R node_modules /target/node_modules && ls -Aoh /target
 
 

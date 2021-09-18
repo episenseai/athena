@@ -1,6 +1,6 @@
 # To start your app
 
 1. Install project dependencies
-   - `pnpm install`
+   - `npm install`
 2. Run the app
-   - `pnpm dev`
+   - `npm run dev`
