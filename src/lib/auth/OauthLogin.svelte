@@ -56,4 +56,10 @@
     border-color: var(--lobster);
     background-color: #fafafa;
   }
+  @media (max-width: 700px) {
+    .auth-block {
+      flex-direction: column;
+    }
+  }
+
 </style>

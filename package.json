@@ -7,7 +7,7 @@
   "type": "module",
   "repository": "github.com:episenseai/athena",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "svelte-kit dev  --port 3006 --host 0.0.0.0",
     "build": "svelte-kit build --verbose",
     "preview": "svelte-kit preview",
     "serve": "node build",

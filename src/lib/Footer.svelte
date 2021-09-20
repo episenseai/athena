@@ -133,6 +133,9 @@
     h4 {
       font-size: 1em;
     }
+    .forms a {
+      display: block;
+    }
   }
   @media (max-width: 400px) {
     .connect {
