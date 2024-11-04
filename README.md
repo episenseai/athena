@@ -1,3 +1,7 @@
+# Project Status
+
+Project is no longer mantained.
+
 ## To start your app
 
 1. Install project dependencies: `npm install`
